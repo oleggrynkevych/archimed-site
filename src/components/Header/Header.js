@@ -17,8 +17,7 @@ function Header () {
     useEffect(() => {
         let handler = (e) => {
             if(!dropdownRef.current.contains(e.target)){
-                setOpen(false);
-                
+                setOpen(false);        
             }
         };
 
@@ -31,7 +30,7 @@ function Header () {
 
     return (
         <header>
-            <div className='container'>
+            <div className='header-container'>
                 <div className='logo-wrapper'>
                     <img src={mainLogo} alt="Archimed Logo" />
                 </div>
