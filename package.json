@@ -11,6 +11,8 @@
     "react-input-mask": "^2.0.4",
     "react-phone-input-2": "^2.15.1",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
     "three": "^0.152.2",
     "web-vitals": "^2.1.4"
   },

@@ -65,7 +65,7 @@
     };
     return (
         <a 
-            href='/'
+            href='/servicepage'
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >

@@ -1,0 +1,531 @@
+.service-page{
+    width: 100%;
+    max-width: 1440px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 0 auto;
+    background: #F5F5F5;
+    color: #042336;
+}
+
+.service-page-title {
+    border-bottom: 1px solid rgba(35, 35, 35, 0.1);
+    padding: 50px 120px;
+}
+
+.service-page h1 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 115%;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.service-page-title span{
+    color: #042336;
+}
+
+.service-page-back-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    cursor: pointer;
+    transition: transform 0.5 easy;
+}
+
+.service-page-back-button:hover span {
+    transform: translateX(2px);
+}
+
+.service-page-back-button:hover img {
+    transform: translateX(-2px);
+}
+
+.service-page-main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #F5F5F5;
+    height: auto;
+    position: relative;
+}
+
+.service-description-block {
+    width: 41%;
+    padding: 32px 200px 0 120px;
+    border-right: 1px solid rgba(35, 35, 35, 0.1);
+}
+
+.service-description-block h2 {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 130%;
+    margin: 0 0 16px 0;
+    position: relative;
+}
+
+.service-description-block h2:nth-child(9),
+.service-description-block h2:nth-child(19){
+    margin: 28px 0 40px 0;
+}
+
+
+.service-description-block h2::before {
+    position: absolute;
+    color: #3693C8;
+    width: 100px;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 170%;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    left: 0;
+    bottom: 26px;
+}
+
+.service-description-block h2:nth-child(9)::before {
+    content: 'етап 01';
+}
+
+.service-description-block h2:nth-child(12)::before {
+    content: 'етап 02';
+}
+
+.service-description-block h2:nth-child(15)::before {
+    content: 'етап 03';
+}
+
+.service-description-block h2:nth-child(17)::before {
+    content: 'етап 04';
+}
+.service-description-block h2:nth-child(19)::before {
+    content: 'етап 05';
+}
+
+.service-description-block h2:nth-child(21)::before {
+    content: 'етап 06';
+}
+
+.service-description-block h2:nth-child(25)::before {
+    content: 'етап 07';
+}
+
+.service-description-block h2:nth-child(27)::before {
+    content: 'етап 08';
+}
+
+.service-description-block h2:nth-child(33)::before {
+    content: 'етап 09';
+}
+
+.service-description-block h2:nth-child(9)::after {
+    content: '3 робочих дні';
+    position: absolute;
+    color: #3693C8;
+    width: 100px;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 170%;
+    left: 0;
+    top: 26px;
+}
+
+.service-description-block h2:nth-child(19)::after {
+    content: '14 робочих днів';
+    position: absolute;
+    color: #3693C8;
+    width: 200px;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 170%;
+    left: 0;
+    top: 26px;
+}
+
+.service-description-block p {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 170%;
+    margin: 0 0 48px 0;
+}
+
+.p-special{
+    margin: 0 0 16px 0 !important;
+}
+
+.service-description-nav{
+    padding: 0;
+    list-style: none;
+    margin: 0 0 48px 0;
+}
+
+.service-description-nav h3{
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.service-description-nav li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:12px;
+    height: 46px;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 170%;
+    border-bottom: 1px solid rgba(35, 35, 35, 0.1);
+}
+
+.zakon-link {
+    color: #3693C8;
+    text-decoration: underline;
+}
+
+.service-description-list{
+    margin: 0 0 16px 0;
+    padding: 0 0 0 20px;
+    opacity: 0.7;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    width: 80%;
+}
+
+.service-description-list.number {
+    list-style-type: decimal-leading-zero;
+    margin: 0 0 48px 0;
+}
+
+.service-description-list.special{
+    margin: 0 0 48px 0;
+}
+
+.service-description-list li {
+    margin-bottom: 8px;
+}
+
+.service-page-form{
+    width: 100%;
+    margin: 0 0 0 0;
+}
+
+.service-page-form input{
+    width: 95%;
+    padding-left: 5%;
+    background: rgba(35, 35, 35, 0.05);
+    color: #042336;
+}
+
+.service-page-form input::placeholder{
+    color: rgba(4, 35, 54, 0.2);
+}
+
+.service-page-form .phone-input{
+    width: 100% !important;
+    background: rgba(35, 35, 35, 0.05) !important;
+    color: #042336 !important;
+}
+
+.service-page-form .flag-dropdown{
+    background: rgb(235 235 235) !important;
+    margin-left: 12px !important;
+  }
+
+.service-page-form .open,
+.service-page-form .selected-flag:focus,
+.service-page-form .selected-flag:hover{
+    background: rgb(235 235 235) !important;
+}
+
+.service-page-form .arrow {
+    border-top: 4px solid #042336 !important;
+}
+
+.service-page-form .form-button {
+    width: 100%;
+    height: 79px;
+    background: #042336;
+    border: 1px solid #042336;
+    border-radius: 100px;
+    color: #F5F5F5;
+    margin-top: 48px;
+  }
+
+  .service-page-form .form-button::after{
+    content: '';
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #042336;
+    background-color: transparent;
+    border-radius: 100px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.service-page-form .form-button::before{
+    content: '';
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #F5F5F5;
+    border-radius: 100px;
+    z-index: 0;
+    transition: transform 0.5s;
+    transform: translateX(100%);
+    cursor: pointer;
+}
+
+.service-page-form .form-button:hover{
+    color: #042336;
+}
+
+.service-page-form .form-button:hover::before{
+    transform: translateX(0%);
+}
+
+.service-materials-block{
+    width: 27%;
+    height: 750px;
+    position: absolute;
+    padding-top: 39px;
+    top:0;
+    right: 0px;
+    margin-right: 120px;
+}
+
+.service-materials-block-title{
+    display: block;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 170%;
+    margin-bottom: 16px;
+}
+
+.service-materials-block.sticky {
+    position: sticky;
+    top: 0;
+}
+
+.material-item{
+    width: 100%;
+    height: auto;
+    background-color: rgba(35, 35, 35, 0.05);;
+    margin-bottom: 12px;
+    padding: 20px 0 20px 0;
+    cursor: pointer;
+}
+
+.material-item-container {
+    width: auto;
+    height: 100%;
+    margin: 0 40px 0 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.material-item-title{
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 170%;
+    margin-bottom:20px;
+}
+
+.material-item-text{
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    opacity: 0.5;
+    margin-bottom: 25px;
+}
+
+.material-item-link {
+    display: flex;
+    align-items: center;
+}
+
+.material-item-link span {
+    margin-right: 4px;
+}
+
+.material-item-link span {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.material-item-link svg {
+    transform: translateX(0px);
+    transition: transform 0.5s ease;
+}
+
+.material-item:hover .material-item-link svg{
+    transform: translateX(5px);
+}
+
+.service-materials-block-info{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 12px;
+    margin-bottom: 56px;
+}
+
+.service-materials-block-info div{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-materials-block-info span{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 150%;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+}
+
+.service-materials-block-info a{
+    color: #042336;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 110%;
+}
+
+.service-materials-button-wrapper {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+
+.service-materials-button{
+    width: 116px;
+    height: 53px;
+    border: 1px solid #042336;
+    border-radius: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #042336;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-materials-button::before{
+    width: 100%;
+    height: 100%;
+    border-radius: 1000px;
+    background-color: #042336;
+    cursor: pointer;
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    content: '';
+    cursor: pointer;
+    transform: translateX(100%);
+    transition: transform 0.5s ease;
+}
+
+.service-materials-button:hover{
+    color:#F5F5F5;
+}
+
+.service-materials-button:hover::before{
+    transform: translateX(0);
+}
+
+.service-materials-button svg {
+    position: relative;
+    z-index: 2;
+    margin-right: 6px;
+}
+
+.service-materials-button span {
+    position: relative;
+    z-index: 2;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 155%;
+}
+
+
+
+@media (max-width: 1435px) {
+    .service-description-block{
+        width: 30%;
+    }
+
+    .service-materials-block{
+        width: 30%;
+    }
+}
+
+@media (max-width: 1100px) {
+    .service-page-main{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .service-description-block{
+        width: 70%;
+        border: none;
+    }
+
+    .service-materials-block{
+        position: relative;
+        width: 382px;
+        margin-left: 120px;
+    }
+}
+
+@media (max-width: 800px){
+    .service-page-form .form-button {
+        margin-bottom: 119px;
+      }
+}

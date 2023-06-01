@@ -9,6 +9,16 @@ import React, {useState, useEffect, useRef} from 'react';
 
 
 function Header () {
+    const servicePagePath = '/servicepage';
+    const secondNavItem = useRef();
+    let path = window.location.pathname;
+
+    useEffect(() => {
+        if (path === servicePagePath) {
+          secondNavItem.current.classList.add('active');
+        }
+    }, [path, servicePagePath]);
+
     const [open, setOpen] = useState(false);
     const [openMenu, setOpenMenu] = useState(false);
 
@@ -37,7 +47,7 @@ function Header () {
                 <nav className={`nav ${openMenu? 'active' : 'inactive'}`}>
                     <ul>
                         <CustomLink href='/'>Головна</CustomLink>
-                        <CustomLink href='/services'>Послуги</CustomLink>
+                        <CustomLink ref={secondNavItem} href='/services'>Послуги</CustomLink>
                         <CustomLink href='/about'>Про нас</CustomLink>
                         <CustomLink href='/contacts'>Контакти</CustomLink>
                     </ul>
@@ -73,15 +83,15 @@ function Header () {
     )
 }
 
-function CustomLink({href, children, ...props}){
+const CustomLink = React.forwardRef(({ href, children, ...props }, ref) => {
     let path = window.location.pathname;
-
+  
     return (
-        <li className={path === href ? 'active' : ''}>
-            <a href={href} {...props}>{children}</a>
-        </li>
-    )
-}
+      <li ref={ref} className={path === href ? 'active' : ''}>
+        <a href={href} {...props}>{children}</a>
+      </li>
+    );
+  });
 
 function DropdownItem (props) {
     return(

@@ -1,0 +1,29 @@
+.services-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.services-wrapper h2 {
+    text-align: left;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 80px;
+    line-height: 120%;
+    text-transform: uppercase;
+    color: #042336;
+    margin: 94px auto 204px auto;
+    width: 1225px;
+}
+
+@media (max-width: 1000px){
+    .services-wrapper h2{
+        width: 343px;
+        margin: 74px auto 100px 16px;
+        font-size: 40px;
+    }
+
+    .services-wrapper{
+        margin-bottom: 95px;
+    }
+}

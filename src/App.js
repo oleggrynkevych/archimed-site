@@ -6,6 +6,7 @@ import Services from './components/Services/Services';
 import About from './components/About/About';
 import Contacts from './components/Contacts/Contacts';
 import Footer from './components/Footer/Footer';
+import ServicePage from './components/Services/ServicePage';
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
       break
     case '/contacts':
       component = <Contacts/>
+      break
+    case '/servicepage':
+      component = <ServicePage/>
       break
   }
    
