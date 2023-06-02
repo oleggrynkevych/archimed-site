@@ -1,11 +1,13 @@
 import './Carousel.css';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import React, {useRef} from 'react';
 
 
 import Slider from 'react-slick';
 
 function CarouselItem () {
+
     return(
         <a href='/'>
             <div className='carousel-item'>
@@ -31,23 +33,24 @@ function Carousel (props) {
         dots: false,
         infinite: false,
         speed: 500,
-        slidesToShow: 2,
+        slidesToShow: 1,
         slidesToScroll: 1,
+        swipeToSlide: true,
         initialSlide: 0,
         responsive: [
           {
-            breakpoint: 1024,
+            breakpoint: 1120,
             settings: {
-              slidesToShow: 2,
+              slidesToShow: 1,
               slidesToScroll: 1,
-              infinite: true,
+              infinite: false,
               dots: false
             }
           },
           {
             breakpoint: 600,
             settings: {
-              slidesToShow: 2,
+              slidesToShow: 1,
               slidesToScroll: 1,
               initialSlide: 2
             }

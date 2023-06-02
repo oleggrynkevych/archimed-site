@@ -6,34 +6,22 @@ import Services from './components/Services/Services';
 import About from './components/About/About';
 import Contacts from './components/Contacts/Contacts';
 import Footer from './components/Footer/Footer';
-import ServicePage from './components/Services/ServicePage';
+import { Route, Routes } from 'react-router-dom';
 
 
 function App() {
 
-  let component
-  switch (window.location.pathname) {
-    case '/':
-      component = <Home/>
-      break
-    case '/services':
-      component = <Services/>
-      break
-    case '/about':
-      component = <About/>
-      break
-    case '/contacts':
-      component = <Contacts/>
-      break
-    case '/servicepage':
-      component = <ServicePage/>
-      break
-  }
+ 
    
   return (
     <div>
       <Header/>
-      {component}
+      <Routes>
+        <Route path='/' element={<Home/>}></Route>
+        <Route path='/services' element={<Services/>}></Route>
+        <Route path='/contacts' element={<Contacts/>}></Route>
+        <Route path='/about' element={<About/>}></Route>
+      </Routes>
       <Footer/>
     </div>
   );

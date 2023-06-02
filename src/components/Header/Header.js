@@ -6,6 +6,7 @@ import closeIcon from '../../images/close-icon.svg';
 import menuIcon from '../../images/menu-icon.svg';
 import './Header.css';
 import React, {useState, useEffect, useRef} from 'react';
+import { Link, useMatch, useResolvedPath} from 'react-router-dom';
 
 
 function Header () {
@@ -46,10 +47,10 @@ function Header () {
                 </div>
                 <nav className={`nav ${openMenu? 'active' : 'inactive'}`}>
                     <ul>
-                        <CustomLink href='/'>Головна</CustomLink>
-                        <CustomLink ref={secondNavItem} href='/services'>Послуги</CustomLink>
-                        <CustomLink href='/about'>Про нас</CustomLink>
-                        <CustomLink href='/contacts'>Контакти</CustomLink>
+                        <CustomLink to='/'>Головна</CustomLink>
+                        <CustomLink ref={secondNavItem} to='/services'>Послуги</CustomLink>
+                        <CustomLink to='/about'>Про нас</CustomLink>
+                        <CustomLink to='/contacts'>Контакти</CustomLink>
                     </ul>
                     <div className='language-switch'> 
                         <span>UA</span>
@@ -83,12 +84,13 @@ function Header () {
     )
 }
 
-const CustomLink = React.forwardRef(({ href, children, ...props }, ref) => {
-    let path = window.location.pathname;
+const CustomLink = React.forwardRef(({ to, children, ...props }, ref) => {
+    const resolvedPath = useResolvedPath(to);
+    const isActive = useMatch({path: resolvedPath.pathname, end: true})
   
     return (
-      <li ref={ref} className={path === href ? 'active' : ''}>
-        <a href={href} {...props}>{children}</a>
+      <li ref={ref} className={isActive ? 'active' : ''}>
+        <Link to={to} {...props}>{children}</Link>
       </li>
     );
   });

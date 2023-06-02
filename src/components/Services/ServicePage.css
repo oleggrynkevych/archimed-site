@@ -515,6 +515,7 @@
     .service-description-block{
         width: 70%;
         border: none;
+        padding-right: 50px;
     }
 
     .service-materials-block{
@@ -528,4 +529,43 @@
     .service-page-form .form-button {
         margin-bottom: 119px;
       }
+}
+
+@media (max-width: 600px){
+    .service-page-title{
+        padding: 24px 16px;
+      }
+
+      .service-page-back-button{
+        font-size: 14px;
+      }
+
+      .service-page h1{
+        font-size: 24px;
+      }
+
+      .service-description-block{
+        width: 90%;
+        padding: 23px 16px 0px 16px;
+      }
+
+      .service-materials-block{
+        position: relative;
+        width: 343px;
+        margin-left: 16px;
+        margin-right: 0px;
+      }
+
+      .service-materials-block.sticky{
+        position: relative;
+      }
+
+      .service-materials-block-info{
+        display: none;
+      }
+
+      .service-materials-button-wrapper{
+        display: none;
+      }
+
 }

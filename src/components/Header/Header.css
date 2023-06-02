@@ -1,9 +1,12 @@
 header{
+    width: 100%;
     background-color: #F5F5F5;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #DEE0E2;
     height: 64px;
+    position: fixed;
+    z-index: 1000;
 
 }
 
@@ -146,7 +149,7 @@ header{
     cursor: pointer;
 }
 
-.dropdown-menu li:nth-child(2n){
+.dropdown-menu li:hover{
     background-color: #E9EBEC;
 }
 

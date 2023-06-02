@@ -1,4 +1,5 @@
 import mapIcon from '../../images/map-icon.svg';
+import {Link} from 'react-router-dom';
 
 import './Footer.css';
 
@@ -44,12 +45,12 @@ function Footer () {
                         <div className='footer-nav'>
                             <span className='footer-subtitle'>Навігація</span>
                             <ul>
-                                <CustomLink href='/'>Головна</CustomLink>
-                                <CustomLink href='/services'>Послуги</CustomLink>
-                                <CustomLink href='/about'>Про нас</CustomLink>
-                                <CustomLink href='/contacts'>Контакти</CustomLink>
-                                <CustomLink href='https://archimed.in.ua/uk/vakansii/' target="_blank">Вакансії</CustomLink>
-                                <CustomLink href='https://hartmann24.com.ua/' target="_blank">Інтернет-магазин</CustomLink>
+                                <CustomLink to='/'>Головна</CustomLink>
+                                <CustomLink to='/services'>Послуги</CustomLink>
+                                <CustomLink to='/about'>Про нас</CustomLink>
+                                <CustomLink to='/contacts'>Контакти</CustomLink>
+                                <CustomLink to='https://archimed.in.ua/uk/vakansii/' target="_blank">Вакансії</CustomLink>
+                                <CustomLink to='https://hartmann24.com.ua/' target="_blank">Інтернет-магазин</CustomLink>
                             </ul>
                         </div>
                         <div className='footer-socmedia'>
@@ -82,11 +83,11 @@ function SiteInfoItem (props) {
     )
 }
 
-function CustomLink({href, children, ...props}){
+function CustomLink({to, children, ...props}){
 
     return (
         <li>
-            <a href={href} {...props}>{children}</a>
+            <Link to={to} {...props}>{children}</Link>
         </li>
     )
 }
