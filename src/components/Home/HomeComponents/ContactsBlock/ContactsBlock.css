@@ -243,6 +243,10 @@
     display: none;
   }
 
+  .contacts-block .footer-site-info {
+    display: none;
+  }
+
   @media (max-width: 1200px){
     .form-button{
         width: 300px;

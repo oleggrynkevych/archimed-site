@@ -1,0 +1,132 @@
+.contacts-page{
+    padding-top: 64px;
+}
+
+.contacts-page .contacts-first-block span:nth-child(1),
+.contacts-page .contacts-first-block span:nth-child(4),
+.contacts-page .contacts-first-block span:nth-child(5),
+.contacts-page .video-item-block{
+    display: none;
+}
+
+.contacts-page .contacts-first-block span:nth-child(2){
+    margin-top: 40px;
+}
+
+.contacts-page.contacts-first-block{
+    border-right: 1px solid #DEE0E2;
+}
+
+.contacts-page input {
+    background: #E9EBEC;
+    color: #042336;
+}
+
+.contacts-page input::placeholder{
+    color:grey;
+}
+
+.contacts-page .phone-input {
+    background: #E9EBEC !important;
+    color: #042336 !important;
+  }
+
+.contacts-page .flag-dropdown{
+    background: #E9EBEC !important;
+}
+
+.contacts-page .open,
+.contacts-page .selected-flag:focus,
+.contacts-page .selected-flag:hover{
+    background: #E9EBEC !important;
+}
+
+.contacts-page .arrow {
+    border-top: 4px solid #042336 !important;
+}
+
+.contacts-page .form-button {
+    background-color: transparent;
+    margin-bottom: 56px;
+}
+
+.contacts-page .footer-site-info {
+    display: flex;
+    color: #042336;
+    margin-top: 85px;
+
+}
+
+.contacts-page .footer-site-info a {
+    color: #042336;
+}
+
+.contacts-page .footer-site-info div {
+    width: 445px;
+}
+
+.contacts-page .site-info-subtitle {
+    display: inline-block !important;
+    margin-top: 0px !important;
+    color: grey;
+}
+
+@media (max-width: 1200px) {
+    .contacts-page .contacts-first-block {
+        padding-left: 60px;
+    }
+
+    .contacts-page .contacts-first-block {
+        width: 50%;
+    }
+
+    .contacts-page .contacts-first-block span:nth-child(2) {
+        width: 200px;
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 800px) {
+    .contacts-page .contacts-block-for-mobile {
+        display: none;
+    }
+
+    .contacts-page input{
+        margin-bottom: 16px;
+        width: 95%;
+        height: 52px;
+        padding-left: 5%;
+    }
+
+    .contacts-page .phone-input {
+        width: 100% !important;
+        height: 52px !important;
+    }
+
+    .contacts-page .contacts-first-block {
+        padding-left: 0px;
+        width: 100%;
+    }
+
+    .contacts-page .footer-site-info div {
+        width: 100%;
+    }
+
+    .contacts-page form {
+        margin-top: 48px;
+    }
+
+    .contacts-page .contacts-block-container {
+        height: 950px;
+        justify-content: start;
+    }
+
+    .contacts-page .footer-site-info {
+        position: absolute;
+        top: 595px;
+    }
+
+    .contacts-page .contacts-first-block span:nth-child(1) {
+        display: flex;
+    }
+}

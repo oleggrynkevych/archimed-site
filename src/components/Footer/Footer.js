@@ -4,6 +4,15 @@ import {Link} from 'react-router-dom';
 import './Footer.css';
 
 function Footer () {
+    function SiteInfoItem (props) {
+        return(
+           <div>
+                <span >{props.firstText}</span>
+                <a href={props.href} target={props.target}>{props.secondText}</a>
+           </div>
+        )
+    }
+
     const scrollToTop = () =>{
         window.scrollTo({
           top: 0, 
@@ -74,14 +83,6 @@ function Footer () {
     )
 }
 
-function SiteInfoItem (props) {
-    return(
-       <div>
-            <span>{props.firstText}</span>
-            <a href={props.href} target={props.target}>{props.secondText}</a>
-       </div>
-    )
-}
 
 function CustomLink({to, children, ...props}){
 
