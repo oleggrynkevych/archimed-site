@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/archimed-site/static/css/main.999e1cd0.css",
-    "main.js": "/archimed-site/static/js/main.e4ec34a9.js",
+    "main.css": "/archimed-site/static/css/main.80f46b18.css",
+    "main.js": "/archimed-site/static/js/main.d1b88454.js",
     "static/js/787.edd4b02d.chunk.js": "/archimed-site/static/js/787.edd4b02d.chunk.js",
     "static/media/zoom-icon.svg": "/archimed-site/static/media/zoom-icon.e9302caba22e97add8819f7337c57abc.svg",
     "static/media/3D-object-1.png": "/archimed-site/static/media/3D-object-1.d75108a54546786c1244.png",
@@ -13,6 +13,7 @@
     "static/media/microsoft-teams-icon.svg": "/archimed-site/static/media/microsoft-teams-icon.127f1d7fd302876d6c2fc02df331ddc2.svg",
     "static/media/google-meets-icon.svg": "/archimed-site/static/media/google-meets-icon.4fa2c33bec0a26ae227c5cbac63eca5a.svg",
     "static/media/search-icon.svg": "/archimed-site/static/media/search-icon.f06a37c0c841a8383885fc832664c00f.svg",
+    "static/media/map-icon-color.svg": "/archimed-site/static/media/map-icon-color.ae9b1f6d943ba005f0e872fa29aadff2.svg",
     "index.html": "/archimed-site/index.html",
     "static/media/map-icon.svg": "/archimed-site/static/media/map-icon.fb1e0039911577466d6eed729bc4808e.svg",
     "static/media/globe-icon.svg": "/archimed-site/static/media/globe-icon.55e5f859f52a9f93976ac7fa84a8de48.svg",
@@ -21,12 +22,12 @@
     "static/media/close-icon.svg": "/archimed-site/static/media/close-icon.ab819a13f6d9241d8897a4f20d4dad1e.svg",
     "static/media/menu-icon.svg": "/archimed-site/static/media/menu-icon.ebc2b220a01cee3c9b50b72c552b6e21.svg",
     "static/media/down-icon.svg": "/archimed-site/static/media/down-icon.32e070635fe584377308664889bc783a.svg",
-    "main.999e1cd0.css.map": "/archimed-site/static/css/main.999e1cd0.css.map",
-    "main.e4ec34a9.js.map": "/archimed-site/static/js/main.e4ec34a9.js.map",
+    "main.80f46b18.css.map": "/archimed-site/static/css/main.80f46b18.css.map",
+    "main.d1b88454.js.map": "/archimed-site/static/js/main.d1b88454.js.map",
     "787.edd4b02d.chunk.js.map": "/archimed-site/static/js/787.edd4b02d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.999e1cd0.css",
-    "static/js/main.e4ec34a9.js"
+    "static/css/main.80f46b18.css",
+    "static/js/main.d1b88454.js"
   ]
 }
