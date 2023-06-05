@@ -1,16 +1,27 @@
 {
   "files": {
-    "main.css": "/archimed-site/static/css/main.80f46b18.css",
-    "main.js": "/archimed-site/static/js/main.d1b88454.js",
+    "main.css": "/archimed-site/static/css/main.3b5fe93d.css",
+    "main.js": "/archimed-site/static/js/main.fa92e77b.js",
     "static/js/787.edd4b02d.chunk.js": "/archimed-site/static/js/787.edd4b02d.chunk.js",
+    "static/media/first-member.png": "/archimed-site/static/media/first-member.83dbf6ad377b441f12b9.png",
+    "static/media/team-photo.png": "/archimed-site/static/media/team-photo.884ba8bc2b39ec5061c6.png",
+    "static/media/second-member.png": "/archimed-site/static/media/second-member.6d12cba2f1b7126ba7f4.png",
     "static/media/zoom-icon.svg": "/archimed-site/static/media/zoom-icon.e9302caba22e97add8819f7337c57abc.svg",
+    "static/media/white-1.png": "/archimed-site/static/media/white-1.cc89116575a691f9f11a.png",
+    "static/media/white-3.png": "/archimed-site/static/media/white-3.7d185b97b79934c539ae.png",
     "static/media/3D-object-1.png": "/archimed-site/static/media/3D-object-1.d75108a54546786c1244.png",
     "static/media/3D-object-2.png": "/archimed-site/static/media/3D-object-2.395890949a96d8ed4456.png",
+    "static/media/white-2.png": "/archimed-site/static/media/white-2.11fb829240ba5963c1f3.png",
     "static/media/3D-object-3.png": "/archimed-site/static/media/3D-object-3.9f43fc826ef8f6eb5919.png",
     "static/media/logo-company-2.svg": "/archimed-site/static/media/logo-company-2.f736c1cf90557f10df1fa6a94076e39e.svg",
     "static/media/logo.svg": "/archimed-site/static/media/logo.a304e5b5b449d9698c6b0feb9e31f5fc.svg",
     "static/media/logo-company-1.svg": "/archimed-site/static/media/logo-company-1.8e3b36b43b5909f7fc99a99329706141.svg",
     "static/media/microsoft-teams-icon.svg": "/archimed-site/static/media/microsoft-teams-icon.127f1d7fd302876d6c2fc02df331ddc2.svg",
+    "static/media/slick.svg": "/archimed-site/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/archimed-site/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/archimed-site/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/quotes-icon.svg": "/archimed-site/static/media/quotes-icon.a4f6a8203853f69a962714552fe80b30.svg",
+    "static/media/slick.woff": "/archimed-site/static/media/slick.295183786cd8a1389865.woff",
     "static/media/google-meets-icon.svg": "/archimed-site/static/media/google-meets-icon.4fa2c33bec0a26ae227c5cbac63eca5a.svg",
     "static/media/search-icon.svg": "/archimed-site/static/media/search-icon.f06a37c0c841a8383885fc832664c00f.svg",
     "static/media/map-icon-color.svg": "/archimed-site/static/media/map-icon-color.ae9b1f6d943ba005f0e872fa29aadff2.svg",
@@ -20,14 +31,19 @@
     "static/media/corner-icon.svg": "/archimed-site/static/media/corner-icon.4d2d145afbfb077201dede6f57c2c20c.svg",
     "static/media/corner-icon-small.svg": "/archimed-site/static/media/corner-icon-small.a1f810d97eae964c302941831ad3ae99.svg",
     "static/media/close-icon.svg": "/archimed-site/static/media/close-icon.ab819a13f6d9241d8897a4f20d4dad1e.svg",
+    "static/media/right-icon.svg": "/archimed-site/static/media/right-icon.1b29fb4dbf77cf6fa952.svg",
+    "static/media/left-icon.svg": "/archimed-site/static/media/left-icon.6a73c0a080797359e794.svg",
+    "static/media/right-icon-white.svg": "/archimed-site/static/media/right-icon-white.71bce829137fc003531c.svg",
+    "static/media/left-icon-white.svg": "/archimed-site/static/media/left-icon-white.ee8c78dc3b4629ae9d94.svg",
     "static/media/menu-icon.svg": "/archimed-site/static/media/menu-icon.ebc2b220a01cee3c9b50b72c552b6e21.svg",
+    "static/media/backIcon.svg": "/archimed-site/static/media/backIcon.933409c877e72e5e6ac94ea96bb236d4.svg",
     "static/media/down-icon.svg": "/archimed-site/static/media/down-icon.32e070635fe584377308664889bc783a.svg",
-    "main.80f46b18.css.map": "/archimed-site/static/css/main.80f46b18.css.map",
-    "main.d1b88454.js.map": "/archimed-site/static/js/main.d1b88454.js.map",
+    "main.3b5fe93d.css.map": "/archimed-site/static/css/main.3b5fe93d.css.map",
+    "main.fa92e77b.js.map": "/archimed-site/static/js/main.fa92e77b.js.map",
     "787.edd4b02d.chunk.js.map": "/archimed-site/static/js/787.edd4b02d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.80f46b18.css",
-    "static/js/main.d1b88454.js"
+    "static/css/main.3b5fe93d.css",
+    "static/js/main.fa92e77b.js"
   ]
 }
