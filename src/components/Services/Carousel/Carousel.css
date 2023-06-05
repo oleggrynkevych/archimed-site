@@ -17,21 +17,22 @@
     text-transform: uppercase;
 }
 
-.slick-slide {
+.carousel .slick-slide {
     background: transparent !important;
     width: 509px !important;
     height: auto !important;
 }
 
-.slick-slider{
+.carousel .slick-slider{
     width: 509px !important;
 }
 
-.slick-track{
+.carousel .slick-track{
     display:flex !important;
+    width: auto !important;
 }
 
-.slick-arrow{
+.carousel .slick-arrow{
     top: -64px !important;
     width: 55px !important;
     height: 55px !important;
@@ -40,12 +41,12 @@
     color: #042336 !important;
 }
 
-.slick-arrow:hover {
+.carousel .slick-arrow:hover {
     scale: 1.2;
     transform-origin: top !important;
 }
 
-.slick-arrow::after {
+.carousel .slick-arrow::after {
     content: '';
     position: absolute;
     top: 0;
@@ -60,63 +61,63 @@
     cursor: pointer;
 }
 
-.slick-arrow:hover::after {
+.carousel .slick-arrow:hover::after {
     transform: scale(1.2);
 }
 
-.slick-prev {
+.carousel .slick-prev {
     left: 489px !important;
     color: #042336 !important;
 }
 
-.slick-prev::before {
+.carousel .slick-prev::before {
     content: url('../../../images/left-icon.svg') !important;
     color: #042336 !important;
     opacity: 1 !important;
 }
 
-.slick-prev:hover:before {
+.carousel .slick-prev:hover:before {
     filter:   saturate(0) invert(100%);
     color: #F5F5F5 !important;
 }
 
-.slick-next {
+.carousel .slick-next {
     left: 560px !important;
     color: #042336 !important;
 }
 
-.slick-next::before {
+.carousel .slick-next::before {
     content: url('../../../images/right-icon.svg') !important;
     color: #042336 !important;
     opacity: 1 !important;
 }
 
-.slick-next:hover:before {
+.carousel .slick-next:hover:before {
     filter:   saturate(0) invert(100%);
     color: #F5F5F5 !important;
 }
 
 
-.slick-disabled{
+.carousel .slick-disabled{
     border: 1px solid rgba(35, 35, 35, 0.5) !important;
     filter:   saturate(0) invert(100%);
     color: #F5F5F5 !important;
 }
 
-.slick-disabled:hover{
+.carousel .slick-disabled:hover{
     scale: 1;
 }
 
-.slick-disabled:hover::before{
+.carousel .slick-disabled:hover::before{
     filter: invert(0%);
     color: #F5F5F5 !important;
 }
 
-.slick-disabled:hover::after{
+.carousel .slick-disabled:hover::after{
     transform: scale(0);
 }
 
-.slick-list {
+.carousel .slick-list {
     overflow: visible !important;
 }
 
@@ -218,11 +219,11 @@
         margin-top: 33px;
     }
 
-    .slick-arrow {
+    .carousel .slick-arrow {
         display: none !important;
     }
 
-    .slick-slider{
+    .carousel .slick-slider{
         width: 367px !important;
     }
     

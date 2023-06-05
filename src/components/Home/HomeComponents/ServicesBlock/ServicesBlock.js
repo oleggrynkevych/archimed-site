@@ -1,6 +1,7 @@
  import './ServicesBlock.css';
  import React, { useRef, useEffect, useState } from 'react';
  import third3d from '../../../../images/3D-object-3.png';
+ import { Link } from 'react-router-dom';
 
  const ServicesBlock = function ({ innerRef }) {
 
@@ -64,8 +65,8 @@
         setIsHovered(false);
     };
     return (
-        <a 
-            href='/servicepage'
+        <Link 
+            to='/servicepage'
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
@@ -80,7 +81,7 @@
                     </svg>
                 </div>
             </div>
-        </a>
+        </Link>
     )
 }
 

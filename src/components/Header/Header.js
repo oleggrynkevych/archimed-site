@@ -47,7 +47,7 @@ function Header () {
                 </div>
                 <nav className={`nav ${openMenu? 'active' : 'inactive'}`}>
                     <ul>
-                        <CustomLink to='/'>Головна</CustomLink>
+                        <CustomLink to='/archimed-site'>Головна</CustomLink>
                         <CustomLink ref={secondNavItem} to='/services'>Послуги</CustomLink>
                         <CustomLink to='/about'>Про нас</CustomLink>
                         <CustomLink to='/contacts'>Контакти</CustomLink>
