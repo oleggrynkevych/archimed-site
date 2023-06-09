@@ -25,7 +25,7 @@ function AppContent() {
     <div>
       <Header />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/archimed-site" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/about" element={<About />} />
