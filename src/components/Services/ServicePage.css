@@ -7,6 +7,7 @@
     margin: 0 auto 0 auto;
     background: #F5F5F5;
     color: #042336;
+    padding-top: 64px;
 }
 
 .service-page-title {
@@ -315,10 +316,9 @@
 .service-materials-block{
     width: 27%;
     height: 750px;
-    position: absolute;
+    position: sticky;
+    top: 34px;
     padding-top: 39px;
-    top:0;
-    right: 0px;
     margin-right: 120px;
 }
 
@@ -330,11 +330,6 @@
     font-size: 14px;
     line-height: 170%;
     margin-bottom: 16px;
-}
-
-.service-materials-block.sticky {
-    position: sticky;
-    top: 0;
 }
 
 .material-item{
@@ -493,6 +488,57 @@
     font-size: 14px;
     line-height: 155%;
 }
+
+
+
+
+.modal-content-container h4 {
+    margin: 0;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 120%;
+    text-transform: uppercase;
+    margin-bottom: 44px;
+}
+
+.modal-content-container span {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 130%;
+}
+
+.modal-content-container p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 170%;
+    margin-bottom: 24px;
+}
+
+.modal-content-container ul {
+    padding-left: 20px;
+    margin-bottom: 24px;
+    opacity: 0.7;
+}
+
+.modal-content-container li {
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+}
+
+.modal-content-container .certificate-photo {
+    margin: 32px auto ;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.modal-content-container .p-special {
+    border-left: 4px solid #042336;
+    padding-left: 16px;
+}
+
 
 
 

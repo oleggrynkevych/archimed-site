@@ -1,10 +1,26 @@
 import './ServicePage.css';
 import React, { useRef, useEffect, useState } from 'react';
 import backIcon from '../../images/backIcon.svg';
+import certificatePhoto from '../../images/certificate-photo.png';
 import PhoneInput from "react-phone-input-2";
 import Carousel from './Carousel/Carousel';
+import Modal from './Modal/Modal';
 
 function ServicePage() {
+
+    const [modalActive, setModalActive] = useState(false);
+
+    useEffect(() => {
+        if (modalActive) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'unset';
+        }
+    
+        return () => {
+          document.body.style.overflow = 'unset';
+        };
+      }, [modalActive]);
 
     const scrollToTop = () =>{
         window.scrollTo({
@@ -12,31 +28,6 @@ function ServicePage() {
           behavior: 'smooth'
         });
       };
-
-    const containerRef = useRef(null);
-    const elementRef = useRef(null);
-    const [isSticky, setIsSticky] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-        const containerRect = containerRef.current.getBoundingClientRect();
-
-        if (
-            containerRect.top <= 0 &&
-            containerRect.bottom >= elementRef.current.offsetHeight
-        ) {
-            setIsSticky(true);
-        } else {
-            setIsSticky(false);
-        }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-        window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
 
 
     return (
@@ -51,7 +42,7 @@ function ServicePage() {
                 <h1>реєстрація лікарських засобів</h1>
             </div>
 
-            <div className='service-page-main' ref={containerRef}>
+            <div className='service-page-main' >
                 <div className='service-description-block'>
                     <h2>Зміст</h2>
                     <ul className='service-description-nav'>
@@ -185,10 +176,11 @@ function ServicePage() {
                 </div>
                 
                 
-                <div className={`service-materials-block ${isSticky? 'sticky' : ''}`} ref={elementRef}>
+                <div className='service-materials-block'>
                     <span className='service-materials-block-title'>Додаткові матеріали</span>
 
                     <MaterialItem 
+                        onClick={() => setModalActive(true)}
                         title={'RoHS (ПКМУ 139)'} 
                         text={'Технічний регламент щодо обмеження використання деяких небезпечних речовин в електричному та електронному обладнанні'}
                     />
@@ -227,16 +219,44 @@ function ServicePage() {
 
             <Carousel textTitle={'інші послуги'}/>
 
+            <Modal active={modalActive} setActive={setModalActive}>
+                <h4>Реєстрація косметичних продуктів</h4>
+                <span>Косметичні продукти</span>
+                <p>До косметичних продуктів відносяться наступні продукти:</p>
+                <ul>
+                    <li>засоби для догляду (крему, сиворотки, маски, бальзами, лосьйони, тоніки, серуми і тд.)</li>
+                    <li>декоративна косметика</li>
+                    <li>дитяча косметика, так само косметика по догляду за дітьми</li>
+                    <li>космецевтика (в залежності від складу і наявності певних рекомендацій)</li>
+                    <li>засоби по догляду за волоссям (шампуні, маски, масла, кондиціонери і тд.)</li>
+                    <li>засоби для очищення шкіри (гелі для душу, мило, пінки, скраби і тд.)</li>
+                    <li>препарати на основі крові та плазми</li>
+                </ul>
+                <div className='certificate-photo'>
+                    <img src={certificatePhoto} alt='Sertificate Photo'/>
+                </div>
+                <p className='p-special'>Для ввезення та реалізації косметичних продуктів необхідно пройти реєстрацію і отримати висновок санітарно-епідеміологічної експертизи (СЕС). Видачу даних висновків здійснює ДержПродСлужба.</p>
+                <p>Реєстрація косметики складається з двох етапів: документальна експертиза та випробування зразків. Функції з проведення експертизи покладені на акредитовані спеціалізовані організації. Термін реєстрації з моменту подачі документації і зразків становить близько 4-х тижнів. В результаті реєстрації видається звіт терміном дії-5 років.</p>
+                <p>Компанія Архімед має великий досвід в проведенні реєстрації косметичних продуктів і готова запропонувати Вам реєстрацію «під ключ», та усі необхідні додаткові послуги:</p>
+                <ul>
+                    <li>підготовка тексту маркування, згідно з чинними законодавчими актам</li>
+                    <li>переклад та нотаріальне копіювання документації</li>
+                    <li>супровід при ввезенні зразків для реєстрації</li>
+                </ul>
+                <p>А також всі необхідні консультації.</p>
+                <p>Більш детальну консультацію можна отримати, написавши нам короткий запит або зателефонувавши за номером, вказаним нижче.</p>
+            </Modal>
+
         </section>
         
     )
 }
 
 function MaterialItem(props) {
-    const { title, text } = props;
+    const { title, text, onClick } = props;
 
     return(
-        <div className='material-item'>
+        <div className='material-item' onClick={onClick}>
             <div className='material-item-container'>
                 <span className='material-item-title'>{title}</span>
                 <span className='material-item-text'>{text}</span>

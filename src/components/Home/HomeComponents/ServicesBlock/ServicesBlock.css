@@ -1,6 +1,7 @@
 .services-block{
     display: flex;
     justify-content: center;
+    padding-top: 64px;
 }
 
 .services-block-container{
@@ -155,7 +156,7 @@ a {
 
 .fixed {
     position: fixed;
-    top: 0;
+    top: 64px;
     left: 120px;
     z-index: -1;
 }

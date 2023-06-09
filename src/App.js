@@ -9,31 +9,6 @@ import Footer from './components/Footer/Footer';
 import { Route, Routes, useLocation, BrowserRouter } from 'react-router-dom';
 import ServicePage from './components/Services/ServicePage';
 
-
-
-// function App() {
-//   const location = useLocation();
-//   const isContactsPath = location.pathname === '/contacts';
-   
-//   return (
-//     <div>
-//       <Header/>
-//       <BrowserRouter basename='/archimed-site'>
-//         <Routes>
-//           <Route exact path='/archimed-site' element={<Home/>}></Route>
-//           <Route path='/services' element={<Services/>}></Route>
-//           <Route path='/contacts' element={<Contacts/>}></Route>
-//           <Route path='/about' element={<About/>}></Route>
-//         </Routes>
-//       </BrowserRouter>
-//       <div className={isContactsPath ? 'special-footer' : ''}>
-//         <Footer/>
-//       </div>
-      
-//     </div>
-//   );
-// }
-
 function App() {
   return (
     <BrowserRouter basename="/archimed-site">
@@ -50,7 +25,7 @@ function AppContent() {
     <div>
       <Header />
       <Routes>
-        <Route exact path="/archimed-site" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/about" element={<About />} />

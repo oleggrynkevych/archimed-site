@@ -14,7 +14,7 @@
       const containerRect = containerRef.current.getBoundingClientRect();
 
       if (
-        containerRect.top <= 0 &&
+        containerRect.top <= 64 &&
         containerRect.bottom >= elementRef.current.offsetHeight
       ) {
         setIsFixed(true);
