@@ -47,10 +47,10 @@ function Header () {
                 </div>
                 <nav className={`nav ${openMenu? 'active' : 'inactive'}`}>
                     <ul>
-                        <CustomLink to='/archimed-site'>Головна</CustomLink>
-                        <CustomLink ref={secondNavItem} to='/services'>Послуги</CustomLink>
-                        <CustomLink to='/about'>Про нас</CustomLink>
-                        <CustomLink to='/contacts'>Контакти</CustomLink>
+                        <CustomLink to='/archimed-site' onClick={() => {setOpenMenu(!openMenu)}}>Головна</CustomLink>
+                        <CustomLink ref={secondNavItem} to='/services' onClick={() => {setOpenMenu(!openMenu)}}>Послуги</CustomLink>
+                        <CustomLink to='/about' onClick={() => {setOpenMenu(!openMenu)}}>Про нас</CustomLink>
+                        <CustomLink to='/contacts' onClick={() => {setOpenMenu(!openMenu)}}>Контакти</CustomLink>
                     </ul>
                     <div className='language-switch'> 
                         <span>UA</span>
