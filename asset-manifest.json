@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/archimed-site/static/css/main.6b7a78bf.css",
-    "main.js": "/archimed-site/static/js/main.0eb9c704.js",
+    "main.js": "/archimed-site/static/js/main.c17e06d1.js",
     "static/js/787.edd4b02d.chunk.js": "/archimed-site/static/js/787.edd4b02d.chunk.js",
     "static/media/first-member.png": "/archimed-site/static/media/first-member.83dbf6ad377b441f12b9.png",
     "static/media/team-photo.png": "/archimed-site/static/media/team-photo.884ba8bc2b39ec5061c6.png",
@@ -41,11 +41,11 @@
     "static/media/modal-back-icon.svg": "/archimed-site/static/media/modal-back-icon.017036d14a94545d8f6b5b2e18308106.svg",
     "static/media/down-icon.svg": "/archimed-site/static/media/down-icon.32e070635fe584377308664889bc783a.svg",
     "main.6b7a78bf.css.map": "/archimed-site/static/css/main.6b7a78bf.css.map",
-    "main.0eb9c704.js.map": "/archimed-site/static/js/main.0eb9c704.js.map",
+    "main.c17e06d1.js.map": "/archimed-site/static/js/main.c17e06d1.js.map",
     "787.edd4b02d.chunk.js.map": "/archimed-site/static/js/787.edd4b02d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6b7a78bf.css",
-    "static/js/main.0eb9c704.js"
+    "static/js/main.c17e06d1.js"
   ]
 }
