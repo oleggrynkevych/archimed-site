@@ -7,7 +7,6 @@
     margin: 0 auto 0 auto;
     background: #F5F5F5;
     color: #042336;
-    padding-top: 64px;
 }
 
 .service-page-title {
@@ -16,7 +15,7 @@
 }
 
 .service-page h1 {
-    font-family: 'Inter';
+    font-family: 'NAMU';
     font-style: normal;
     font-weight: 600;
     font-size: 40px;
@@ -393,6 +392,11 @@
 .material-item:hover .material-item-link svg{
     transform: translateX(5px);
 }
+
+.material-item:hover {
+    background: rgba(35, 35, 35, 0.15);
+}
+
 
 .service-materials-block-info{
     width: 100%;

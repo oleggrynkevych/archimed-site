@@ -17,7 +17,7 @@ function Home() {
     }
 
     return (
-        <div>
+        <div style={{marginTop: '-64px'}}>
             <FirstSection scrollToNextComponent={scrollToNextComponent}/>
             <ServicesBlock innerRef={secondComponentRef}/>
             <Partners/>

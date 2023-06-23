@@ -2,6 +2,7 @@ import './Partners.css';
 import logoCompany1 from '../../../../images/logo-company-1.svg';
 import logoCompany2 from '../../../../images/logo-company-2.svg';
 import React, { useEffect, useRef, useState } from 'react';
+import { logosData } from './partners-data';
 
 
 
@@ -10,8 +11,6 @@ let firstSlideTime = '15s';
 
 const sectionRef = useRef(null);
 const [scrollTransform, setScrollTransform] = useState({ scale: 0.9, translateY: '150px' });
-
-const [headerBg, setHeaderBg] = useState (false);
 
 useEffect(() => {
 
@@ -51,94 +50,40 @@ useEffect(() => {
                 <h5>4 посольства</h5>
                 <div className='logos'>
                     <div className='logos-slide' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
+                        {logosData.map((logo, index) => (
+                            <Logo key={index} src={logo} />
+                        ))}
                     </div>
                     <div className='logos-slide' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
+                        {logosData.map((logo, index) => (
+                            <Logo key={index} src={logo} />
+                        ))}
                     </div>
                 </div>
 
                 <div className='logos reverse'>
                     <div className='logos-slide' style={{ animation: `${firstSlideTime} slide-reverse infinite linear` }}>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
+                        {logosData.map((logo, index) => (
+                            <Logo key={index} src={logo} />
+                        ))}
                     </div>
                     <div className='logos-slide' style={{ animation: `${firstSlideTime} slide-reverse infinite linear` }}>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
+                        {logosData.map((logo, index) => (
+                            <Logo key={index} src={logo} />
+                        ))}
                     </div>
                 </div>
 
                 <div className='logos'>
                     <div className='logos-slide' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
+                        {logosData.map((logo, index) => (
+                            <Logo key={index} src={logo} />
+                        ))}
                     </div>
                     <div className='logos-slide' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
-                        <Logo src={logoCompany1}/>
-                        <Logo src={logoCompany2}/>
+                        {logosData.map((logo, index) => (
+                            <Logo key={index} src={logo} />
+                        ))}
                     </div>
                 </div>
             </div>

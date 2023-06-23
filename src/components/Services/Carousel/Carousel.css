@@ -1,15 +1,22 @@
 .carousel {
     padding: 192px 0 186px 0px;
-    margin-left: 9%;
-    width: 91%;
-    max-width: 1320px;
+    width: 100%;
     overflow: hidden;
     color: #393939;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.carousel-container {
+    margin-left: 9%;
+    width: 100%;
+    max-width: 1320px;
 }
 
 .carousel h5 {
     margin: 0 0 40px 0;
-    font-family: 'Inter';
+    font-family: 'NAMU';
     font-style: normal;
     font-weight: 800;
     font-size: 40px;
@@ -34,15 +41,17 @@
 
 .carousel .slick-arrow{
     top: -64px !important;
-    width: 55px !important;
-    height: 55px !important;
+    width: 77px !important;
+    height: 77px !important;
     border: 1px solid #042336 !important;
     border-radius: 10000px;
     color: #042336 !important;
+    transition: all 0.4s ease;  
+    scale: 1;
 }
 
 .carousel .slick-arrow:hover {
-    scale: 1.2;
+    scale: 1.3;
     transform-origin: top !important;
 }
 
@@ -57,7 +66,7 @@
     border-radius: 1000px;
     z-index: -1;
     transform: scale(0);
-    transition: transform 0.4s;   
+    transition: transform 0.4s ease; 
     cursor: pointer;
 }
 
@@ -66,7 +75,7 @@
 }
 
 .carousel .slick-prev {
-    left: 489px !important;
+    left: 410px !important;
     color: #042336 !important;
 }
 
@@ -82,7 +91,7 @@
 }
 
 .carousel .slick-next {
-    left: 560px !important;
+    left: 510px !important;
     color: #042336 !important;
 }
 
@@ -156,7 +165,7 @@
 
 .carousel-item-text{
     width: 224px;
-    font-family: 'Inter';
+    font-family: 'NAMU';
     font-style: normal;
     font-weight: 500;
     font-size: 20px;

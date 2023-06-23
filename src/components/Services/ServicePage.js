@@ -1,5 +1,6 @@
 import './ServicePage.css';
 import React, { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import backIcon from '../../images/backIcon.svg';
 import certificatePhoto from '../../images/certificate-photo.png';
 import PhoneInput from "react-phone-input-2";
@@ -27,18 +28,19 @@ function ServicePage() {
           top: 0, 
           behavior: 'smooth'
         });
-      };
+    };
 
 
     return (
+        <div>
         <section className='service-page'>
             <div className='service-page-title'>
-                <a href='/services'>
+                <Link to='/services'>
                     <div className='service-page-back-button'>
                         <img src={backIcon} alt='Back Icon'/>
                         <span>всі послуги</span>
                     </div>
-                </a>
+                </Link>
                 <h1>реєстрація лікарських засобів</h1>
             </div>
 
@@ -165,7 +167,7 @@ function ServicePage() {
                         <span>Телефон</span>
                         <PhoneInput
                             country="ua"
-                            masks={{ua: '(..) ..-..-..'}}
+                            masks={{ua: '(..) ...-..-..'}}
                             disableCountryCode={false}
                             alwaysDefaultMask={false}
                             value=''
@@ -217,8 +219,6 @@ function ServicePage() {
                 </div>
             </div>
 
-            <Carousel textTitle={'інші послуги'}/>
-
             <Modal active={modalActive} setActive={setModalActive}>
                 <h4>Реєстрація косметичних продуктів</h4>
                 <span>Косметичні продукти</span>
@@ -248,6 +248,9 @@ function ServicePage() {
             </Modal>
 
         </section>
+        <Carousel textTitle={'інші послуги'}></Carousel>
+    </div>
+
         
     )
 }

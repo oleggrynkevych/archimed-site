@@ -1,14 +1,21 @@
-header{
+.header{
     width: 100%;
     background-color: #F5F5F5;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #DEE0E2;
     height: 64px;
-    position: fixed;
+    position: sticky;
+    top: 0px;
     z-index: 1000;
-
+    transition-property: all; 
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 700ms;
 }
+
+.header.hide {
+    top: -64px;
+  }
 
 .header-container{
     width: 100%;
@@ -35,7 +42,7 @@ header{
 .nav a{
     color: inherit;
     text-decoration: none;
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -137,7 +144,7 @@ header{
 }
 
 .dropdown-menu li {
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -266,7 +273,7 @@ header{
 
     .nav li{
         color: #F5F5F5;
-        font-family: 'Inter';
+        font-family: 'Mulish';
         font-style: normal;
         font-weight: 800;
         font-size: 24px;
@@ -293,12 +300,12 @@ header{
 
     .language-switch{
         display: flex;
-        margin-top: 225px;
+        margin-top: 160px;
         gap: 24px;
     }
 
     .language-switch span{
-        font-family: 'Inter';
+        font-family: 'Mulish';
         font-style: normal;
         font-weight: 400;
         font-size: 16px;

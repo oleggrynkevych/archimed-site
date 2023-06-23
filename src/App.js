@@ -8,13 +8,24 @@ import Contacts from './components/Contacts/Contacts';
 import Footer from './components/Footer/Footer';
 import { Route, Routes, useLocation, BrowserRouter } from 'react-router-dom';
 import ServicePage from './components/Services/ServicePage';
+import React, { useEffect} from 'react';
 
 function App() {
   return (
-    <BrowserRouter basename="/archimed-site">
+    <BrowserRouter>
       <AppContent />
     </BrowserRouter>
   );
+}
+
+function ScrollToTopOnPageChange() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({top: 0, behavior: "instant"});
+  }, [location.pathname]);
+
+  return null;
 }
 
 function AppContent() {
@@ -24,8 +35,9 @@ function AppContent() {
   return (
     <div>
       <Header />
+      <ScrollToTopOnPageChange/>
       <Routes>
-        <Route exact path="/archimed-site" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/about" element={<About />} />

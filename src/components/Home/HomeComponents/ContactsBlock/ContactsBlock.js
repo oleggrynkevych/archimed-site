@@ -2,23 +2,13 @@ import './ContactsBlock.css';
 import googleMeetsIcon from '../../../../images/google-meets-icon.svg';
 import zoomIcon from '../../../../images/zoom-icon.svg';
 import microsoftTeamsIcon from '../../../../images/microsoft-teams-icon.svg';
-import cornerIcon from '../../../../images/corner-icon.svg';
 import mapIcon from '../../../../images/map-icon-color.svg';
-import cornerIconSmall from '../../../../images/corner-icon-small.svg';
 import React, { useState } from "react";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 
 
 function ContactsBlock ({commonStyle}) {
-    function SiteInfoItem (props) {
-        return(
-           <div>
-                <span className='site-info-subtitle'>{props.firstText}</span>
-                <a href={props.href} target={props.target}>{props.secondText}</a>
-           </div>
-        )
-    }
 
     const [phoneNumber, setPhoneNumber] = useState("");
 
@@ -90,18 +80,28 @@ function ContactsBlock ({commonStyle}) {
                         <span>Телефон</span>
                         <PhoneInput
                             country="ua"
-                            masks={{ua: '(..) ..-..-..'}}
+                            masks={{ua: '(..) ...-..-..'}}
                             disableCountryCode={false}
                             alwaysDefaultMask={false}
                             value={phoneNumber}
                             onChange={handlePhoneNumberChange}
                             inputClass='phone-input'
+                            countryCodeEditable={false}
                         />
                         <div className='form-button'><span>надіслати</span></div>
                     </form>
                 </div>
             </div>
         </section>
+    )
+}
+
+function SiteInfoItem (props) {
+    return(
+       <div>
+            <span className='site-info-subtitle'>{props.firstText}</span>
+            <a href={props.href} target={props.target}>{props.secondText}</a>
+       </div>
     )
 }
 

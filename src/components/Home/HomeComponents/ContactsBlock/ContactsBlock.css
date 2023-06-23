@@ -36,6 +36,7 @@
 
   .contacts-first-block span:nth-child(2) {
     width: 383px;
+    font-family: 'NAMU';
     font-style: normal;
     font-weight: 800;
     font-size: 60px;
@@ -55,6 +56,7 @@
   }
 
   .contacts-first-block span:nth-child(4) {
+    font-family: 'NAMU';
     font-style: normal;
     font-weight: 800;
     font-size: 20px;

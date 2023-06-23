@@ -1,7 +1,3 @@
-.contacts-page{
-    padding-top: 64px;
-}
-
 .contacts-page .contacts-first-block span:nth-child(1),
 .contacts-page .contacts-first-block span:nth-child(4),
 .contacts-page .contacts-first-block span:nth-child(5),
@@ -13,8 +9,9 @@
     margin-top: 40px;
 }
 
-.contacts-page.contacts-first-block{
-    border-right: 1px solid #DEE0E2;
+.contacts-page .contacts-first-block{
+    border-right: 1px solid rgba(222, 224, 226, 1) !important;
+    ;
 }
 
 .contacts-page input {

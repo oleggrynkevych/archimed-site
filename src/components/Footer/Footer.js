@@ -1,5 +1,6 @@
 import mapIcon from '../../images/map-icon.svg';
 import {Link} from 'react-router-dom';
+import {dataNav, dataSocialIcon} from './footer-data.js';
 
 import './Footer.css';
 
@@ -13,10 +14,12 @@ function Footer () {
         )
     }
 
-    const scrollToTop = () =>{
+    const scrollToTop = (e) =>{
+        e.preventDefault();
         window.scrollTo({
           top: 0, 
-          behavior: 'smooth'
+          behavior: 'smooth',
+          block: 'start'
         });
       };
 
@@ -26,10 +29,10 @@ function Footer () {
                 <div className='footer-head'>
                     <span>Архімед — ваш торговий представник</span>
                     <div onClick={scrollToTop}>
-                    <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.25 24.25V25H14.75V24.25H16.25ZM14.75 6.75C14.75 6.33579 15.0858 6 15.5 6C15.9142 6 16.25 6.33579 16.25 6.75H14.75ZM14.75 24.25V6.75H16.25V24.25H14.75Z" fill="currentColor"/>
-                        <path d="M20.5 11.75L15.5 6.75L10.5 11.75" stroke='currentColor' strokeWidth="1.5" strokeLinecap="square"/>
-                    </svg>
+                        <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.25 24.25V25H14.75V24.25H16.25ZM14.75 6.75C14.75 6.33579 15.0858 6 15.5 6C15.9142 6 16.25 6.33579 16.25 6.75H14.75ZM14.75 24.25V6.75H16.25V24.25H14.75Z" fill="currentColor"/>
+                            <path d="M20.5 11.75L15.5 6.75L10.5 11.75" stroke='currentColor' strokeWidth="1.5" strokeLinecap="square"/>
+                        </svg>
                     </div>
                 </div>
                 <div className='footer-main'>
@@ -54,20 +57,21 @@ function Footer () {
                         <div className='footer-nav'>
                             <span className='footer-subtitle'>Навігація</span>
                             <ul>
-                                <CustomLink to='/'>Головна</CustomLink>
-                                <CustomLink to='/services'>Послуги</CustomLink>
-                                <CustomLink to='/about'>Про нас</CustomLink>
-                                <CustomLink to='/contacts'>Контакти</CustomLink>
-                                <CustomLink to='https://archimed.in.ua/uk/vakansii/' target="_blank">Вакансії</CustomLink>
-                                <CustomLink to='https://hartmann24.com.ua/' target="_blank">Інтернет-магазин</CustomLink>
+                                {dataNav.map((item, index) => (
+                                    <li key={index}>
+                                        <Link to={item.to} target={item.target}>{item.label}</Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                         <div className='footer-socmedia'>
                             <span className='footer-subtitle'>соціальні мережі</span>
                             <ul>
-                                <SocialIcon href='/'>Twitter</SocialIcon>
-                                <SocialIcon href='/'>Facebook</SocialIcon>
-                                <SocialIcon href='/'>Instagram</SocialIcon>
+                                {dataSocialIcon.map((item, index) => (
+                                    <li key={index}>
+                                        <a href={item.href}>{item.label}</a>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
@@ -80,25 +84,6 @@ function Footer () {
                 <div></div>
             </div>
         </footer>
-    )
-}
-
-
-function CustomLink({to, children, ...props}){
-
-    return (
-        <li>
-            <Link to={to} {...props}>{children}</Link>
-        </li>
-    )
-}
-
-function SocialIcon({href, children, ...props}){
-
-    return (
-        <li>
-            <a href={href} {...props}>{children}</a>
-        </li>
     )
 }
 

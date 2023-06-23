@@ -67,15 +67,16 @@ function Carousel (props) {
 
     return(
         <div className='carousel'>
-            <h5>{props.textTitle}</h5>
-            <Slider {...settings}>
-                <CarouselItem/>
-                <CarouselItem/>
-                <CarouselItem/>
-                <CarouselItem/>
-                <CarouselItem/>
-            </Slider>
-            
+            <div className='carousel-container'>
+              <h5>{props.textTitle}</h5>
+              <Slider {...settings}>
+                  <CarouselItem/>
+                  <CarouselItem/>
+                  <CarouselItem/>
+                  <CarouselItem/>
+                  <CarouselItem/>
+              </Slider>
+            </div>
         </div>
     )
 }

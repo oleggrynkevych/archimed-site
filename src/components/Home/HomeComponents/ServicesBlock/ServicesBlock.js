@@ -1,53 +1,28 @@
  import './ServicesBlock.css';
- import React, { useRef, useEffect, useState } from 'react';
- import third3d from '../../../../images/3D-object-3.png';
- import { Link } from 'react-router-dom';
+ import React, { Suspense, useEffect, useRef, useState} from 'react';
+ import { Canvas , useFrame } from '@react-three/fiber'; import { Link } from 'react-router-dom';
+ import {servicesData} from './service-block-data.js';
+import SyringeColorsService3D from './SyringeColorsService3D';
 
  const ServicesBlock = function ({ innerRef }) {
 
-  const containerRef = useRef(null);
-  const elementRef = useRef(null);
-  const [isFixed, setIsFixed] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const containerRect = containerRef.current.getBoundingClientRect();
-
-      if (
-        containerRect.top <= 64 &&
-        containerRect.bottom >= elementRef.current.offsetHeight
-      ) {
-        setIsFixed(true);
-      } else {
-        setIsFixed(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
     return (
-        <section className='services-block' ref={innerRef}>
-            <div className={`services-block-container ${isFixed? 'end-flex' : ''}`} ref={containerRef}>
-                <div className='third-3d-second'>
-                    <img src={third3d}></img>
+        <section className='services-block'>
+            <div className='services-block-container'>
+                <div className='second-3d'>
+                    <Canvas dpr={2} camera={{fov: 45, position: [0,0,0]}}>
+                        <Suspense fallback={null}>
+                            <ambientLight/>
+                            <directionalLight intensity={2} position={[0,0,50]}/>
+                            <SyringeColorsService3D/>
+                        </Suspense>
+                    </Canvas>
                 </div>
-                <h3 className={isFixed ? 'fixed' : ''} ref={elementRef}>Наші послуги</h3>
-                <div className='services-wrapper'>
-                    <ServiceItem number={'01'} name={'Оцінка відповідності медичних виробів'}/>
-                    <ServiceItem number={'01'} name={'Оцінка відповідності медичних виробів'}/>
-                    <ServiceItem number={'01'} name={'Оцінка відповідності медичних виробів'}/>
-                    <ServiceItem number={'01'} name={'Оцінка відповідності медичних виробів'}/>
-                    <ServiceItem number={'01'} name={'Оцінка відповідності медичних виробів'}/>
-                    <ServiceItem number={'01'} name={'Оцінка відповідності медичних виробів'}/>
-                    <ServiceItem number={'01'} name={'Оцінка відповідності медичних виробів'}/>
-                    <ServiceItem number={'01'} name={'Оцінка відповідності медичних виробів'}/>
-                    <ServiceItem number={'01'} name={'Оцінка відповідності медичних виробів'}/>
-                    <ServiceItem number={'01'} name={'Оцінка відповідності медичних виробів'}/>
+                <h3 >Наші послуги</h3>
+                <div className='services-wrapper' ref={innerRef}>
+                    {servicesData.map((service, index) => (
+                        <ServiceItem key={index} number={service.number} name={service.name} />
+                    ))}
                 </div>
             </div>
         </section>
