@@ -7,7 +7,7 @@ import { logosData } from './partners-data';
 
 
 function Partners () {
-let firstSlideTime = '15s';
+let firstSlideTime = '16s';
 
 const sectionRef = useRef(null);
 const [scrollTransform, setScrollTransform] = useState({ scale: 0.9, translateY: '150px' });
@@ -46,7 +46,7 @@ useEffect(() => {
             <div className='partners-block-container' ref={sectionRef} style={{ transform: `scale(${scrollTransform.scale}) translateY(${scrollTransform.translateY})` }}>
                 <h5>нам довіряють</h5>
                 <h5>31 міжнародна компанія</h5>
-                <h5>15 український компаній</h5>
+                <h5>15 українських компаній</h5>
                 <h5>4 посольства</h5>
                 <div className='logos'>
                     <div className='logos-slide' style={{ animation: `${firstSlideTime} slide infinite linear` }}>

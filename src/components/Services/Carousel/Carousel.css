@@ -209,6 +209,10 @@
         margin-left: 4%;
     }
 
+    .carousel .slick-list {
+        overflow: hidden !important;
+    }
+
     .carousel h5{
         font-size: 24px;
     }

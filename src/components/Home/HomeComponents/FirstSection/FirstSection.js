@@ -5,20 +5,46 @@ import ScissorsColors3D from './ScissorsColors3D';
 import PillsColors3D from './PillsColors3D';
 import SyringeColors3D from './SyringeColors3D';
 
+import { extend, useThree } from "@react-three/fiber";
+import { SSAOPass } from "three-stdlib";
+import {PostFX} from '../../../PostFX.js/PostFX';
+import { PostFX_2 } from '../../../Home/HomeComponents/ServicesBlock/PostFX_2';
+
+function Effect() {
+    const { gl, scene, camera, size } = useThree()
+    const renderer = new PostFX(gl)
+    return useFrame((state) => {
+      renderer.render(scene, camera)
+    }, 1)
+  }
+
+  function Effect_2() {
+    const { gl, scene, camera, size } = useThree()
+    const renderer = new PostFX_2(gl)
+    return useFrame((state) => {
+      renderer.render(scene, camera)
+    }, 1)
+  }
+
 const FirstSection = function ({ scrollToNextComponent }) {
 
     return(
         <section className='first-section'>
             <div className='first-3d' style={{width:'100%', height:'100%', top:'64px', left:'0', overflow: 'visible'}}>
                     <Canvas dpr={2} camera={{fov: 45, position: [0,0,0]}}>
+                    <Effect/>
                         <Suspense fallback={null}>
                             <ambientLight/>
                             <directionalLight intensity={2} position={[0,0,50]}/>
                             
-                            {/* <ScissorsColor3D/> */}
                             <ScissorsColors3D/>
+                        
+
                             <PillsColors3D/>
+                            
+
                             <SyringeColors3D/>
+                            
                         </Suspense>
                     </Canvas>
                 </div>

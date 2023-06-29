@@ -66,7 +66,7 @@ function SyringeColors3D (props) {
         const handleScroll = () => {
         const currentScrollY = window.scrollY;
         
-        let newPositionY = startPositionY - currentScrollY*0.0005;
+        let newPositionY = startPositionY - currentScrollY*0.00025;
         let newRotationZ = Math.PI * -1.35 - currentScrollY*0.007;
         let newRotationX = Math.PI * -1.65 + currentScrollY*0.005;
 

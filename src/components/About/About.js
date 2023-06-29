@@ -94,7 +94,9 @@ function SliderTeamMember (props) {
             <div className='slider-team-member-content'>
                 <div className='member-content-container'>
                     <div className='slider-team-member-comment'>
-                        <img src={quotesIcon}/>
+                        <div className='slider-team-member-comment-image'>
+                            <img src={quotesIcon}/>
+                        </div>
                         <span>{props.quote}</span>
                     </div>
                     <div className='slider-team-member-person'>

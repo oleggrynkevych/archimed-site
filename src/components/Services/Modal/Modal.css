@@ -58,14 +58,7 @@
 }
 
 @media (max-width: 700px) {
-    .modal{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
     .modal-content{
         width: 340px;
-        height: 90%;
     }
 }

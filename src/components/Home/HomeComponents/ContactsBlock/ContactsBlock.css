@@ -63,19 +63,54 @@
     line-height: 115%;
     text-transform: uppercase;
     margin-top: 169px;
+    margin-bottom: 24px;
   }
 
   .video-item {
+    width: 112px;
+    height: 22px;
+    padding: 5px 15px;
     width: auto;
     display: flex;
     flex-direction: row; 
     align-items: center;
-    padding: 8px 16px;
     gap: 12px;
-    border: 1px solid rgba(245, 245, 245, 0.2);
+    border: 1px solid var(--light, #F5F5F5);
     border-radius: 40px;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
   }
+
+  .video-item::before{
+    content: '';
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #F5F5F5;
+    border: 1px solid var(--light, #F5F5F5);
+    border-radius: 40px;
+    z-index: 0;
+    transition: transform 0.5s ease;
+    transform: translateX(100%);
+    cursor: pointer;
+}
+
+
+.video-item:hover{
+  color: #042336;
+}
+
+.video-item:hover::before{
+  transform: translateX(0%);
+}
+
+.video-item svg {
+  position: relative;
+  z-index: 5;
+}
 
   .video-item span {
     width: auto !important;
@@ -85,14 +120,20 @@
     line-height: 0% !important;
     text-transform: none !important;
     margin-top: 0 !important;
+    color: inherit !important;
+    position: relative;
+    z-index: 5;
   }
 
   .video-item-block {
     display: flex;
     flex-direction: row;
     gap: 12px;
-    margin-top: 12px;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
+  }
+
+  .video-item-block a{
+    color: inherit;
   }
 
   .corner-icon {
@@ -179,7 +220,7 @@
     border-radius: 100px;
     border: 1px solid #DEE0E2;
     color: #1C3849 ;
-    margin-top: 87px;
+    margin-top: 75px;
     position: relative;
     cursor: pointer;
     overflow: hidden;
@@ -262,12 +303,12 @@
     width: 300px !important;
   }
 
-  .video-item-block {
+  /* .video-item-block {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 60%;
-  }
+  } */
 }
 
 @media (max-width: 800px){
@@ -328,7 +369,7 @@
         width: 100%;
         height: 79px;
         margin-top: 48px;
-        margin-bottom: 434px;
+        margin-bottom: 305px;
     }
 
     .corner-icon {
@@ -380,7 +421,10 @@
         align-items: center;
         margin-top: 32px;
         gap: 24px;
-        padding: ;
+    }
+
+    .video-item-block-mobile  a{
+      color: inherit;
     }
 
     .video-item{

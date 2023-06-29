@@ -79,7 +79,7 @@ function Footer () {
 
                 <div className='footer-bottom'>
                     <span>© Архімед 2018. Всі права захищені</span>
-                    <a href='/'>Політика конфіденційності</a>
+                    <Link to='/privacypolicy'>Політика конфіденційності</Link>
                 </div>
                 <div></div>
             </div>

@@ -67,9 +67,10 @@
 
 .about-page-header-photo {
     position: absolute;
-    bottom: -81px;
+    bottom: 0px;
     right: 0px;
     width: 50%;
+    height: 100%;
 }
 
 .about-page-header-photo img {
@@ -246,10 +247,14 @@
     line-height: 130%;
 }
 
-.slider-team-member-comment img {
+.slider-team-member-comment-image img {
+    margin-bottom: 12px;
+    width: 100%;
+    height: auto;
+}
+
+.slider-team-member-comment-image{
     width: 45px;
-    height: 34px;
-    margin-bottom: 32px;
 }
 
 .slider-team-member-person {
@@ -466,11 +471,14 @@
     }
 
     .about-page-header-photo{
-        width: 600px;
+        width: auto;
+        height: 480px;
+        bottom: 0;
     }
 
     .about-page-header-photo img{
-        width: 100%;
+       height: 100%;
+       width: auto;
     }
 
     .about-page-main-first-text {
@@ -500,10 +508,21 @@
 }
 
 @media (max-width: 900px) {
+
+    .about-page-header {
+        padding-bottom: 245px;
+    }
+
     .about-page-header-photo{
-        width: 400px;
+        width: 100%;
+        height: 520px;
         right: 0px;
     }
+
+    .about-page-header-photo img{
+        height: auto;
+        width: 100%;
+     }
 
     .about-page-main-second-text span {
         width: 324px;
@@ -525,7 +544,7 @@
     }
 
     .slider-team-member-person {
-        margin-bottom: 10px;
+        margin-bottom: 40px;
     }
 
     .slider-team-member-content{
@@ -581,7 +600,6 @@
 
     .about-page-header-photo {
         right: 0px;
-
     }
 
     .small-container-main {
@@ -695,6 +713,10 @@
         margin: 30px 16px 24px 16px;
     }
 
+    .slider-team-member-comment-image{
+        width: 25px;
+    }
+
     .slider-team-member-comment span {
         width: 100%;
         font-size: 16px;
@@ -703,10 +725,6 @@
 
     .slider-team-member-person span:nth-child(2) {
         font-size: 12px;
-    }
-
-    .slider-team-member-comment img {
-        margin-bottom: 12px;
     }
 
     .slider-team-member-person {
@@ -736,9 +754,16 @@
 
 }
 
+@media (max-width: 500px) {
+    .about-page-header-photo img {
+        position: inherit;
+        bottom: 0px;
+    }
+}
+
 @media (min-width: 2000px){
     .about-page-header-photo {
-        width: 30%;
+        width: 40%;
     }
 }
 

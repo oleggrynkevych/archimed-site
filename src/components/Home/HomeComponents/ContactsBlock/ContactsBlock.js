@@ -1,7 +1,5 @@
 import './ContactsBlock.css';
-import googleMeetsIcon from '../../../../images/google-meets-icon.svg';
-import zoomIcon from '../../../../images/zoom-icon.svg';
-import microsoftTeamsIcon from '../../../../images/microsoft-teams-icon.svg';
+import videoLogo from '../../../../images/video-logo.svg';
 import mapIcon from '../../../../images/map-icon-color.svg';
 import React, { useState } from "react";
 import "react-phone-input-2/lib/style.css";
@@ -24,20 +22,18 @@ function ContactsBlock ({commonStyle}) {
                     <span>зв’яжіться з нами</span>
                     <span>і ми реалізуємо найкраще рішення для вашого бізнесу</span>
                     <span>або заплануйте відео-зустріч</span>
-                    <span>ми доступні в</span>
+                    {/* <span>ми доступні в</span> */}
                     <div className='video-item-block'>
-                        <VideoItem src={googleMeetsIcon} text={'Google meet'}/>
-                        <VideoItem src={zoomIcon} text={'Zoom'}/>
-                        <VideoItem src={microsoftTeamsIcon} text={'Microsoft teams'}/>
+                        <VideoItem src={videoLogo} text={'Запланувати'}/>
+                        
                     </div>
 
                     <div className='contacts-block-for-mobile'>
                         <span>або заплануйте відео-зустріч</span>
                         <span>ми доступні в</span>
                         <div className='video-item-block-mobile'>
-                            <VideoItem src={googleMeetsIcon} text={'Google meet'}/>
-                            <VideoItem src={zoomIcon} text={'Zoom'}/>
-                            <VideoItem src={microsoftTeamsIcon} text={'Microsoft teams'}/>
+                            <VideoItem src={videoLogo} text={'Запланувати'}/>
+                            
                         </div>
                     </div>
 
@@ -107,10 +103,23 @@ function SiteInfoItem (props) {
 
 function VideoItem ({...props}){
     return (
+        <a href='https://calendly.com/d/y45-v9w-nhm/30-minute-preliminary-consultation?month=2023-06'
+        target='_blank'>
        <div className='video-item'>
-            <img src={props.src}/>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_1443_569)">
+                <path d="M15.3333 4.66663L10.6666 7.99996L15.3333 11.3333V4.66663Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
+                <path d="M9.33329 3.33337H1.99996C1.26358 3.33337 0.666626 3.93033 0.666626 4.66671V11.3334C0.666626 12.0698 1.26358 12.6667 1.99996 12.6667H9.33329C10.0697 12.6667 10.6666 12.0698 10.6666 11.3334V4.66671C10.6666 3.93033 10.0697 3.33337 9.33329 3.33337Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_1443_569">
+                <rect width="16" height="16" fill="white"/>
+                </clipPath>
+                </defs>
+            </svg>
             <span>{props.text}</span>
        </div>
+       </a>
     )
 }
 

@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import Services from './components/Services/Services';
 import About from './components/About/About';
 import Contacts from './components/Contacts/Contacts';
+import PrivacyPolicy from './components/Privacy Policy/PrivacyPolicy';
 import Footer from './components/Footer/Footer';
 import { Route, Routes, useLocation, BrowserRouter } from 'react-router-dom';
 import ServicePage from './components/Services/ServicePage';
@@ -42,6 +43,7 @@ function AppContent() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/about" element={<About />} />
         <Route path="/servicepage" element={<ServicePage />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
       </Routes>
       <div className={isContactsPath ? 'special-footer' : ''}>
         <Footer />

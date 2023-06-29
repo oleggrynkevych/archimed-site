@@ -17,7 +17,10 @@
     flex-direction: row;
     justify-content: space-between;
     position: relative;
+}
 
+.services-wrapper {
+    margin-top: 150px;
 }
 
 .services-block-container.end-flex {
@@ -35,9 +38,10 @@
     position: sticky;
     top: 65px;
     text-transform: uppercase;
-    margin: 50px 0 0 0;
+    margin: 200px 0 0 0;
     width: 300px;
     height: 50px;
+    z-index: 20;
 }
 
 /* Styles For Service Item */
@@ -210,5 +214,9 @@ a {
 
     .service-item h4{
         font-size: 20px;
+    }
+
+    .services-wrapper {
+        margin-top: 12px;
     }
 }

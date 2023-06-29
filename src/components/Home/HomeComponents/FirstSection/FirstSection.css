@@ -113,6 +113,7 @@
 .first-3d {
     position: absolute;
     overflow: visible;
+    background-color: transparent;
 }
 
 .second-3d {

@@ -26,7 +26,7 @@ function ScissorsColors3D (props) {
         });
     };
 
-   
+   console.log(123);
 
     useEffect(() => {
         loadModel();
