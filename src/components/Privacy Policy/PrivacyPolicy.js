@@ -4,7 +4,7 @@ import './PrivacyPolicy.css'
 function PrivacyPolicy(){
     return(
         <div className='privacy-policy'>
-            <Iframe url="https://docs.google.com/document/d/17qLvF2JpQj4czj81UNIe0GKISQyvFP6K2FSK8mAS998/preview" />        
+            <Iframe url="https://docs.google.com/document/d/e/2PACX-1vRNBfd4SYVzBmHOqdGbIoaWsCqxHulzvI805EhdHvCq0gXaAghv6ODUgQ63mqooeOIYCWYWqZ-bbm9t/pub?embedded=true" />        
         </div>
     )
 }

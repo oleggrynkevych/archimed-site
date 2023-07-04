@@ -1,5 +1,6 @@
 import './About.css';
 import teamPhoto from '../../images/team-photo.png';
+import teamPhotoMobile from '../../images/team-photo-mobile.png';
 import Slider from "react-slick";
 import quotesIcon from '../../images/quotes-icon.svg';
 import Carousel from '../Services/Carousel/Carousel';
@@ -9,6 +10,8 @@ import { Canvas , useFrame } from '@react-three/fiber';
 import Scissors3D from './Scissors3D';
 import Pills3D from './Pills3D';
 import Syringe3D from './Syringe3D';
+import { EffectComposer, SMAA } from "@react-three/postprocessing";
+import SobelEdge from '../Sobel/SobleEdge';
 
 function About() {
 
@@ -25,15 +28,18 @@ function About() {
         <div className="about-page">
                 <div className="about-page-header">  
                     <div className='small-container-header'>   
-                    <div className="about-page-header-text">
-                        <span>Руйнуємо пострадянські стереотипи і демонструємо всьому світу, що наша країна має величезний потенціал</span>
-                        <span>мета</span>
-                        <span>відкриваєм двері в Україну міжнародним виробникам товарів для охорони здоров'я</span>
-                    </div>
-                    <div className="about-page-header-photo">
-                        <img src={teamPhoto} alt='Team Photo'></img>
-                    </div>
-                    </div>     
+                        <div className="about-page-header-text">
+                            <span>Руйнуємо пострадянські стереотипи і демонструємо всьому світу, що наша країна має величезний потенціал</span>
+                            <span>мета</span>
+                            <span>відкриваєм двері в Україну міжнародним виробникам товарів для охорони здоров'я</span>
+                        </div>
+                        <div className="about-page-header-photo">
+                            <img src={teamPhoto} alt='Team Photo'></img>
+                        </div>
+                        <div className="about-page-header-photo-mobile">
+                        <img src={teamPhotoMobile} alt='Team Photo'></img>
+                    </div>   
+                    </div>  
                 </div>
 
                 <div className="about-page-main">
@@ -45,6 +51,10 @@ function About() {
                                 <Scissors3D/>
                                 <Pills3D/>
                                 <Syringe3D/>
+                                <EffectComposer multisampling={0}>
+                                    <SobelEdge />
+                                    <SMAA />
+                                </EffectComposer>
                             </Suspense>
                         </Canvas>
                     </div>

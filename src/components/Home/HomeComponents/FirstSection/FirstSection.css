@@ -3,7 +3,7 @@
     justify-content: center;
     overflow: hidden;
     position: relative;
-    height: 130vh;
+    height: 120vh;
     z-index: 10;
 }
 
@@ -19,7 +19,7 @@
     height: 100%;;
     box-sizing: border-box;
     margin-left: 120px;
-    padding: 124px 0 37vh 0;
+    padding: 124px 0 27vh 0;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -57,7 +57,7 @@
 .first-section-button {
     position: absolute;
     right: 120px;
-    bottom: 37vh;
+    bottom: 27vh;
     z-index: 5;
 }
 

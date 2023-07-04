@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 
+
 function PillsColors3D (props) {
     const group = useRef();
     const pivot = useRef();
@@ -23,44 +24,6 @@ function PillsColors3D (props) {
             obj.position.sub(center); 
             obj.remove(obj.children[1])
             obj.rotation.y = Math.PI; 
-
-            console.log(obj)
-            // obj.traverse((child) => {
-            //     console.log(child)
-            //     if (child.isMesh) {
-            //       let material;
-              
-            //       // Set different materials for different parts of the model
-            //       if (child.name === 'part1') {
-            //         material = new THREE.MeshBasicMaterial({
-            //           color: 0xffffff, // Color of the part without borders (transparent)
-                      
-            //         });
-              
-            //         const wireframeMaterial = new THREE.MeshBasicMaterial({
-            //           color: 0x042336, // Color of the main mesh borders in HEX format
-            //           wireframe: true, // Render the borders as wireframe
-            //           wireframeLinewidth: 2, // Thickness of the wireframe lines
-            //         });
-              
-            //         const geometry = child.geometry.clone();
-            //         const edges = new THREE.EdgesGeometry(geometry);
-              
-            //         const wireframe = new THREE.LineSegments(edges, wireframeMaterial);
-            //         child.add(wireframe);
-            //       } else {
-            //         material = new THREE.MeshBasicMaterial({
-            //           color: 0xffffff, // Color of the remaining parts (transparent)
-                      
-            //         });
-            //       }
-              
-            //       child.material = material;
-            //     }
-            //   });
-              
-              
-              
             
             pivot.current.add(obj);
             pivot.current.position.copy(center); 
@@ -112,6 +75,7 @@ function PillsColors3D (props) {
             ease: Back.easeOut.config(3)
         })
 
+        
         gsap.to(group.current.position, {
             y: newPositionY,
             duration: 0.1,

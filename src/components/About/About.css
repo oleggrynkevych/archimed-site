@@ -73,6 +73,10 @@
     height: 100%;
 }
 
+.about-page-header-photo-mobile{
+    display: none;
+}
+
 .about-page-header-photo img {
     width: 100%;
 }
@@ -578,10 +582,13 @@
 @media (max-width: 700px) {
     .about-page-header {
         margin: auto 16px;
+        padding-bottom: 0px;
+        padding-top: 10vh;
+        height: 85vh;
     }
 
     .small-container-header {
-        margin: auto 16px;
+        margin: 0px 16px;
     }
 
     .about-page-header-text span:nth-child(3) {
@@ -599,7 +606,19 @@
     }
 
     .about-page-header-photo {
-        right: 0px;
+        display: none;
+    }
+
+    .about-page-header-photo-mobile{
+        display: block;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+    }
+
+    .about-page-header-photo-mobile img {
+        width: 100%;
     }
 
     .small-container-main {

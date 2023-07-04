@@ -55,7 +55,7 @@ function SyringeColors3D (props) {
         startPositionZ = -5;
     } else {
         startPositionX = 0.6;
-        startPositionY = 0.12;
+        startPositionY = 0;
         startPositionZ = -3.2;
     }
 

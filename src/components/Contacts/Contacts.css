@@ -88,6 +88,10 @@
         display: none;
     }
 
+    .contacts-page .contacts-first-block{
+        border-right: none !important;
+    }
+
     .contacts-page input{
         margin-bottom: 16px;
         width: 95%;

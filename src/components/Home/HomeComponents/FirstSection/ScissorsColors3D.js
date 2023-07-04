@@ -20,13 +20,12 @@ function ScissorsColors3D (props) {
             box.getCenter(center);
             obj.position.sub(center); 
             obj.rotation.y = Math.PI; 
-            
             pivot.current.add(obj);
             pivot.current.position.copy(center); 
         });
     };
 
-   console.log(123);
+   
 
     useEffect(() => {
         loadModel();

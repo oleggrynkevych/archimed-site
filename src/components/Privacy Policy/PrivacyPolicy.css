@@ -5,6 +5,7 @@
     flex-direction: row;
     justify-content: center;
     background-color: white;
+    
 }
 
 
@@ -13,11 +14,17 @@
     height: 100%;
     border: none;
     background: white !important;
+    
 }
 
 @media (max-width: 700px) {
     .privacy-policy iframe{
-        width: 90%;
+        width: 80%;
+        
+    }
+
+    .privacy-policy {
+        padding-bottom: 50px;
     }
 }
 
