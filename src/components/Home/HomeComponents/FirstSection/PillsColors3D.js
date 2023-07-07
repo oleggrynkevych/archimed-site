@@ -22,15 +22,17 @@ function PillsColors3D (props) {
             const center = new THREE.Vector3();
             box.getCenter(center);
             obj.position.sub(center); 
-            obj.remove(obj.children[1])
-            obj.rotation.y = Math.PI; 
+
             
+            obj.remove(obj.children[1]);
+
+            obj.rotation.y = Math.PI; 
             pivot.current.add(obj);
             pivot.current.position.copy(center); 
         });
     };
 
-   
+    
 
     useEffect(() => {
         loadModel();
@@ -117,7 +119,6 @@ function PillsColors3D (props) {
 
         };
     }, );
-
 
     return (
       <group position={[startPositionX, startPositionY, startPositionZ]} rotation={[startRotationX, startRotationY, startRotationZ]} ref={group} {...props} dispose={null} scale={[0.2, 0.2, 0.2]}>

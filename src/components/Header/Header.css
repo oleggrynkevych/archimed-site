@@ -14,7 +14,7 @@
 }
 
 .header.hide {
-    top: -64px;
+    top: -100%;
   }
 
 .header-container{

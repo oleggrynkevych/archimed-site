@@ -251,6 +251,7 @@ void main() {
     vec3 finalColor = mix(sceneColor, lineColor, outline);
 
     gl_FragColor = vec4(finalColor, outline);
+    // gl_FragColor = texture2D(normalBuffer, uv);
 
     // threejs r154 renamed this to <colorspace_fragment>
     // https://github.com/mrdoob/three.js/pull/26206
@@ -283,7 +284,10 @@ class SobelEdgePass extends Pass {
         const colorBuffer = new THREE.WebGLRenderTarget(resolution.x, resolution.y);
         this.colorBuffer = colorBuffer;
 
-        this.normalOverrideMaterial = new THREE.MeshNormalMaterial();
+        this.normalOverrideMaterial = new THREE.MeshNormalMaterial({
+            side: THREE.DoubleSide,
+            transparent: false
+        });
     }
 
     render(renderer, inputBuffer, outputBuffer, deltaTime, stencilTest) {
@@ -335,7 +339,3 @@ class SobelEdgePass extends Pass {
 }
 
 export { SobelEdgePass };
-
-
-
-

@@ -1,6 +1,7 @@
 .services-wrapper{
     display: flex;
     flex-direction: column;
+    background-color: #f5f5f5;
 }
 
 .services-wrapper h2 {
@@ -25,5 +26,6 @@
 
     .services-wrapper{
         margin-bottom: 95px;
+        margin-top: 0;
     }
 }

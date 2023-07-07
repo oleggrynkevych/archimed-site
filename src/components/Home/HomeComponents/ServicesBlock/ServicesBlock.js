@@ -4,18 +4,9 @@
  import {servicesData} from './service-block-data.js';
 import SyringeColorsService3D from './SyringeColorsService3D';
 import { extend, useThree } from "@react-three/fiber";
-import {PostFX_2} from './PostFX_2.js';
+
 import { EffectComposer, SMAA } from "@react-three/postprocessing";
 import SobelEdge from '../../../Sobel/SobleEdge'
-
-
-// function Effect() {
-//     const { gl, scene, camera, size } = useThree()
-//     const renderer = new PostFX_2(gl)
-//     return useFrame((state) => {
-//       renderer.render(scene, camera)
-//     }, 1)
-//   }
 
 
  const ServicesBlock = function ({ innerRef }) {
@@ -25,7 +16,6 @@ import SobelEdge from '../../../Sobel/SobleEdge'
             <div className='services-block-container'>
                 <div className='second-3d'>
                     <Canvas dpr={2} camera={{fov: 45, position: [0,0,0]}}>
-                        {/* <Effect/> */}
                         <color attach="background" args={['#F5F5F5']} linear/>
 
                         <Suspense fallback={null}>

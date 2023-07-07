@@ -75,14 +75,14 @@ function Syringe3D (props) {
             z: newRotationZ,
             duration: 0.1,
             ease: Back.easeOut.config(3),
-            scrub: true
+            
         })
 
         gsap.to(group.current.position, {
             y: newPositionY, 
             duration: 0.1,
             ease: Back.easeOut.config(3),
-            scrub: true
+            
         })
         
 

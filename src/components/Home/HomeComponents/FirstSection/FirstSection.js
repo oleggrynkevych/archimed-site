@@ -7,22 +7,11 @@ import SyringeColors3D from './SyringeColors3D';
 
 import { extend, useThree } from "@react-three/fiber";
 import { SSAOPass } from "three-stdlib";
-import {PostFX} from '../../../PostFX.js/PostFX';
-import { PostFX_2 } from '../../../Home/HomeComponents/ServicesBlock/PostFX_2';
 
 import { EffectComposer, SMAA } from "@react-three/postprocessing";
 import SobelEdge from '../../../Sobel/SobleEdge'
 
 
-        
-
-// function Effect() {
-//     const { gl, scene, camera, size } = useThree()
-//     const renderer = new PostFX(gl)
-//     return useFrame((state) => {
-//       renderer.render(scene, camera)
-//     }, 1)
-//   }
 
 const FirstSection = function ({ scrollToNextComponent }) {
 
@@ -30,7 +19,6 @@ const FirstSection = function ({ scrollToNextComponent }) {
         <section className='first-section'>
             <div className='first-3d' style={{width:'100%', height:'100%', top:'64px', left:'0', overflow: 'visible'}}>
                     <Canvas dpr={2} camera={{fov: 45, position: [0,0,0]}}>
-                    {/* <Effect/> */}
                     <color attach="background" args={['#F5F5F5']} linear/>
                         <Suspense fallback={null}>
                             <ScissorsColors3D/>

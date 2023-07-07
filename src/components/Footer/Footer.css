@@ -2,6 +2,11 @@ footer{
     background-color: #1C3849;
     display: flex;
     justify-content: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
 }
 
 .footer-container{
@@ -117,6 +122,11 @@ footer{
     line-height: 110%;
     text-decoration: none;
     color: #F5F5F5;
+    cursor: pointer;
+}
+
+.footer-site-info a:hover{
+    opacity: 50%;
 }
 
 .footer-nav-and-socmedia {
@@ -130,6 +140,7 @@ footer{
     flex-direction: row !important;
     margin-top: -22px !important;
     margin-bottom: 0!important;
+    cursor: pointer;
 }
 
 .footer-map img{
@@ -145,6 +156,7 @@ footer{
     line-height: 150%;
     color: #F5F5F5;
 }
+
 
 .footer-nav{
     margin-right: 83px;
@@ -292,6 +304,11 @@ footer{
 
 
 @media (max-width: 720px) {
+    footer {
+        position:relative;
+        z-index: 1;
+    }
+
     .footer-head div {
         display: none;
     }

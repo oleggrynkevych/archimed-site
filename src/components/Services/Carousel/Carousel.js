@@ -37,6 +37,7 @@ function Carousel (props) {
         slidesToScroll: 1,
         swipeToSlide: true,
         initialSlide: 0,
+        draggable: true,
         responsive: [
           {
             breakpoint: 1120,
@@ -44,7 +45,8 @@ function Carousel (props) {
               slidesToShow: 1,
               slidesToScroll: 1,
               infinite: false,
-              dots: false
+              dots: false,
+              draggable: true,
             }
           },
           {
@@ -52,14 +54,16 @@ function Carousel (props) {
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
-              initialSlide: 2
+              initialSlide: 2,
+              draggable: true,
             }
           },
           {
             breakpoint: 480,
             settings: {
               slidesToShow: 1,
-              slidesToScroll: 1
+              slidesToScroll: 1,
+              draggable: true,
             }
           }
         ]

@@ -1,5 +1,5 @@
 import './About.css';
-import teamPhoto from '../../images/team-photo.png';
+import teamPhoto from '../../images/team-photo.jpeg';
 import teamPhotoMobile from '../../images/team-photo-mobile.png';
 import Slider from "react-slick";
 import quotesIcon from '../../images/quotes-icon.svg';
@@ -34,11 +34,8 @@ function About() {
                             <span>відкриваєм двері в Україну міжнародним виробникам товарів для охорони здоров'я</span>
                         </div>
                         <div className="about-page-header-photo">
-                            <img src={teamPhoto} alt='Team Photo'></img>
+                            <div className="background-team-image"></div>
                         </div>
-                        <div className="about-page-header-photo-mobile">
-                        <img src={teamPhotoMobile} alt='Team Photo'></img>
-                    </div>   
                     </div>  
                 </div>
 

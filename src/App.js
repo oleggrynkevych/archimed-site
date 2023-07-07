@@ -33,18 +33,23 @@ function AppContent() {
   const location = useLocation();
   const isContactsPath = location.pathname === '/contacts';
 
+  const marginClass = 'margin-class';
+  const marginSpecialClass = 'margin-special-class';
+
   return (
     <div>
       <Header />
       <ScrollToTopOnPageChange/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/servicepage" element={<ServicePage />} />
-        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-      </Routes>
+      <div className={!isContactsPath ? marginClass : marginSpecialClass}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/servicepage" element={<ServicePage />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        </Routes>
+      </div>
       <div className={isContactsPath ? 'special-footer' : ''}>
         <Footer />
       </div>

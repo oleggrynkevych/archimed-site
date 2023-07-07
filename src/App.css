@@ -1,3 +1,9 @@
+
+.special-footer footer {
+    position: relative;   
+}
+
+
 .special-footer .footer-container{
     height: 432px;
     display: flex;
@@ -76,4 +82,19 @@
     }
 
 
+}
+
+.margin-class{
+    margin-bottom: 750px;
+    background-color: #f5f5f5;
+}
+
+.margin-special-class{
+    margin-bottom: 0px;
+}
+
+@media (max-width: 720px) {
+    .margin-class{
+        margin-bottom: 0px;
+    }
 }
