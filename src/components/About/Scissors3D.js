@@ -116,7 +116,7 @@ function Scissors3D (props) {
             window.removeEventListener('mousemove', handleMouseMove);
 
         };
-    }, );
+    }, []);
 
 
     return (

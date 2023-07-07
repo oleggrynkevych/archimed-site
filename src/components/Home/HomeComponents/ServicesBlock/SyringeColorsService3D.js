@@ -62,6 +62,7 @@ function SyringeColorsService3D (props) {
     const prevScrollY = useRef(0);
 
     useEffect(() => {
+        console.log(123);
 
         const handleScroll = () => {
         const currentScrollY = window.scrollY;
@@ -118,7 +119,7 @@ function SyringeColorsService3D (props) {
             window.removeEventListener('mousemove', handleMouseMove);
 
         };
-    }, );
+    }, []);
 
 
     return (

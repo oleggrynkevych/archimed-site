@@ -120,7 +120,7 @@ function SyringeColors3D (props) {
             window.removeEventListener('mousemove', handleMouseMove);
 
         };
-    }, );
+    }, []);
 
 
     return (

@@ -118,7 +118,7 @@ function PillsColors3D (props) {
             window.removeEventListener('mousemove', handleMouseMove);
 
         };
-    }, );
+    }, []);
 
     return (
       <group position={[startPositionX, startPositionY, startPositionZ]} rotation={[startRotationX, startRotationY, startRotationZ]} ref={group} {...props} dispose={null} scale={[0.2, 0.2, 0.2]}>
