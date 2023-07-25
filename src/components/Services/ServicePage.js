@@ -1,15 +1,74 @@
 import './ServicePage.css';
-import React, { useRef, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useRef } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import backIcon from '../../images/backIcon.svg';
 import certificatePhoto from '../../images/certificate-photo.png';
 import PhoneInput from "react-phone-input-2";
 import Carousel from './Carousel/Carousel';
 import Modal from './Modal/Modal';
+import { useQuery, gql } from '@apollo/client';
+import useScrollToTop from '../../hooks/useScrollToTop';
+import MaterialItem from './MaterialItem.js';
+
+const SERVICE = gql`
+    query GetServices($id: ID!) {
+        service(id: $id) {
+            data {
+                id
+                attributes {
+                    Title,
+                    Order,
+                    Description{
+                        ${Array.from({ length: 45 }, (_, i) => `Text${i + 1}`).join('\n')}
+                    }
+                    
+                }
+            }
+        }
+    }
+`
+
+const ADDITIONALMATERIAL = gql`
+    query AdditionalMaterial {
+        additionalMaterials {           
+            data {
+                id
+                attributes {
+                    WhichService,
+                    Title,
+                    Description,
+                    ModalDescription {
+                        ${Array.from({ length: 30 }, (_, i) => `Text${i + 1}`).join('\n')}
+                    }
+                }
+            }
+        }
+    }
+`
 
 function ServicePage() {
-
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [modalActive, setModalActive] = useState(false);
+    const [selectedMaterial, setSelectedMaterial] = useState(null);
+
+    function handleSubmit(event) {
+        event.preventDefault();
+    }
+
+    const {id} = useParams();
+
+    const {loading, error, data} = useQuery(SERVICE, {
+        variables: {id: id}
+    });
+
+    const {loading: additionalMaterialsLoading, error: additionalMaterialsError, data: additionalMaterialsData} = useQuery(ADDITIONALMATERIAL);
+
+    const handleMaterialItemClick = (material) => {
+        setSelectedMaterial(material);
+        setModalActive(true);
+    };
 
     useEffect(() => {
         if (modalActive) {
@@ -21,192 +80,137 @@ function ServicePage() {
         return () => {
           document.body.style.overflow = 'unset';
         };
-      }, [modalActive]);
+    }, [modalActive]);
 
-    const scrollToTop = () =>{
-        window.scrollTo({
-          top: 0, 
-          behavior: 'smooth'
-        });
-    };
+    useEffect( ()=>{
+        const strapiDomain = "http://localhost:1337";
+        const modalImage = document.querySelector('.modal-content-container img');
+        
+        if (selectedMaterial && modalImage) {
+            const currentSrc = modalImage.getAttribute('src');
 
+            if (!currentSrc.startsWith('http://localhost:1337')) {
+                modalImage.setAttribute('src', strapiDomain + currentSrc);
+            }
+        }
+        
+    }, [selectedMaterial])
+
+    useEffect(()=>{
+        const allLinks = document.querySelectorAll('.service-description-block a');
+        const allTitles = document.querySelectorAll('.service-description-block h2');
+        const pageTitles = document.querySelectorAll('.service-description-block h2');
+
+        allLinks.forEach((link) => {link.addEventListener('click', function(){
+            this.setAttribute('target', '_blank');
+        })})
+
+        allTitles.forEach((title, index) => { 
+            const cloneTitle = title.cloneNode(true);
+            const number = (index + 1).toString().padStart(2, '0');
+            const titleText = cloneTitle.innerText;
+            cloneTitle.innerText = `${number}. \u00A0${cloneTitle.innerText}`;
+            document.getElementById('list').append(cloneTitle);
+
+            cloneTitle.addEventListener('click', () => {
+                const pageTitle = Array.from(pageTitles).find((pageTitle) => pageTitle.innerText === titleText);
+                if (pageTitle) {
+                    pageTitle.scrollIntoView({ behavior: 'smooth' });
+                }
+                });
+        })
+    },[data]);
+
+    const scrollToTop = useScrollToTop();
+    
+    if(loading || additionalMaterialsLoading) return <p></p>
+    if(error || additionalMaterialsError) return <p></p>
+
+    const orderSercive = data.service.data.attributes.Order;
+    const hasMatchingMaterials = additionalMaterialsData && additionalMaterialsData.additionalMaterials.data.some(material => orderSercive === material.attributes.WhichService);
 
     return (
         <div>
-        <section className='service-page'>
-            <div className='service-page-title'>
-                <Link to='/services'>
-                    <div className='service-page-back-button'>
-                        <img src={backIcon} alt='Back Icon'/>
-                        <span>всі послуги</span>
-                    </div>
-                </Link>
-                <h1>реєстрація лікарських засобів</h1>
-            </div>
-
-            <div className='service-page-main' >
-                <div className='service-description-block'>
-                    <h2>Зміст</h2>
-                    <ul className='service-description-nav'>
-                        <li>
-                            <span>01.</span>
-                            <h3>Загальна інформація</h3>
-                        </li>
-                        <li>
-                            <span>02.</span>
-                            <h3>Перелік лікарських засобів згідно законодавства</h3>
-                        </li>
-                        <li>
-                            <span>03.</span>
-                            <h3>Хто здійнює реєстрацію лікарських засобів</h3>
-                        </li>
-                        <li>
-                            <span>04.</span>
-                            <h3>Етапи реєстрації</h3>
-                        </li>
-                    </ul>
-                    <p>
-                        Лікарські засоби дозволені до продажу та медичного застосування в Українї виключно за умови державної реєстрації. Процедура державної реєстрації лікарських засобів має своєю метою, унеможливлення потрапляння на ринок небезпечних, неефективних лікарських засобів та ліків, якість яких є неприйнятною. <br></br> <br></br> В процессах реєстрації ліків, Україна дотримується принципів і стандартів, прийнятих в країнах із строгою регуляторною системою, таких як: країни-члени Європейського Союзу, Сполучене Королівство Великої Британії та Північної Ірландії, Сполучені Штати Америки (США), Японія, Швейцарська Конфедерація, Канада, Австралія, Ізраїль та ін.. Законодавство України щодо реєстрації лікарських засобів та підзаконні нормативно-правові акти гармонізовано до європейських регуляторних актів. Основу законодавства України щодо лікарських засобів складає <a className='zakon-link' target='_blank' href='https://zakon.rada.gov.ua/laws/show/123/96-%D0%B2%D1%80#Text'>Закон України “Про лікарські засоби”.</a>
-                    </p>
-
-
-                    <h2>Перелік лікарських засобів згідно законодавства</h2>
-                    <ul className='service-description-list'>
-                        <li>активні фармацевтичні інгредієнти, зокрема у формах пелет, грануляту та інших формах випуску</li>
-                        <li>готові лікарські засоби</li>
-                        <li>медичні імунобіологічні препарати</li>
-                        <li>медичні вироби, які містять речовини, що у процесі використання надходять до системного кровотоку</li>
-                        <li>радіофармацевтичні лікарські засоби</li>
-                        <li>препарати на основі крові та плазми</li>
-                        <li>препарати на основі крові та плазми</li>
-                    </ul>
-                    <p>До радіофармацевтичних лікарських засобів і препаратів на основі крові та плазми людини застосовується спеціальний порядок державної реєстрації.</p>
-                    
-                    
-                    <h2>Хто здійнює реєстрацію лікарських засобів</h2>
-                    <p>Державну реєстрацію лікарських засобів здійснює Міністерство охорони здоров’я України за результатами експертизи матеріалів реєстраційного досьє. Еспертиза досьє здійснюється незалежними експертами Державного експертиного центру МОЗ України, керуючись Порядком, затвердженим <a className='zakon-link' target='_blank' href='https://zakon.rada.gov.ua/laws/show/z1069-05#n21'>Наказом МОЗ України №426 від 26.08.2005 року.</a></p>
-                    
-                    
-                    <h2>Подача заявки</h2>
-                    <p className='p-special'>Для початку Державної реєстрації лікарського засобу, заявник має подати заявку до МОЗ України. За результатами обробки заявки, МОЗ України передає лист-направлення до Державного експертного центру. Після чого заявник подає до ДЕЦ МОЗ України для проведення експертизи реєстраційну форму лікарського засобу, який подається на державну реєстрацію, для одного з нижченаведених типів:</p>
-                    <ul className='service-description-list special'>
-                        <li>лікарський засіб за повним досьє (інноваційний, оригінальний препарат)</li>
-                        <li>генеричний, гібридний лікарський засіб або біосиміляр</li>
-                        <li>лікарський засіб з добре вивченим медичним застосуванням</li>
-                        <li>лікарський засіб з фіксованою комбінацією</li>
-                        <li>інформована згода</li>
-                    </ul>
-                    
-                    
-                    <h2>Мікро досьє</h2>
-                    <p className='p-special'>Реєстраційна форма "Мікро-досьє" з усіма, встановленими наказом МОЗ №460, додатками подається до Державного експертного центру МОЗ. З метою проведення експертизи реєстраційних матеріалів заявником подаються до Державного експертного центру МОЗ України в паперовому та електронному вигляді:</p>
-                    <ul className='service-description-list number'>
-                        <li>матеріали реєстраційного досьє в форматі Загального технічного документа (Common Technical Documents – CTD)</li>
-                        <li>матеріали щодо методів контролю якості лікарського засобу</li>
-                        <li>відомості про технологію виробництва лікарського засобу та копія офіційного дозвільного документа на виробництво, виданого уповноваженим органом держави, де здійснюється таке виробництво</li>
-                        <li>текст маркування упаковки</li>
-                        <li>засвідчена в установленому порядку копія документа, що підтверджує відповідність умов виробництва поданого на реєстрацію лікарського засобу (крім діючих речовин (субстанцій) чинним в Україні вимогам належної виробничої практики</li>
-                        <li>документ, що підтверджує сплату реєстраційного збору</li> 
-                    </ul>
-
-
-                    <h2>Договір та оплата</h2>
-                    <p>Супровід процесу погодження та укладання договору на проведення експертних робіт із ГЕЦ МОЗ. Оплата рахунку.</p>
-
-                    <h2>Подача CTD досьє</h2>
-                    <p>Подання до ГЕЦ МОЗ повного реєстраційного досьє, відповідно до форми заявки, у CTD форматі.</p>
-
-                    <h2>Попередня експертиза</h2>
-                    <p>Першим етапом експертизи досьє лікарського засобу, що подається на державну реєстрацію, є попередня експертиза. Метою здійснення попередньої експертизи є перевірка комплектності матеріалів реєстраційного досьє на лікарський засіб відповідно до типу лікарського засобу без оцінки їх змісту. В разі позитивного результату, матеріали реєстраційного досьє передаються на спеціалізовану експертизу. Строк здійснення попередньої експертизи складає – 14 робочих днів.</p>
-
-                    <h2>Спеціалізована експертиза</h2>
-                    <p className='p-special'>Спеціалізована експертиза матеріалів реєстраційного досьє лікарського засобу проводиться експертами Державного експертного центру МОЗ України із можливим залученням позаштатних спеціалістів. Метою спеціалізованої еспертизи є перевірка даних щодо ефективності, безпеки та якості лікарського засобу, а також:</p>
-                    <ul className='service-description-list'>
-                        <li>підтвердження відповідності звітів про доклінічні дослідження та звітів про клінічні випробування, наданих заявником, матеріалам реєстраційного досьє</li>
-                        <li>підготовка рекомендацій до інструкції для медичного застосування, тексту маркування упаковки готового лікарського засобу і методів контролю якості лікарського засобу</li>
-                    </ul>
-                    <p>В ході спеціалізованої експертизи матеріалів реєстраційного досьє, експерті комісії можуть запитувати додаткові матеріали щодо ефективності, безпеки та якості лікарського засобу. Заявник має 90 робочих днів після запиту для усунення зауважень та надання затребуваних документів або обґрунтування іншого строку надання матеріалів. В разі ненадання, реєстраційне досьє знімається з розгляду. <br></br><br></br>Рішенням експертної комісії, лікарський засіб може бути направлений на проведення лабораторних випробувань. Лабораторні випробування проводяться для гарантії відтворення методів контролю якості, запропонованих Заявником.</p>
-
-                    <h2>Редакційні правки</h2>
-                    <p>З метою скасування технічних помилок у пакеті реєстраційної документації проекти документів узгоджуються із заявником.</p>
-
-
-                    <h2>Наказ МОЗ</h2>
-                    <p className='p-special'>Рішенням експертної комісії, лікарський засіб може бути направлений на проведення лабораторних випробувань. Лабораторні випробування проводяться для гарантії відтворення методів контролю якості, запропонованих Заявником.<br></br><br></br>За результатми спеціалізованої експертизи, Державний експертний центр МОЗ України видає:</p>
-                    <ul className='service-description-list'>
-                        <li>висновок щодо ефективності, безпеки та якості лікарського засобу, що пропонується до державної реєстрації.</li>
-                        <li>або ​​висновок щодо відмови в реєстрації на лікарський засіб.</li>
-                    </ul>
-                    <p className='p-special'>Висновок щодо ефективності, безпеки та якості лікарського засобу, що пропонується до державної реєстрації розглядається під час засідань відповідного дорадчого органу Центру та надаються рекомендації до МОЗ України про можливість державної реєстрації лікарського засобу.<br></br><br></br>У разі позитивного висновку МОЗ України наказом затверджує Рішення про державну реєстрацію лікарського засобу.<br></br><br></br>Рішенням МОЗ також затверджуються:</p>
-                    <ul className='service-description-list'>
-                        <li>методи контролю якості на лікарський засіб</li>
-                        <li>текст маркування первинної та вторинної (за наявності) упаковок готового лікарського засобу</li>
-                        <li>інструкція для медичного застосування лікарського засобу</li>
-                        <li>коротка характеристика лікарського засобу (за наявності)</li>
-                    </ul>
-                    <p>Дані документи складають пакет Реєстраційного посвідчення.</p>
-
-                    <h2>Реєстрація</h2>
-                    <p className='p-special'>Результатом пакету послуг щодо державної реєстрації лікарського засобу є:</p>
-                    <ul className='service-description-list'>
-                        <li>Реєстраційне посвідчення на лікарський засіб (медичний імунобіологічний препарат)</li>
-                        <li>Внесення його до Державного реєстру лікарських засобів України</li>
-                    </ul>
-                    <p>Спеціалісти компанії Архімед, із задоволенням, нададуть додаткову інформацію та проконсультують з питань порядку державної реєстрації лікарських засобів і забезпечать професійний супровід процедури державної реєстрації лікарських засобів, представляючи ваші інтереси пред всіма стейкхолдерами: МОЗ України,.Державний експертний центр МОЗ України, Державна служба України з лікарських засобів та контролю за наркотиками та спеціалізованих лабораторіях.</p>
-
-                    <h2>Заключення</h2>
-                    <p>З метою мінімізації ризику негативної відповіді за результатами першого етапу експертизи, спеціалісти компанії Архімед, виконують попередній аудит реєстраційного досьє на лікарський засіб, до моменту подачі заявки на державну реєстацію. За результатами попереднього аудиту, компанія-замовник отримує звіт щодо комплектності реєстраційного досьє та готовності до подачі заявки на державну реєстрацію лікарського засобу.<br></br><br></br>Ми маємо вагомий і головне – успішний досвід реєстрації лікарських засобів і готові забезпечити професійну допомогу вашій компанії.<br></br><br></br>Команда Архімед глибоко розуміє роль реєстрації в життєвому циклі лікарського засобу на ринку. Нажаль, не кожне агенство розуміє, що реєстрація лікарського засобу хоч і важливий, але тільки перший крок на шляху до комерційно та соціально успішного проекту. Тому ми працюємо на результат, ефективно використовуючи час та оптимізуючи витрати наших партнерів.</p>
-                    <p>Більш детальну консультацію можна отримати, написавши нам короткий запит або зателефонувавши за номером, вказаним нижче.</p>
-
-                    <h2>Заповніть форму і ми зв’яжемось з вами</h2>
-                    <form className='service-page-form'>
-                        <span>Ім’я</span>
-                        <input placeholder='Георгій'/>
-                        <span>E-mail</span>
-                        <input placeholder='example@mail.com'/>
-                        <span>Телефон</span>
-                        <PhoneInput
-                            country="ua"
-                            masks={{ua: '(..) ...-..-..'}}
-                            disableCountryCode={false}
-                            alwaysDefaultMask={false}
-                            value=''
-                            inputClass='phone-input'
-                        />
-                        <div className='form-button'><span>надіслати</span></div>
-                    </form>
+            <section className='service-page'>
+                <div className='service-page-title'>
+                    <Link to='/services'>
+                        <div className='service-page-back-button'>
+                            <img src={backIcon} alt='Back Icon'/>
+                            <span>всі послуги</span>
+                        </div>
+                    </Link>
+                    <h1>{data.service.data.attributes.Title}</h1>
                 </div>
-                
-                
-                <div className='service-materials-block'>
-                    <span className='service-materials-block-title'>Додаткові матеріали</span>
 
-                    <MaterialItem 
-                        onClick={() => setModalActive(true)}
-                        title={'RoHS (ПКМУ 139)'} 
-                        text={'Технічний регламент щодо обмеження використання деяких небезпечних речовин в електричному та електронному обладнанні'}
-                    />
-                    <MaterialItem 
-                        title={'Метрологія (ПКМУ 94)'} 
-                        text={'Технічний регламент законодавчо регульованих засобів вимірювальної техніки'}
-                    />
-                    <MaterialItem 
-                        title={'RED (ПКМУ 355)'} 
-                        text={'Технічний регламент радіообладнання'}
-                    />
+                <div className='service-page-main' >
+                    <div className='service-desription'>
+                        <div className='zmist'>
+                            <h4>Зміст</h4>
+                            <div id='list'></div>
+                        </div>
+                        
+
+                        <div className='service-description-block'> 
+
+                            {Object.values(data.service.data.attributes.Description).map((text, index) => (
+                                index > 0 && (
+                                    <div key={index} dangerouslySetInnerHTML={{ __html: decodeURI(text) }} />
+                                )
+                            ))}
+
+                            <h5>Заповніть форму і ми зв’яжемось з вами</h5>
+                            <form className='service-page-form' onSubmit={handleSubmit}>
+                                <span>Ім’я</span>
+                                <input 
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder='Георгій'/>
+                                <span>E-mail</span>
+                                <input 
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder='example@mail.com'/>
+                                <span>Телефон</span>
+                                <PhoneInput
+                                    country="ua"
+                                    masks={{ua: '(..) ...-..-..'}}
+                                    disableCountryCode={false}
+                                    alwaysDefaultMask={false}
+                                    countryCodeEditable={false}
+                                    value=''
+                                    inputClass='phone-input'
+                                    onChange={(value) => setPhone(value)}
+                                />
+                                <button className='form-button'><span>надіслати</span></button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                <div className='service-materials-block'>
+                    {hasMatchingMaterials && (
+                        <span className='service-materials-block-title'>Додаткові матеріали</span>
+                    )}
+                    
+                    {additionalMaterialsData.additionalMaterials.data.map((material) => 
+                        orderSercive == material.attributes.WhichService ? (
+                            <MaterialItem
+                                onClick={() => handleMaterialItemClick(material)}                                key={material.id}
+                                title={material.attributes.Title}
+                                text={material.attributes.Description}
+                            />
+                        ) : null
+                    )}
 
                     <div className='service-materials-block-info'>
                         <div>
                             <span>пошта</span>
-                            <a href='mailto:mail@archimed.in.ua' target='_blank'>mail@archimed.in.ua</a>
+                            <a href='mailto:mail@archimed.in.ua' target='_blank' rel="noreferrer">mail@archimed.in.ua</a>
                         </div>
                         <div>
                             <span>телефон</span>
-                            <a href='tel:380442325252' target='_blank'>+380 (44) 232-52-52</a>
+                            <a href='tel:380442325252' target='_blank' rel="noreferrer">+380 (44) 232-52-52</a>
                         </div>
                     </div>
 
-                    <div className='service-materials-button-wrapper'>
+                    <div className='service-materials-button-wrapper'style={!hasMatchingMaterials ? {marginTop: '500px'} : null}>
                         <div className='service-materials-button' onClick={scrollToTop}>
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6.5 11.8611V12.3611H7.5V11.8611H6.5ZM7.5 3.69446C7.5 3.41832 7.27614 3.19446 7 3.19446C6.72386 3.19446 6.5 3.41832 6.5 3.69446H7.5ZM7.5 11.8611V3.69446H6.5V11.8611H7.5Z" fill="currentColor"/>
@@ -215,63 +219,53 @@ function ServicePage() {
                             <span>наверх</span>
                         </div>
                     </div>
-                
+                    
+                    </div>
                 </div>
-            </div>
 
-            <Modal active={modalActive} setActive={setModalActive}>
-                <h4>Реєстрація косметичних продуктів</h4>
-                <span>Косметичні продукти</span>
-                <p>До косметичних продуктів відносяться наступні продукти:</p>
-                <ul>
-                    <li>засоби для догляду (крему, сиворотки, маски, бальзами, лосьйони, тоніки, серуми і тд.)</li>
-                    <li>декоративна косметика</li>
-                    <li>дитяча косметика, так само косметика по догляду за дітьми</li>
-                    <li>космецевтика (в залежності від складу і наявності певних рекомендацій)</li>
-                    <li>засоби по догляду за волоссям (шампуні, маски, масла, кондиціонери і тд.)</li>
-                    <li>засоби для очищення шкіри (гелі для душу, мило, пінки, скраби і тд.)</li>
-                    <li>препарати на основі крові та плазми</li>
-                </ul>
-                <div className='certificate-photo'>
-                    <img src={certificatePhoto} alt='Sertificate Photo'/>
-                </div>
-                <p className='p-special'>Для ввезення та реалізації косметичних продуктів необхідно пройти реєстрацію і отримати висновок санітарно-епідеміологічної експертизи (СЕС). Видачу даних висновків здійснює ДержПродСлужба.</p>
-                <p>Реєстрація косметики складається з двох етапів: документальна експертиза та випробування зразків. Функції з проведення експертизи покладені на акредитовані спеціалізовані організації. Термін реєстрації з моменту подачі документації і зразків становить близько 4-х тижнів. В результаті реєстрації видається звіт терміном дії-5 років.</p>
-                <p>Компанія Архімед має великий досвід в проведенні реєстрації косметичних продуктів і готова запропонувати Вам реєстрацію «під ключ», та усі необхідні додаткові послуги:</p>
-                <ul>
-                    <li>підготовка тексту маркування, згідно з чинними законодавчими актам</li>
-                    <li>переклад та нотаріальне копіювання документації</li>
-                    <li>супровід при ввезенні зразків для реєстрації</li>
-                </ul>
-                <p>А також всі необхідні консультації.</p>
-                <p>Більш детальну консультацію можна отримати, написавши нам короткий запит або зателефонувавши за номером, вказаним нижче.</p>
-            </Modal>
+                <Modal active={modalActive} setActive={setModalActive}>
+                    {selectedMaterial && (
+                        <>
+                        {Object.values(selectedMaterial.attributes.ModalDescription).map((text, index) => (
+                            index > 0 && (
+                            <div key={index} dangerouslySetInnerHTML={{ __html: decodeURI(text) }} />
+                            )
+                        ))}
+                        </>
+                    )}
+                    
+                    {/* <h4>Реєстрація косметичних продуктів</h4>
+                    <span>Косметичні продукти</span>
+                    <p>До косметичних продуктів відносяться наступні продукти:</p>
+                    <ul>
+                        <li>засоби для догляду (крему, сиворотки, маски, бальзами, лосьйони, тоніки, серуми і тд.)</li>
+                        <li>декоративна косметика</li>
+                        <li>дитяча косметика, так само косметика по догляду за дітьми</li>
+                        <li>космецевтика (в залежності від складу і наявності певних рекомендацій)</li>
+                        <li>засоби по догляду за волоссям (шампуні, маски, масла, кондиціонери і тд.)</li>
+                        <li>засоби для очищення шкіри (гелі для душу, мило, пінки, скраби і тд.)</li>
+                        <li>препарати на основі крові та плазми</li>
+                    </ul>
+                    <div className='certificate-photo'>
+                        <img src={certificatePhoto} alt='Sertificate'/>
+                    </div>
+                    <p className='p-special'>Для ввезення та реалізації косметичних продуктів необхідно пройти реєстрацію і отримати висновок санітарно-епідеміологічної експертизи (СЕС). Видачу даних висновків здійснює ДержПродСлужба.</p>
+                    <p>Реєстрація косметики складається з двох етапів: документальна експертиза та випробування зразків. Функції з проведення експертизи покладені на акредитовані спеціалізовані організації. Термін реєстрації з моменту подачі документації і зразків становить близько 4-х тижнів. В результаті реєстрації видається звіт терміном дії-5 років.</p>
+                    <p>Компанія Архімед має великий досвід в проведенні реєстрації косметичних продуктів і готова запропонувати Вам реєстрацію «під ключ», та усі необхідні додаткові послуги:</p>
+                    <ul>
+                        <li>підготовка тексту маркування, згідно з чинними законодавчими актам</li>
+                        <li>переклад та нотаріальне копіювання документації</li>
+                        <li>супровід при ввезенні зразків для реєстрації</li>
+                    </ul>
+                    <p>А також всі необхідні консультації.</p>
+                    <p>Більш детальну консультацію можна отримати, написавши нам короткий запит або зателефонувавши за номером, вказаним нижче.</p> */}
+                </Modal>
 
-        </section>
-        <Carousel textTitle={'інші послуги'}></Carousel>
+            </section>
+            <Carousel textTitle={'інші послуги'} id={id}></Carousel>
     </div>
 
         
-    )
-}
-
-function MaterialItem(props) {
-    const { title, text, onClick } = props;
-
-    return(
-        <div className='material-item' onClick={onClick}>
-            <div className='material-item-container'>
-                <span className='material-item-title'>{title}</span>
-                <span className='material-item-text'>{text}</span>
-                <div className='material-item-link'>
-                    <span>дізнатись більше</span>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.89791 13.5218L4.54436 13.8754L5.25146 14.5825L5.60502 14.2289L4.89791 13.5218ZM13.105 6.72892C13.3003 6.53366 13.3003 6.21707 13.105 6.02181C12.9098 5.82655 12.5932 5.82655 12.3979 6.02181L13.105 6.72892ZM5.60502 14.2289L13.105 6.72892L12.3979 6.02181L4.89791 13.5218L5.60502 14.2289Z" fill="currentColor"/>
-                        <path d="M5.25146 6.37537H12.7515V13.8754" stroke="currentColor" strokeLinecap="square"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
     )
 }
 

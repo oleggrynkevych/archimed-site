@@ -59,104 +59,31 @@
     position: relative;
 }
 
-.service-description-block {
-    width: 41%;
-    padding: 32px 200px 0 120px;
+.service-desription{
+    display: flex;
+    flex-direction: column;
+    width: 61%;
     border-right: 1px solid rgba(35, 35, 35, 0.1);
 }
 
-.service-description-block h2 {
+.zmist {
+    padding: 32px 200px 0 120px;
+}
+
+.service-description-block {
+    padding: 0 200px 0 120px;
+}
+
+
+.service-description-block h2,
+.service-description-block h5 {
     font-family: 'Mulish';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 130%;
-    margin: 0 0 16px 0;
+    margin: 0 0 22px 0;
     position: relative;
-}
-
-.service-description-block h2:nth-child(9),
-.service-description-block h2:nth-child(19){
-    margin: 28px 0 40px 0;
-}
-
-
-.service-description-block h2::before {
-    position: absolute;
-    color: #3693C8;
-    width: 100px;
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 170%;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    left: 0;
-    bottom: 26px;
-}
-
-.service-description-block h2:nth-child(9)::before {
-    content: 'етап 01';
-}
-
-.service-description-block h2:nth-child(12)::before {
-    content: 'етап 02';
-}
-
-.service-description-block h2:nth-child(15)::before {
-    content: 'етап 03';
-}
-
-.service-description-block h2:nth-child(17)::before {
-    content: 'етап 04';
-}
-.service-description-block h2:nth-child(19)::before {
-    content: 'етап 05';
-}
-
-.service-description-block h2:nth-child(21)::before {
-    content: 'етап 06';
-}
-
-.service-description-block h2:nth-child(25)::before {
-    content: 'етап 07';
-}
-
-.service-description-block h2:nth-child(27)::before {
-    content: 'етап 08';
-}
-
-.service-description-block h2:nth-child(33)::before {
-    content: 'етап 09';
-}
-
-.service-description-block h2:nth-child(9)::after {
-    content: '3 робочих дні';
-    position: absolute;
-    color: #3693C8;
-    width: 100px;
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 170%;
-    left: 0;
-    top: 26px;
-}
-
-.service-description-block h2:nth-child(19)::after {
-    content: '14 робочих днів';
-    position: absolute;
-    color: #3693C8;
-    width: 200px;
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 170%;
-    left: 0;
-    top: 26px;
 }
 
 .service-description-block p {
@@ -165,30 +92,24 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 170%;
+    margin: 0 0 40px 0;
+}
+
+.service-description-block h3 {
+    color: #3693C8;
+    width: 100px;
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    margin: 0 0 12px 0;
+}
+
+#list{
     margin: 0 0 48px 0;
 }
 
-.p-special{
-    margin: 0 0 16px 0 !important;
-}
-
-.service-description-nav{
-    padding: 0;
-    list-style: none;
-    margin: 0 0 48px 0;
-}
-
-.service-description-nav h3{
-    padding: 0;
-    list-style: none;
-    margin: 0;
-}
-
-.service-description-nav li {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap:12px;
+#list h2 {
     height: 46px;
     font-family: 'Mulish';
     font-style: normal;
@@ -196,15 +117,16 @@
     font-size: 13px;
     line-height: 170%;
     border-bottom: 1px solid rgba(35, 35, 35, 0.1);
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
 }
 
-.zakon-link {
-    color: #3693C8;
-    text-decoration: underline;
-}
-
-.service-description-list{
-    margin: 0 0 16px 0;
+.service-description-block ol,
+.service-description-block ul{
+    margin: 0 0 24px 0;
     padding: 0 0 0 20px;
     opacity: 0.7;
     font-family: 'Mulish';
@@ -215,17 +137,15 @@
     width: 80%;
 }
 
-.service-description-list.number {
-    list-style-type: decimal-leading-zero;
-    margin: 0 0 48px 0;
-}
-
-.service-description-list.special{
-    margin: 0 0 48px 0;
-}
-
-.service-description-list li {
+.service-description-block ul li,
+.service-description-block ol li{
     margin-bottom: 8px;
+
+}
+
+.service-description-block a {
+    color: #3693C8;
+    text-decoration: underline;
 }
 
 .service-page-form{
@@ -436,7 +356,7 @@
 
 .service-materials-button-wrapper {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     width: 100%;
 }
 
@@ -496,7 +416,7 @@
 
 
 
-.modal-content-container h4 {
+.modal-content-container h2 {
     margin: 0;
     font-weight: 800;
     font-size: 30px;
@@ -505,10 +425,19 @@
     margin-bottom: 44px;
 }
 
-.modal-content-container span {
+.modal-content-container h3 {
     font-weight: 700;
     font-size: 20px;
     line-height: 130%;
+}
+
+.modal-content-container h4{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 170%;
+    margin-bottom: 24px;
+    border-left: 4px solid #042336;
+    padding-left: 16px;
 }
 
 .modal-content-container p {
@@ -516,6 +445,7 @@
     font-size: 16px;
     line-height: 170%;
     margin-bottom: 24px;
+    display: flex;
 }
 
 .modal-content-container ul {
@@ -531,24 +461,16 @@
     line-height: 140%;
 }
 
-.modal-content-container .certificate-photo {
+.modal-content-container img {
     margin: 32px auto ;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.modal-content-container .p-special {
-    border-left: 4px solid #042336;
-    padding-left: 16px;
 }
 
 
 
 
 @media (max-width: 1435px) {
-    .service-description-block{
-        width: 30%;
+    .service-desription{
+        width: 50%;
     }
 
     .service-materials-block{
@@ -562,17 +484,21 @@
         flex-direction: column;
     }
 
-    .service-description-block{
-        width: 70%;
+    .service-desription{
+        width: 100%;
         border: none;
-        padding-right: 50px;
     }
 
     .service-materials-block{
         position: relative;
         width: 382px;
         margin-left: 120px;
+        height: auto;
     }
+
+    .service-materials-button-wrapper{
+        display: none;
+      }
 }
 
 @media (max-width: 800px){
@@ -594,16 +520,22 @@
         font-size: 24px;
       }
 
-      .service-description-block{
+      .service-page-main{
         width: 90%;
         padding: 23px 16px 0px 16px;
+      }
+
+      .zmist,
+      .service-description-block{
+        padding: 0;
       }
 
       .service-materials-block{
         position: relative;
         width: 343px;
-        margin-left: 16px;
+        margin-left: 0px;
         margin-right: 0px;
+        padding: 0 0 40px 0;
       }
 
       .service-materials-block.sticky{
@@ -611,10 +543,6 @@
       }
 
       .service-materials-block-info{
-        display: none;
-      }
-
-      .service-materials-button-wrapper{
         display: none;
       }
 

@@ -1,30 +1,41 @@
 import mapIcon from '../../images/map-icon.svg';
 import {Link} from 'react-router-dom';
-import {dataNav, dataSocialIcon} from './footer-data.js';
-
+import {dataNav} from './footer-data.js';
+import { useQuery, gql } from '@apollo/client';
 import './Footer.css';
+import useScrollToTop from '../../hooks/useScrollToTop';
+import SiteInfoItem from './SiteInfoItem.js';
 
-function Footer () {
-    function SiteInfoItem (props) {
-        return(
-           <div>
-                <span >{props.firstText}</span>
-                <a href={props.href} target={props.target}>{props.secondText}</a>
-           </div>
-        )
+
+const INFO = gql`
+    query GetHomePage {
+        homePage {
+            data {
+                attributes {
+                    EMail,
+                    TelephoneNumber,
+                    Adress,
+                    AdressLink, 
+                    SocialMedia,
+                    PrivacyPolicy
+                }
+            }
+        }
     }
+`
 
-    const scrollToTop = (e) =>{
-        e.preventDefault();
-        window.scrollTo({
-          top: 0, 
-          behavior: 'smooth',
-          block: 'start'
-        });
-      };
+function Footer ({ isSpecial }) {
+    const {loading, error, data} = useQuery(INFO);
+
+    const specialClass = isSpecial ? 'special-footer' : '';
+
+    const scrollToTop = useScrollToTop();
+
+    if(loading) return <p></p>
+    if(error) return <p></p>
 
     return (
-        <footer>
+        <footer className={specialClass}>
             <div className='footer-container'>
                 <div className='footer-head'>
                     <span>Архімед — ваш торговий представник</span>
@@ -37,18 +48,20 @@ function Footer () {
                 </div>
                 <div className='footer-main'>
                     <div className='footer-site-info'>
-                        <SiteInfoItem href={'mailto:mail@archimed.in.ua'} target={"_blank"} firstText={'пошта'} secondText={'mail@archimed.in.ua'}/>
-                        <SiteInfoItem href={'tel:380442325252'} target={"_blank"} firstText={'телефон'} secondText={'+380 (44) 232-52-52'}/>
+                        <SiteInfoItem href={`mailto:${data.homePage.data.attributes.EMail}`} target={"_blank"} rel={"noopener"} firstText={'пошта'} secondText={data.homePage.data.attributes.EMail}/>
+                        <SiteInfoItem href={`tel:${data.homePage.data.attributes.TelephoneNumber}`} target={"_blank"} rel={"noopener"} firstText={'телефон'} secondText={data.homePage.data.attributes.TelephoneNumber}/>
                         <SiteInfoItem 
-                            href={'https://www.google.com/maps/place/%D0%A2%D0%9E%D0%92+%22%D0%90%D1%80%D1%85%D1%96%D0%BC%D0%B5%D0%B4+%D0%9C%D0%B5%D0%B4%D1%96%D0%BA%D0%B0%D0%BB%22/@50.4705986,30.5185406,18z/data=!4m6!3m5!1s0x40d4d3f7f5a65159:0x337c2360967c3ed3!8m2!3d50.470532!4d30.519643!16s%2Fg%2F11h4qrnrfh?entry=ttu'} 
+                            href={data.homePage.data.attributes.AdressLink} 
                             target={"_blank"}
+                            rel={"noopener"}
                             firstText={'адреса'} 
-                            secondText={'04071, м. Київ, вул. Верхній Вал, 64'}/>
+                            secondText={data.homePage.data.attributes.Adress}/>
                         <div className='footer-map'>
                             <img src={mapIcon} alt="Map Icon"></img>
                             <a 
-                                href={'https://www.google.com/maps/place/%D0%A2%D0%9E%D0%92+%22%D0%90%D1%80%D1%85%D1%96%D0%BC%D0%B5%D0%B4+%D0%9C%D0%B5%D0%B4%D1%96%D0%BA%D0%B0%D0%BB%22/@50.4705986,30.5185406,18z/data=!4m6!3m5!1s0x40d4d3f7f5a65159:0x337c2360967c3ed3!8m2!3d50.470532!4d30.519643!16s%2Fg%2F11h4qrnrfh?entry=ttu'}
+                                href={data.homePage.data.attributes.AdressLink}
                                 target="_blank"
+                                rel="noreferrer"
                             >Дивитись в картах Google</a>
                         </div>
                     </div>
@@ -66,20 +79,14 @@ function Footer () {
                         </div>
                         <div className='footer-socmedia'>
                             <span className='footer-subtitle'>соціальні мережі</span>
-                            <ul>
-                                {dataSocialIcon.map((item, index) => (
-                                    <li key={index}>
-                                        <a href={item.href}>{item.label}</a>
-                                    </li>
-                                ))}
-                            </ul>
+                            <div dangerouslySetInnerHTML={{ __html: decodeURI(data.homePage.data.attributes.SocialMedia) }} />
                         </div>
                     </div>
                 </div>
 
                 <div className='footer-bottom'>
                     <span>© Архімед 2018. Всі права захищені</span>
-                    <Link to='/privacypolicy'>Політика конфіденційності</Link>
+                    <Link to='/privacypolicy'>{data.homePage.data.attributes.PrivacyPolicy} </Link>
                 </div>
                 <div></div>
             </div>

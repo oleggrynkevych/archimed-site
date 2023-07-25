@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef} from 'react';
 import second3d from '../../3d-elements/pills-colors.glb';
 import {gsap, Back} from 'gsap';
 import {useMediaQuery} from '../../hooks/useMediaQuery';
@@ -115,7 +115,7 @@ function Pills3D (props) {
             window.removeEventListener('mousemove', handleMouseMove);
 
         };
-    }, []);
+    }, [isDeskTop, startPositionX, startPositionY, startPositionZ, startRotationX]);
 
 
     return (

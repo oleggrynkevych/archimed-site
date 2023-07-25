@@ -148,7 +148,7 @@
     .first-section-container{
         margin: auto 0px;
         padding: 114px 0 50px 0;
-        justify-content: start;
+        justify-content: flex-start;
     }
 
     .first-section h1{

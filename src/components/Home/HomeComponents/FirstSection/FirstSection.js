@@ -1,19 +1,34 @@
-import React, { Suspense, useEffect, useRef } from 'react';
-import { Canvas , useFrame } from '@react-three/fiber';
+import React, { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
 import './FirstSection.css';
 import ScissorsColors3D from './ScissorsColors3D';
 import PillsColors3D from './PillsColors3D';
 import SyringeColors3D from './SyringeColors3D';
 
-import { extend, useThree } from "@react-three/fiber";
-import { SSAOPass } from "three-stdlib";
+import { EffectComposer, SMAA, FXAA } from "@react-three/postprocessing";
+import SobelEdge from '../../../Sobel/SobleEdge';
+import { useQuery, gql } from '@apollo/client';
 
-import { EffectComposer, SMAA } from "@react-three/postprocessing";
-import SobelEdge from '../../../Sobel/SobleEdge'
+
+const SUBTITLE = gql`
+    query GetHomePage {
+        homePage {
+            data {
+                attributes {
+                    SubTitleHomePage
+                }
+            }
+        }
+    }
+`
 
 
 
 const FirstSection = function ({ scrollToNextComponent }) {
+    const {loading, error, data} = useQuery(SUBTITLE);
+
+    if(loading) return <p></p>
+    if(error) return <p></p>
 
     return(
         <section className='first-section'>
@@ -24,11 +39,9 @@ const FirstSection = function ({ scrollToNextComponent }) {
                             <ScissorsColors3D/>
                             <PillsColors3D/>
                             <SyringeColors3D/>
-                            <ambientLight/>
-                            <directionalLight intensity={2} position={[0,0,50]}/>
                             <EffectComposer multisampling={0}>
                                 <SobelEdge />
-                                <SMAA />
+                                <FXAA />
                             </EffectComposer>
                             
                         </Suspense>
@@ -46,7 +59,7 @@ const FirstSection = function ({ scrollToNextComponent }) {
                 </div>
                 <div className='first-section-container-text'>
                     <h1>Архімед — ваш торговий представник в Україні</h1>
-                    <h2>Відкриваєм двері в Україну міжнародним виробникам товарів для охорони здоров'я</h2>
+                    <h2>{data.homePage.data.attributes.SubTitleHomePage}</h2>
                 </div>
             </div>
         </section>

@@ -28,7 +28,7 @@
 .services-block-container.end-flex {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .services-block-container h3{
@@ -52,16 +52,26 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    width: 792px;
+    justify-content: space-between;
+    width: 760px;
     height: 136px;
+    padding: 0px 16px;
     color: #042336;
     border-bottom: 1px solid rgba(35, 35, 35, 0.1);
     cursor: pointer;
     position: relative;
     overflow: hidden;
     transition: transform 0.4s ease;
+}
 
+.service-item-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.service-item-info span {
+    margin-right: 32px;
 }
 
 .service-item span{
@@ -183,13 +193,13 @@ a {
     .services-block-container.end-flex {
         display: flex;
         flex-direction: column;
-        justify-content: start;
+        justify-content: flex-start;
     }
 
     .service-item{
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: flex-start;
         justify-content: space-around;
         width: 100%;
         padding: 24px 0;
@@ -208,6 +218,11 @@ a {
 @media (max-width: 900px) {
     .services-block-container {
         margin: auto 16px;
+    }
+
+    .service-item-info {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .services-block-container h3{

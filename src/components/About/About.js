@@ -1,19 +1,68 @@
 import './About.css';
-import teamPhoto from '../../images/team-photo.jpeg';
-import teamPhotoMobile from '../../images/team-photo-mobile.png';
 import Slider from "react-slick";
-import quotesIcon from '../../images/quotes-icon.svg';
 import Carousel from '../Services/Carousel/Carousel';
 import {teamMembersData} from './about-page-data.js';
-import React, { Suspense, useEffect, useRef } from 'react';
-import { Canvas , useFrame } from '@react-three/fiber';
+import React, { Suspense} from 'react';
+import { Canvas } from '@react-three/fiber';
 import Scissors3D from './Scissors3D';
 import Pills3D from './Pills3D';
 import Syringe3D from './Syringe3D';
 import { EffectComposer, SMAA } from "@react-three/postprocessing";
 import SobelEdge from '../Sobel/SobleEdge';
+import { useQuery, gql } from '@apollo/client';
+import SliderTeamMember from './SliderTeamMember.js';
+
+
+const ABOUTINFO = gql`
+query GetAboutPage {
+    aboutPage {
+      data {
+        attributes {
+            Text1, 
+            Text2,
+            Text3,
+            Text4,
+            ButtonText
+        }
+      }
+    }
+  }
+`
+
+const TEAMMEMBER = gql`
+    query GetTeamMember {
+        teamMembers {
+            data {
+                id
+                attributes {
+                Comment,
+                FirstName,
+                Position,
+                LastName,
+                Order,
+                Photo{
+                    data{
+                        attributes{
+                            url
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+`
 
 function About() {
+    const {loading, error, data} = useQuery(ABOUTINFO);
+    const {loading: teamMemberLoading, error: teamMemberError, data: teamMemberData} = useQuery(TEAMMEMBER);
+
+    if(loading || teamMemberLoading) return <p></p>
+    if(error || teamMemberError) return <p></p>
+
+    const sortedTeamMembers = [...teamMemberData.teamMembers.data].sort((a, b) => {
+        return a.attributes.Order - b.attributes.Order;
+    });
 
     const settings = {
         dots: false,
@@ -29,7 +78,7 @@ function About() {
                 <div className="about-page-header">  
                     <div className='small-container-header'>   
                         <div className="about-page-header-text">
-                            <span>Руйнуємо пострадянські стереотипи і демонструємо всьому світу, що наша країна має величезний потенціал</span>
+                            <span>{data.aboutPage.data.attributes.Text1}</span>
                             <span>мета</span>
                             <span>відкриваєм двері в Україну міжнародним виробникам товарів для охорони здоров'я</span>
                         </div>
@@ -43,8 +92,7 @@ function About() {
                     <div className='third-3d'>
                         <Canvas dpr={2} camera={{fov: 45, position: [0,0,0]}}>
                             <Suspense fallback={null}>
-                                <ambientLight/>
-                                <directionalLight intensity={2} position={[0,0,50]}/>
+                        
                                 <Scissors3D/>
                                 <Pills3D/>
                                 <Syringe3D/>
@@ -56,30 +104,31 @@ function About() {
                         </Canvas>
                     </div>
                     <div className='small-container-main'>
-                        <span className="about-page-main-first-text">Архімед не є класичним дистрибутором, що претендує на маржинальність</span>
+                        <span className="about-page-main-first-text">{data.aboutPage.data.attributes.Text2}</span>
                         <div className="about-page-main-second-text">
-                            <span>Ми – сервісна компанія, яка реалізує представницькі функції і здійснює експертну допомогу для іноземних виробників ліків, медичних виробів і косметичних засобів, забезпечуючи супровід повного життєвого циклу товару на ринку.</span>
-                            <div>кодекс ділової етики</div>
+                            <span>{data.aboutPage.data.attributes.Text3}</span>
+                            <div>{data.aboutPage.data.attributes.ButtonText}</div>
                         </div>
                         <div className="about-page-main-special">
                             <div className="about-page-special-first-text">
                                 <span>команда</span>
                                 <span>Нами рухає інтерес до всього, що ми робимо</span>
                             </div>
-                            <span className="about-page-special-second-text">Ми прагнемо формувати команду виключно з захоплених людей, упереджених до спільної справи і вміють досягати мети</span>
+                            <span className="about-page-special-second-text">{data.aboutPage.data.attributes.Text4}</span>
                         </div>
                     </div>
                 </div>
                 
                 <div className='about-page-slider'>
                     <Slider {...settings}>
-                        {teamMembersData.map((member) => (
+                        {sortedTeamMembers.map((member) => (
                             <SliderTeamMember
                                 key={member.id}
-                                src={member.src}
-                                quote={member.quote}
-                                name={member.name}
-                                position={member.position}
+                                src={member.attributes.Photo.data.attributes.url}
+                                quote={member.attributes.Comment}
+                                firstname={member.attributes.FirstName}
+                                lastname={member.attributes.LastName}
+                                position={member.attributes.Position}
                             />
                         ))}
                     </Slider>  
@@ -88,30 +137,6 @@ function About() {
                 <div className='about-page-carousel'>
                     <Carousel textTitle={'наші послуги'}/> 
                 </div>           
-        </div>
-    )
-}
-
-function SliderTeamMember (props) {
-    return(
-        <div className='slider-team-member'>
-            <div className='slider-team-member-photo'>
-                <img src={props.src}/>
-            </div>
-            <div className='slider-team-member-content'>
-                <div className='member-content-container'>
-                    <div className='slider-team-member-comment'>
-                        <div className='slider-team-member-comment-image'>
-                            <img src={quotesIcon}/>
-                        </div>
-                        <span>{props.quote}</span>
-                    </div>
-                    <div className='slider-team-member-person'>
-                        <span>{props.name}</span>
-                        <span>{props.position}</span>
-                    </div>
-                </div>
-            </div>
         </div>
     )
 }

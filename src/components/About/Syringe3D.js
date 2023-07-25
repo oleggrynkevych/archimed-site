@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import third3d from '../../3d-elements/syringe-colors.glb';
 import {gsap, Back} from 'gsap';
 import {useMediaQuery} from '../../hooks/useMediaQuery';
@@ -120,7 +120,7 @@ function Syringe3D (props) {
             window.removeEventListener('mousemove', handleMouseMove);
 
         };
-    }, []);
+    }, [isDeskTop, startPositionX, startPositionY, startPositionZ, startRotationY, startRotationX]);
 
 
     return (

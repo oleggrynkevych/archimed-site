@@ -6,42 +6,60 @@ import closeIcon from '../../images/close-icon.svg';
 import menuIcon from '../../images/menu-icon.svg';
 import './Header.css';
 import React, {useState, useEffect, useRef} from 'react';
-import { Link, useMatch, useResolvedPath, useLocation} from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import useScrollDirection from '../../hooks/useScrollDirection';
 import classNames from 'classnames';
+import {dataNav} from './header-data.js';
+import DropdownItem from './DropdownItem.js';
+import CustomLink from './CustomLink.js';
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
+import cookies from 'js-cookie';
+import { languages } from '../../languages';
 
 
 
 
 function Header () {
+    const { t } = useTranslation();
     const scrollDirection = useScrollDirection();
 
-
-
-    const servicePagePath = '/servicepage';
-    const servicesPath = '/services';
     const secondNavItem = useRef();
     const location = useLocation();
-    const isServicePagePath = location.pathname === servicePagePath;
-    const isServicesPath = location.pathname === servicesPath;
-   
+    const isActiveServicePage = location.pathname.startsWith('/services/');
+
+    const currentLanguageCode = cookies.get('i18next') || 'ua';
+    const currentLanguage = languages.find(l => l.code === currentLanguageCode);
+
+    useEffect(()=> {
+      document.title = t('app_title')
+    },[currentLanguage, t])
+
     useEffect(() => {
-        if (isServicePagePath) {
-          secondNavItem.current.classList.add('active');
-        } else if (isServicesPath){
-          secondNavItem.current.classList.add('active');
-        } else {
+      if (isActiveServicePage) {
+        secondNavItem.current.classList.add('active');
+      } else {
+        secondNavItem.current.classList.remove('active');
+      }
+        
+      return () => {
+        if (secondNavItem.current) {
           secondNavItem.current.classList.remove('active');
         }
-    
-        return () => {
-          secondNavItem.current.classList.remove('active');
-        };
-      }, [isServicePagePath, isServicesPath]);
+      };
+    }, [isActiveServicePage]);
     
 
     const [open, setOpen] = useState(false);
     const [openMenu, setOpenMenu] = useState(false);
+
+    const handleLinkClick = () => {
+      setOpenMenu(!openMenu);
+    };
+
+    const handleDropdownClick = () => {
+      setOpen(!open);
+    };
 
     let dropdownRef = useRef();
 
@@ -93,24 +111,18 @@ function Header () {
             </div>
           </Link>
         <nav className={navClass}>
-          <ul>
-            <CustomLink to="/" onClick={() => setOpenMenu(!openMenu)}>
-              Головна
-            </CustomLink>
+        <ul>
+          {dataNav.map((item, index) => (
             <CustomLink
-              ref={secondNavItem}
-              to="/services"
-              onClick={() => setOpenMenu(!openMenu)}
+              key={index}
+              to={item.to}
+              ref={index === 1 ? secondNavItem : null}
+              onClick={handleLinkClick}
             >
-              Послуги
+              {t(item.text)}
             </CustomLink>
-            <CustomLink to="/about" onClick={() => setOpenMenu(!openMenu)}>
-              Про нас
-            </CustomLink>
-            <CustomLink to="/contacts" onClick={() => setOpenMenu(!openMenu)}>
-              Контакти
-            </CustomLink>
-          </ul>
+          ))}
+        </ul>
           <div className="language-switch">
             <span>UA</span>
             <div className="line"></div>
@@ -124,10 +136,10 @@ function Header () {
           <div className="dropdown-container" ref={dropdownRef}>
             <div
               className={dropdownTriggerClass}
-              onClick={() => setOpen(!open)}
+              onClick={handleDropdownClick}
             >
               <img src={globeIcon} alt="Globe Icon" />
-              <span>UA</span>
+              <span>{t('language_switcher')}</span>
               <img
                 className={classNames('down-arrow', { active: open })}
                 src={downIcon}
@@ -135,11 +147,14 @@ function Header () {
               />
             </div>
             <div className={dropdownMenuClass}>
-              <ul>
-                <DropdownItem text={'UA'} />
-                <DropdownItem text={'EN'} />
-                <DropdownItem text={'RU'} />
-              </ul>
+              <div>
+                {languages.map(({code, country_code}) => (
+                  <DropdownItem 
+                    onClick={() => i18next.changeLanguage(code)}
+                    key={country_code} 
+                    text={code} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -147,38 +162,18 @@ function Header () {
           className={menuIconClass}
           src={menuIcon}
           alt="Menu Icon"
-          onClick={() => setOpenMenu(!openMenu)}
+          onClick={handleLinkClick}
         ></img>
         <img
           className={closeIconClass}
           src={closeIcon}
           alt="Close Icon"
-          onClick={() => setOpenMenu(!openMenu)}
+          onClick={handleLinkClick}
         ></img>
       </div>
     </header>
     )
 }
 
-const CustomLink = React.forwardRef(({ to, children, ...props }, ref) => {
-    const resolvedPath = useResolvedPath(to);
-    const isActive = useMatch({path: resolvedPath.pathname, end: true})
-
-    const liClass = classNames({ active: isActive });
-  
-    return (
-      <li ref={ref} className={liClass}>
-        <Link to={to} {...props}>{children}</Link>
-      </li>
-    );
-  });
-
-function DropdownItem (props) {
-    return(
-        <li className='dropdown-item'>
-            <a>{props.text}</a>
-        </li>
-    )
-}
 
 export default Header;

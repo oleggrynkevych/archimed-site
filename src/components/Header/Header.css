@@ -119,10 +119,6 @@
     position: relative;
 }
 
-.dropdown-menu ul {
-    list-style: none;
-}
-
 .dropdown-item img {
     margin-right: 12px;
 }
@@ -139,13 +135,13 @@
     border-radius: 8px;
 }
 
-.dropdown-menu ul {
+.dropdown-menu div {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.dropdown-menu li {
+.dropdown-menu button {
     font-family: 'Mulish';
     font-style: normal;
     font-weight: 500;
@@ -153,12 +149,16 @@
     color: #042336;
     line-height: 150%;
     padding: 8px 16px;
+    width: 100%;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+    background-color: transparent;
 }
 
-.dropdown-menu li:hover{
+.dropdown-menu button:hover{
     background-color: #E9EBEC;
 }
 

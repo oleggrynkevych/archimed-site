@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import first3d from '../../../../3d-elements/scissors-colors.glb';
 import {gsap , Back} from 'gsap';
 import {useMediaQuery} from '../../../../hooks/useMediaQuery';
@@ -115,7 +115,7 @@ function ScissorsColors3D (props) {
             window.removeEventListener('mousemove', handleMouseMove);
 
         };
-    }, []);
+    }, [isDeskTop, startPositionX, startRotationY, startPositionY, startPositionZ, startRotationX]);
 
 
     return (

@@ -161,7 +161,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
 }
 
 .carousel-item-text{
@@ -207,7 +207,7 @@
 @media (max-width: 600px){
     .carousel {
         width: 100%;
-        
+        padding: 30px 0 100px 0px;
     }
 
     .carousel .slick-list {
@@ -227,7 +227,7 @@
     .carousel-item-bottom-block {
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: flex-start;
     }
 
     .carousel-item-link{

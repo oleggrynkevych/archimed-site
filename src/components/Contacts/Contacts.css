@@ -119,7 +119,7 @@
 
     .contacts-page .contacts-block-container {
         height: 950px;
-        justify-content: start;
+        justify-content: flex-start;
     }
 
     .contacts-page .footer-site-info {
