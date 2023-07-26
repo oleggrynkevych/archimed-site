@@ -36,7 +36,7 @@ function AppContent() {
           <ScrollToTopOnPageChange/>
             <div className={containerClassName}>
               <Routes>
-              <Route path='/$/' element={<Home />} />
+              <Route path='/:lang/' element={<Home />} />
               <Route path='/:lang/services' element={<Services />} />
               <Route path='/:lang/contacts' element={<Contacts />} />
               <Route path='/:lang/about' element={<About />} />

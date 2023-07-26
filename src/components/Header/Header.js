@@ -40,7 +40,7 @@ function Header ({ i18n, navigate }) {
     const handleLanguageChange = (code) => {
       i18n.changeLanguage(code);
       const currentPath = location.pathname;
-      const newPath = `/${code}${currentPath.substring(6)}`;
+      const newPath = `/${code}${currentPath.substring(3)}`;
       navigate(newPath);
     };
 
@@ -121,16 +121,17 @@ function Header ({ i18n, navigate }) {
           </Link>
         <nav className={navClass}>
         <ul>
-          {dataNav.map((item, index) => (
-            <CustomLink
-              key={index}
-              to={item.to}
-              ref={index === 1 ? secondNavItem : null}
-              onClick={handleLinkClick}
-            >
-              {t(item.text)}
-            </CustomLink>
-          ))}
+        {dataNav.map((item, index) => (
+          <CustomLink
+            key={index}
+            // to={item.to}
+                to={`/${i18n.language}${item.to}`}
+            ref={index === 1 ? secondNavItem : null}
+            onClick={handleLinkClick}
+          >
+            {t(item.text)}
+          </CustomLink>
+        ))}
         </ul>
           <div className="language-switch">
             <span>UA</span>
