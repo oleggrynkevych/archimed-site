@@ -20,7 +20,8 @@ import { languages } from '../../languages';
 
 
 
-function Header () {
+function Header ({ i18n, navigate }) {
+   
     const { t } = useTranslation();
     const scrollDirection = useScrollDirection();
 
@@ -34,6 +35,14 @@ function Header () {
     useEffect(()=> {
       document.title = t('app_title')
     },[currentLanguage, t])
+
+
+    const handleLanguageChange = (code) => {
+      i18n.changeLanguage(code);
+      const currentPath = location.pathname;
+      const newPath = `/${code}${currentPath.substring(6)}`;
+      navigate(newPath);
+    };
 
     useEffect(() => {
       if (isActiveServicePage) {
@@ -150,7 +159,7 @@ function Header () {
               <div>
                 {languages.map(({code, country_code}) => (
                   <DropdownItem 
-                    onClick={() => i18next.changeLanguage(code)}
+                    onClick={() => handleLanguageChange(code)}
                     key={country_code} 
                     text={code} />
                 ))}

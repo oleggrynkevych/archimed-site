@@ -33,7 +33,7 @@ function Footer ({ isSpecial }) {
 
     if(loading) return <p></p>
     if(error) return <p></p>
-
+    
     return (
         <footer className={specialClass}>
             <div className='footer-container'>
