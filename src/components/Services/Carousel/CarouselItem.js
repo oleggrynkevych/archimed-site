@@ -1,8 +1,12 @@
 import {Link} from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 
 function CarouselItem ({...props}) {
+    const { i18n } = useTranslation();
+
     return(
-        <Link to={`/services/${props.id}`}>
+        <Link to={`/${i18n.language}/services/${props.id}`}>
             <div className='carousel-item'>
                 <span className='carousel-item-title'>{props.subtitle}</span>
                 <div className='carousel-item-bottom-block'>

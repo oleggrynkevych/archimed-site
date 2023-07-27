@@ -114,7 +114,7 @@ function Header ({ i18n, navigate }) {
     return (
       <header className={`header ${ scrollDirection === "down" ? "hide" : "show"}`}>
         <div className="header-container">
-          <Link to="/">
+          <Link to={`/${i18n.language}/`}>
             <div className="logo-wrapper">
               <img src={mainLogo} alt="Archimed Logo" />
             </div>
@@ -124,8 +124,7 @@ function Header ({ i18n, navigate }) {
         {dataNav.map((item, index) => (
           <CustomLink
             key={index}
-            // to={item.to}
-                to={`/${i18n.language}${item.to}`}
+            to={`/${i18n.language}${item.to}`}
             ref={index === 1 ? secondNavItem : null}
             onClick={handleLinkClick}
           >

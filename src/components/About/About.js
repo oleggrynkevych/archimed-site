@@ -11,11 +11,12 @@ import { EffectComposer, SMAA } from "@react-three/postprocessing";
 import SobelEdge from '../Sobel/SobleEdge';
 import { useQuery, gql } from '@apollo/client';
 import SliderTeamMember from './SliderTeamMember.js';
+import { useTranslation } from 'react-i18next';
 
 
 const ABOUTINFO = gql`
-query GetAboutPage {
-    aboutPage {
+query GetAboutPage ($locale: I18NLocaleCode) {
+    aboutPage (locale: $locale) {
       data {
         attributes {
             Text1, 
@@ -30,8 +31,8 @@ query GetAboutPage {
 `
 
 const TEAMMEMBER = gql`
-    query GetTeamMember {
-        teamMembers {
+    query GetTeamMember ($locale: I18NLocaleCode) {
+        teamMembers (locale: $locale) {
             data {
                 id
                 attributes {
@@ -54,8 +55,16 @@ const TEAMMEMBER = gql`
 `
 
 function About() {
-    const {loading, error, data} = useQuery(ABOUTINFO);
-    const {loading: teamMemberLoading, error: teamMemberError, data: teamMemberData} = useQuery(TEAMMEMBER);
+    const { t, i18n } = useTranslation();
+    const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
+
+    const {loading, error, data} = useQuery(ABOUTINFO, {
+        variables: { locale: locale }
+    });
+
+    const {loading: teamMemberLoading, error: teamMemberError, data: teamMemberData} = useQuery(TEAMMEMBER, {
+        variables: { locale: locale }
+    });
 
     if(loading || teamMemberLoading) return <p></p>
     if(error || teamMemberError) return <p></p>

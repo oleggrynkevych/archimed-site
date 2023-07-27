@@ -6,10 +6,11 @@ import { useParams } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import Slider from 'react-slick';
 import CarouselItem from './CarouselItem.js';
+import { useTranslation } from 'react-i18next';
 
 const SERVICES = gql`
-    query GetServices {
-        services {
+    query GetServices ($locale: I18NLocaleCode) {
+        services (locale: $locale) {
             data {
                 id
                 attributes {
@@ -64,7 +65,13 @@ function Carousel (props) {
         ]
     };
 
-    const {loading, error, data} = useQuery(SERVICES);
+    const { t, i18n } = useTranslation();
+    const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
+
+    const {loading, error, data} = useQuery(SERVICES, {
+      variables: { locale: locale }
+    });
+    
     const idFromUrl = props.id;
 
     if(loading) return <p></p>

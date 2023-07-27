@@ -8,11 +8,13 @@ import SyringeColors3D from './SyringeColors3D';
 import { EffectComposer, SMAA, FXAA } from "@react-three/postprocessing";
 import SobelEdge from '../../../Sobel/SobleEdge';
 import { useQuery, gql } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
+
 
 
 const SUBTITLE = gql`
-    query GetHomePage {
-        homePage {
+    query GetHomePage ($locale: I18NLocaleCode) {
+        homePage (locale: $locale) {
             data {
                 attributes {
                     SubTitleHomePage
@@ -25,11 +27,16 @@ const SUBTITLE = gql`
 
 
 const FirstSection = function ({ scrollToNextComponent }) {
-    const {loading, error, data} = useQuery(SUBTITLE);
+    const { t, i18n } = useTranslation();
+    const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
+
+    const {loading, error, data} = useQuery(SUBTITLE, {
+        variables: { locale: locale }
+    });
 
     if(loading) return <p></p>
     if(error) return <p></p>
-
+    console.log(data);
     return(
         <section className='first-section'>
             <div className='first-3d' style={{width:'100%', height:'100%', top:'64px', left:'0', overflow: 'visible'}}>

@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function ServiceItem({...props}){
     const [isHovered, setIsHovered] = useState(false);
+
+    const { i18n } = useTranslation();
+
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -13,7 +17,7 @@ function ServiceItem({...props}){
     };
     return (
         <Link 
-            to={`/services/${props.id}`}
+            to={`/${i18n.language}/services/${props.id}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >

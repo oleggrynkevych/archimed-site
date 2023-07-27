@@ -9,10 +9,12 @@ import Modal from './Modal/Modal';
 import { useQuery, gql } from '@apollo/client';
 import useScrollToTop from '../../hooks/useScrollToTop';
 import MaterialItem from './MaterialItem.js';
+import { useTranslation } from 'react-i18next';
+
 
 const SERVICE = gql`
-    query GetServices($id: ID!) {
-        service(id: $id) {
+    query GetServices($locale: I18NLocaleCode, $id: ID!) {
+        service(locale: $locale, id: $id) {
             data {
                 id
                 attributes {
@@ -29,8 +31,8 @@ const SERVICE = gql`
 `
 
 const ADDITIONALMATERIAL = gql`
-    query AdditionalMaterial {
-        additionalMaterials {           
+    query AdditionalMaterial ($locale: I18NLocaleCode) {
+        additionalMaterials (locale: $locale) {           
             data {
                 id
                 attributes {
@@ -53,6 +55,9 @@ function ServicePage() {
     const [modalActive, setModalActive] = useState(false);
     const [selectedMaterial, setSelectedMaterial] = useState(null);
 
+    const { t, i18n } = useTranslation();
+    const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
+
     function handleSubmit(event) {
         event.preventDefault();
     }
@@ -60,10 +65,16 @@ function ServicePage() {
     const {id} = useParams();
 
     const {loading, error, data} = useQuery(SERVICE, {
-        variables: {id: id}
+        variables: 
+            {
+                locale: locale,
+                id: id
+            }
     });
 
-    const {loading: additionalMaterialsLoading, error: additionalMaterialsError, data: additionalMaterialsData} = useQuery(ADDITIONALMATERIAL);
+    const {loading: additionalMaterialsLoading, error: additionalMaterialsError, data: additionalMaterialsData} = useQuery(ADDITIONALMATERIAL, {
+        variables: { locale: locale }
+    });
 
     const handleMaterialItemClick = (material) => {
         setSelectedMaterial(material);
@@ -125,6 +136,7 @@ function ServicePage() {
     
     if(loading || additionalMaterialsLoading) return <p></p>
     if(error || additionalMaterialsError) return <p></p>
+    console.log(data);
 
     const orderSercive = data.service.data.attributes.Order;
     const hasMatchingMaterials = additionalMaterialsData && additionalMaterialsData.additionalMaterials.data.some(material => orderSercive === material.attributes.WhichService);

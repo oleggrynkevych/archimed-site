@@ -6,12 +6,14 @@
 //  import {servicesData} from './service-block-data.js';
 import SyringeColorsService3D from './SyringeColorsService3D';
 import { EffectComposer, SMAA } from "@react-three/postprocessing";
-import SobelEdge from '../../../Sobel/SobleEdge'
+import SobelEdge from '../../../Sobel/SobleEdge';
+import { useTranslation } from 'react-i18next';
+
 
 
 const SERVICES = gql`
-    query GetServices {
-        services {
+    query GetServices ($locale: I18NLocaleCode) {
+        services (locale: $locale) {
             data {
                 id
                 attributes {
@@ -24,7 +26,12 @@ const SERVICES = gql`
 `
 
 const ServicesBlock = function ({ innerRef }) {
-    const {loading, error, data} = useQuery(SERVICES);
+    const { t, i18n } = useTranslation();
+    const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
+
+    const {loading, error, data} = useQuery(SERVICES, {
+        variables: { locale: locale }
+    });
 
     if(loading) return <p></p>
     if(error) return <p></p>

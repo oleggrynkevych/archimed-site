@@ -5,11 +5,13 @@ import { useQuery, gql } from '@apollo/client';
 import './Footer.css';
 import useScrollToTop from '../../hooks/useScrollToTop';
 import SiteInfoItem from './SiteInfoItem.js';
+import { useTranslation } from 'react-i18next';
+
 
 
 const INFO = gql`
-    query GetHomePage {
-        homePage {
+    query GetHomePage ($locale: I18NLocaleCode) {
+        homePage (locale: $locale) {
             data {
                 attributes {
                     EMail,
@@ -25,7 +27,12 @@ const INFO = gql`
 `
 
 function Footer ({ isSpecial }) {
-    const {loading, error, data} = useQuery(INFO);
+    const { t, i18n } = useTranslation();
+    const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
+
+    const {loading, error, data} = useQuery(INFO, {
+        variables: { locale: locale }
+    });
 
     const specialClass = isSpecial ? 'special-footer' : '';
 
@@ -70,11 +77,19 @@ function Footer ({ isSpecial }) {
                         <div className='footer-nav'>
                             <span className='footer-subtitle'>Навігація</span>
                             <ul>
-                                {dataNav.map((item, index) => (
-                                    <li key={index}>
-                                        <Link to={item.to} target={item.target}>{item.label}</Link>
-                                    </li>
-                                ))}
+                            {dataNav.map((item, index) => (
+                                <li key={index}>
+                                    {item.to.startsWith("https") ? (
+                                    <a href={item.to} target={item.target}>
+                                        {item.label}
+                                    </a>
+                                    ) : (
+                                    <Link to={`/${i18n.language}${item.to}`}>
+                                        {item.label}
+                                    </Link>
+                                    )}
+                                </li>
+                            ))}
                             </ul>
                         </div>
                         <div className='footer-socmedia'>
