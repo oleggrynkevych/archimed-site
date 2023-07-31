@@ -50,7 +50,7 @@ function PillsColors3D (props) {
 
 
     if (isMobile) {
-        startPositionX = 1.2;
+        startPositionX = 1;
         startPositionY = 1.4;
         startPositionZ = -5.7;
     } else if (isDeskTop) {
@@ -64,6 +64,7 @@ function PillsColors3D (props) {
     useEffect(() => {
 
         const handleScroll = () => {
+        if (!pivot.current || !pivot.current.children[0]) return;
         const currentScrollY = window.scrollY;
         
         let newPositionY = startPositionY - currentScrollY*0.001;
@@ -88,6 +89,7 @@ function PillsColors3D (props) {
         };
 
         const handleMouseMove = (event) => {
+            if (!pivot.current || !pivot.current.children[0]) return;
             const { clientX, clientY } = event;
 
             const rotationX = startRotationX - (clientX - window.innerWidth * 0.5) * 0.00016;

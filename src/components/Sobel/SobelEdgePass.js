@@ -221,7 +221,7 @@ void make_kernel_normal(inout vec3 n[9], sampler2D tex, vec2 coord) {
 }
 
 vec3 computeSobelEdges(vec3 m[9]) {
-    vec3 sobel_edge_h = m[2] + (1.2 * m[5]) + m[8] - (m[0] + (1.2 * m[3]) + m[6]);
+    vec3 sobel_edge_h = m[2] + (1.7 * m[5]) + m[8] - (m[0] + (1.7 * m[3]) + m[6]);
     vec3 sobel_edge_v = m[0] + (1.2 * m[1]) + m[2] - (m[6] + (1.2 * m[7]) + m[8]);
     return sqrt((sobel_edge_h * sobel_edge_h) + (sobel_edge_v * sobel_edge_v));
 }
@@ -241,7 +241,7 @@ void main() {
     vec3 normalSobel = computeSobelEdges(n);
 
     // clean up normal edges
-    if (length(normalSobel) < 0.7) {
+    if (length(normalSobel) < 0.95) {
         normalSobel *= 0.0;
     }
 

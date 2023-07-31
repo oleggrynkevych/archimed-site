@@ -40,7 +40,7 @@ const FirstSection = function ({ scrollToNextComponent }) {
     return(
         <section className='first-section'>
             <div className='first-3d' style={{width:'100%', height:'100%', top:'64px', left:'0', overflow: 'visible'}}>
-                    <Canvas dpr={2} camera={{fov: 45, position: [0,0,0]}}>
+                    <Canvas dpr={1.5} camera={{fov: 45, position: [0,0,0]}}>
                     <color attach="background" args={['#F5F5F5']} linear/>
                         <Suspense fallback={null}>
                             <ScissorsColors3D/>
@@ -65,7 +65,7 @@ const FirstSection = function ({ scrollToNextComponent }) {
                     </div>
                 </div>
                 <div className='first-section-container-text'>
-                    <h1>Архімед — ваш торговий представник в Україні</h1>
+                    <h1>{t('title')}</h1>
                     <h2>{data.homePage.data.attributes.SubTitleHomePage}</h2>
                 </div>
             </div>

@@ -1,8 +1,48 @@
 {
     "app_title": "ARCHIMED",
+    
     "language_switcher": "EN",
     "main_page": "Main",
     "services_page": "Services",
     "about_page": "About us",
-    "contacts_page": "Contacts"
+    "contacts_page": "Contacts",
+
+    "title": "ARCHIMEDES IS YOUR SALES REPRESENTATIVE IN UKRAINE",
+
+    "services_subtitle": "our services",
+    "learn_more": "learn more",
+
+    "partners_text": "they trust us",
+    "inter_companies": "31 INTERNATIONAL COMPANIES",
+    "ua_companies": "15 UKRAINIAN COMPANIES",
+    "embassies": "4 EMBASSIES",
+
+    "contact_form": "contact form",
+    "contact_with_us": "contact us",
+    "contact_subtitle": "and we implement the best solution for your business",
+    "contact_video_subtitle": "or schedule a video meeting",
+    "available_at": "we are available at",
+    "google_map_text": "View in Google Maps",
+    "fill_fields": "fill in the fields",
+    "name_form": "Name",
+    "phone_form": "Phone",
+    "send_form": "send",
+    "plan": "Plan",
+
+    "footer-title": "Archimedes is your sales representative",
+    "nav": "Navigation",
+    "social": "social networks",
+    "rights": "© Archimed 2018. All rights reserved",
+    "shop": "Shop",
+    "vacancies": "Vacancies",
+    "post": "E-mail",
+    "adress": "Adress",
+    "phone": "Phone"
+
+
+
+
+
+
+
 }

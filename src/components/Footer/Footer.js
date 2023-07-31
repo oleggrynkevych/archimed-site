@@ -45,7 +45,7 @@ function Footer ({ isSpecial }) {
         <footer className={specialClass}>
             <div className='footer-container'>
                 <div className='footer-head'>
-                    <span>Архімед — ваш торговий представник</span>
+                    <span>{t('footer-title')}</span>
                     <div onClick={scrollToTop}>
                         <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.25 24.25V25H14.75V24.25H16.25ZM14.75 6.75C14.75 6.33579 15.0858 6 15.5 6C15.9142 6 16.25 6.33579 16.25 6.75H14.75ZM14.75 24.25V6.75H16.25V24.25H14.75Z" fill="currentColor"/>
@@ -55,13 +55,13 @@ function Footer ({ isSpecial }) {
                 </div>
                 <div className='footer-main'>
                     <div className='footer-site-info'>
-                        <SiteInfoItem href={`mailto:${data.homePage.data.attributes.EMail}`} target={"_blank"} rel={"noopener"} firstText={'пошта'} secondText={data.homePage.data.attributes.EMail}/>
-                        <SiteInfoItem href={`tel:${data.homePage.data.attributes.TelephoneNumber}`} target={"_blank"} rel={"noopener"} firstText={'телефон'} secondText={data.homePage.data.attributes.TelephoneNumber}/>
+                        <SiteInfoItem href={`mailto:${data.homePage.data.attributes.EMail}`} target={"_blank"} rel={"noopener"} firstText={t('post')} secondText={data.homePage.data.attributes.EMail}/>
+                        <SiteInfoItem href={`tel:${data.homePage.data.attributes.TelephoneNumber}`} target={"_blank"} rel={"noopener"} firstText={t('phone')} secondText={data.homePage.data.attributes.TelephoneNumber}/>
                         <SiteInfoItem 
                             href={data.homePage.data.attributes.AdressLink} 
                             target={"_blank"}
                             rel={"noopener"}
-                            firstText={'адреса'} 
+                            firstText={t('adress')} 
                             secondText={data.homePage.data.attributes.Adress}/>
                         <div className='footer-map'>
                             <img src={mapIcon} alt="Map Icon"></img>
@@ -69,23 +69,23 @@ function Footer ({ isSpecial }) {
                                 href={data.homePage.data.attributes.AdressLink}
                                 target="_blank"
                                 rel="noreferrer"
-                            >Дивитись в картах Google</a>
+                            >{t('google_map_text')}</a>
                         </div>
                     </div>
 
                     <div className='footer-nav-and-socmedia'>
                         <div className='footer-nav'>
-                            <span className='footer-subtitle'>Навігація</span>
+                            <span className='footer-subtitle'>{t('nav')}</span>
                             <ul>
                             {dataNav.map((item, index) => (
                                 <li key={index}>
                                     {item.to.startsWith("https") ? (
                                     <a href={item.to} target={item.target}>
-                                        {item.label}
+                                       {t(item.label)}
                                     </a>
                                     ) : (
                                     <Link to={`/${i18n.language}${item.to}`}>
-                                        {item.label}
+                                        {t(item.label)}
                                     </Link>
                                     )}
                                 </li>
@@ -93,14 +93,14 @@ function Footer ({ isSpecial }) {
                             </ul>
                         </div>
                         <div className='footer-socmedia'>
-                            <span className='footer-subtitle'>соціальні мережі</span>
+                            <span className='footer-subtitle'>{t('social')}</span>
                             <div dangerouslySetInnerHTML={{ __html: decodeURI(data.homePage.data.attributes.SocialMedia) }} />
                         </div>
                     </div>
                 </div>
 
                 <div className='footer-bottom'>
-                    <span>© Архімед 2018. Всі права захищені</span>
+                    <span>{t('rights')}</span>
                     <Link to='/privacypolicy'>{data.homePage.data.attributes.PrivacyPolicy} </Link>
                 </div>
                 <div></div>

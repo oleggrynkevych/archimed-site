@@ -4,8 +4,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import InternationalPartners from './InternationalPartners';
 import UkrainianPartners from './UkrainianPartners';
 import EmbassiesPartners from './EmbassiesPartners';
+import { useTranslation } from 'react-i18next';
 
 function Partners () {
+    const { t } = useTranslation();
     const sectionRef = useRef(null);
     const [scrollTransform, setScrollTransform] = useState({ scale: 0.9, translateY: '150px' });
 
@@ -41,10 +43,10 @@ function Partners () {
         return(
             <section className='partners-block'>
                 <div className='partners-block-container' ref={sectionRef} style={{ transform: `scale(${scrollTransform.scale}) translateY(${scrollTransform.translateY})` }}>
-                    <h5>нам довіряють</h5>
-                    <h5>31 міжнародна компанія</h5>
-                    <h5>15 українських компаній</h5>
-                    <h5>4 посольства</h5>
+                    <h5>{t('partners_text')}</h5>
+                    <h5>{t('inter_companies')}</h5>
+                    <h5>{t('ua_companies')}</h5>
+                    <h5>{t('embassies')}</h5>
                     <div className='logos'>
                         <InternationalPartners/>
                         <InternationalPartners/>

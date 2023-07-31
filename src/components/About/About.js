@@ -99,7 +99,7 @@ function About() {
 
                 <div className="about-page-main">
                     <div className='third-3d'>
-                        <Canvas dpr={2} camera={{fov: 45, position: [0,0,0]}}>
+                        <Canvas dpr={1.5} camera={{fov: 45, position: [0,0,0]}}>
                             <Suspense fallback={null}>
                         
                                 <Scissors3D/>

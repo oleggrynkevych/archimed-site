@@ -50,7 +50,7 @@ function SyringeColors3D (props) {
 
 
     if (isMobile) {
-        startPositionX = 0.3;
+        startPositionX = 0.1;
         startPositionY = 0.2;
         startPositionZ = -5;
     } else {
@@ -64,6 +64,7 @@ function SyringeColors3D (props) {
     useEffect(() => {
 
         const handleScroll = () => {
+        if (!pivot.current || !pivot.current.children[0]) return;
         const currentScrollY = window.scrollY;
         
         let newPositionY = startPositionY - currentScrollY*0.00025;
@@ -90,6 +91,7 @@ function SyringeColors3D (props) {
         };
 
         const handleMouseMove = (event) => {
+            if (!pivot.current || !pivot.current.children[0]) return;
             const { clientX, clientY } = event;
 
             const rotationX = startRotationX - (clientX - window.innerWidth * 0.5) * 0.00015;

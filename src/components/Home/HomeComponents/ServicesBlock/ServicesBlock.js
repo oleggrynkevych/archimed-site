@@ -56,7 +56,7 @@ const ServicesBlock = function ({ innerRef }) {
                         </Suspense>
                     </Canvas> */}
                 </div>
-                <h3 >Наші послуги</h3>
+                <h3>{t('services_subtitle')}</h3>
                 <div className='services-wrapper' ref={innerRef}>
                     {sortedData.map(service => (
                         <ServiceItem 

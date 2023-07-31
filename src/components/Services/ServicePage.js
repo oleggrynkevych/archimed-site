@@ -1,8 +1,7 @@
 import './ServicePage.css';
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import backIcon from '../../images/backIcon.svg';
-import certificatePhoto from '../../images/certificate-photo.png';
 import PhoneInput from "react-phone-input-2";
 import Carousel from './Carousel/Carousel';
 import Modal from './Modal/Modal';
@@ -10,7 +9,6 @@ import { useQuery, gql } from '@apollo/client';
 import useScrollToTop from '../../hooks/useScrollToTop';
 import MaterialItem from './MaterialItem.js';
 import { useTranslation } from 'react-i18next';
-
 
 const SERVICE = gql`
     query GetServices($locale: I18NLocaleCode, $id: ID!) {
@@ -20,12 +18,25 @@ const SERVICE = gql`
                 attributes {
                     Title,
                     Order,
-                    Description{
+                    locale,
+                    Description {
                         ${Array.from({ length: 45 }, (_, i) => `Text${i + 1}`).join('\n')}
                     }
-                    
+                    localizations {
+                        data {
+                            id
+                            attributes {
+                                Title,
+                                Order,
+                                locale,
+                                Description {
+                                    ${Array.from({ length: 45 }, (_, i) => `Text${i + 1}`).join('\n')}
+                                }
+                            }
+                        }
+                    }
                 }
-            }
+              }
         }
     }
 `
@@ -54,15 +65,17 @@ function ServicePage() {
     const [phone, setPhone] = useState('');
     const [modalActive, setModalActive] = useState(false);
     const [selectedMaterial, setSelectedMaterial] = useState(null);
+    const [nextServiceId, setNextServiceId] = useState();
 
     const { t, i18n } = useTranslation();
     const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
 
-    function handleSubmit(event) {
-        event.preventDefault();
-    }
-
     const {id} = useParams();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const initialId = useRef(id);
+    const initialLocale = useRef(locale);
 
     const {loading, error, data} = useQuery(SERVICE, {
         variables: 
@@ -80,6 +93,10 @@ function ServicePage() {
         setSelectedMaterial(material);
         setModalActive(true);
     };
+
+    function handleSubmit(event) {
+        event.preventDefault();
+    }
 
     useEffect(() => {
         if (modalActive) {
@@ -132,10 +149,44 @@ function ServicePage() {
         })
     },[data]);
 
+    useEffect(() => {
+        if (data) {
+            const {localizations} = data.service.data.attributes;
+
+            const nextLocalization = localizations.data.find(localization => localization.attributes.locale === locale);
+            const nextId = nextLocalization ? nextLocalization.id : null;
+            
+            if (nextId && locale !== initialLocale.current) {
+                setNextServiceId(nextId);
+            } 
+        }
+
+        if (locale === initialLocale.current) {
+            setNextServiceId(initialId.current);
+        }
+    }, [data, locale]);
+
+    useEffect(() => {
+        const currentPath = location.pathname;
+        console.log(currentPath)
+       
+        if (nextServiceId) {
+            const pathSegments = currentPath.split('/');
+            const lastSegment = pathSegments[pathSegments.length - 1];
+    
+            if (!isNaN(lastSegment)) {
+              pathSegments[pathSegments.length - 1] = nextServiceId.toString();
+              const newPath = pathSegments.join('/');
+      
+              navigate(newPath);
+            }
+          }
+    }, [nextServiceId])
+
     const scrollToTop = useScrollToTop();
     
-    if(loading || additionalMaterialsLoading) return <p></p>
-    if(error || additionalMaterialsError) return <p></p>
+    if(loading || additionalMaterialsLoading ) return <p></p>
+    if(error || additionalMaterialsError ) return <p></p>
     console.log(data);
 
     const orderSercive = data.service.data.attributes.Order;

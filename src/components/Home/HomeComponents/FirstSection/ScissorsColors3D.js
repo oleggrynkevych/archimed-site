@@ -57,6 +57,9 @@ function ScissorsColors3D (props) {
     useEffect(() => {
 
         const handleScroll = () => {
+  
+            
+        if (!pivot.current || !pivot.current.children[0]) return;
         const currentScrollY = window.scrollY;
         
         let newPositionY = startPositionY - currentScrollY*0.0006;
@@ -85,6 +88,7 @@ function ScissorsColors3D (props) {
         };
 
         const handleMouseMove = (event) => {
+            if (!pivot.current || !pivot.current.children[0]) return;
             const { clientX, clientY } = event;
 
             const rotationY = startRotationY - (clientX - window.innerWidth * 0.5) * 0.00015;

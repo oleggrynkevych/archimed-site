@@ -7,10 +7,12 @@ import PhoneInput from "react-phone-input-2";
 import { useQuery, gql } from '@apollo/client';
 import SiteInfoItem from './SiteInfoItem.js';
 import VideoItem from './VideoItem';
+import { useTranslation } from 'react-i18next';
+
 
 const INFO = gql`
-    query GetHomePage {
-        homePage {
+    query GetHomePage ($locale: I18NLocaleCode){
+        homePage (locale: $locale) {
             data {
                 attributes {
                     EMail,
@@ -25,7 +27,12 @@ const INFO = gql`
 
 
 function ContactsBlock ({commonStyle}) {
-    const {loading, error, data} = useQuery(INFO);
+    const { t, i18n } = useTranslation();
+    const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
+
+    const {loading, error, data} = useQuery(INFO, {
+        variables: { locale: locale }
+    });
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -38,10 +45,10 @@ function ContactsBlock ({commonStyle}) {
         <section className='contacts-block' style={commonStyle}>
             <div className='contacts-block-container'>
                 <div className='contacts-first-block'>
-                    <span>контактна форма</span>
-                    <span>зв’яжіться з нами</span>
-                    <span>і ми реалізуємо найкраще рішення для вашого бізнесу</span>
-                    <span>або заплануйте відео-зустріч</span>
+                    <span>{t('contact_form')}</span>
+                    <span>{t('contact_with_us')}</span>
+                    <span>{t('contact_subtitle')}</span>
+                    <span>{t('contact_video_subtitle')}</span>
 
                     <div className='video-item-block'>
                         <VideoItem src={videoLogo} text={'Запланувати'}/>
@@ -49,8 +56,8 @@ function ContactsBlock ({commonStyle}) {
                     </div>
 
                     <div className='contacts-block-for-mobile'>
-                        <span>або заплануйте відео-зустріч</span>
-                        <span>ми доступні в</span>
+                        <span>{t('contact_video_subtitle')}</span>
+                        <span>{t('available_at')}</span>
                         <div className='video-item-block-mobile'>
                             <VideoItem src={videoLogo} text={'Запланувати'}/>
                             
@@ -72,7 +79,7 @@ function ContactsBlock ({commonStyle}) {
                                 href={data.homePage.data.attributes.AdressLink}                                
                                 target="_blank"
                                 rel="noreferrer"
-                            >Дивитись в картах Google</a>
+                            >{t('google_map_text')}</a>
                         </div>
                     </div>
 
@@ -89,9 +96,9 @@ function ContactsBlock ({commonStyle}) {
                 </div>
 
                 <div className='contacts-second-block'>
-                    <span className='contacts-second-block-title'>Заповніть поля</span>
+                    <span className='contacts-second-block-title'>{t('fill_fields')}</span>
                     <form>
-                        <span>Ім’я</span>
+                        <span>{t('name_form')}</span>
                         <input 
                             placeholder='Георгій'                              
                             onChange={(e) => setName(e.target.value)}/>
@@ -99,7 +106,7 @@ function ContactsBlock ({commonStyle}) {
                         <input 
                             placeholder='example@mail.com'
                             onChange={(e) => setEmail(e.target.value)}/>
-                        <span>Телефон</span>
+                        <span>{t('phone_form')}</span>
                         <PhoneInput
                             country="ua"
                             masks={{ua: '(..) ...-..-..'}}
@@ -110,7 +117,7 @@ function ContactsBlock ({commonStyle}) {
                             countryCodeEditable={false}
                             onChange={(value) => setPhone(value)}
                         />
-                        <button className='form-button'><span>надіслати</span></button>
+                        <button className='form-button'><span>{t('send_form')}</span></button>
                     </form>
                 </div>
             </div>

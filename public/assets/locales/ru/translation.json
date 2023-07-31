@@ -1,8 +1,46 @@
 {
     "app_title": "АРХИМЕД",
+
     "language_switcher": "RU",
     "main_page": "Главная",
     "services_page": "Услуги",
     "about_page": "О нас",
-    "contacts_page": "Контакты"
+    "contacts_page": "Контакты",
+
+    "title": "АРХИМЕД — ВАШ ТОРГОВЫЙ ПРЕДСТАВИТЕЛЬ В УКРАИНЕ",
+
+    "services_subtitle": "Наши услуги",
+    "learn_more": "узнать больше",
+    
+    "partners_text": "нам доверяют",
+    "inter_companies": "31 МЕЖДУНАРОДНАЯ КОМПАНИЯ",
+    "ua_companies": "15 УКРАИНСКИХ КОМПАНИЙ",
+    "embassies": "4 ПОСОЛЬСТВА",
+
+    "contact_form": "контактная форма",
+    "contact_with_us": "свяжитесь с нами",
+    "contact_subtitle": "и мы реализуем лучшее решение для вашего бизнеса",
+    "contact_video_subtitle": "или запланируйте видео-встречу",
+    "available_at": "мы доступны в",
+    "google_map_text": "Смотреть в картах Google",
+    "fill_fields": "заполните поля",
+    "name_form": "Имя",
+    "phone_form": "Телефон",
+    "send_form": "отправить",
+    "plan": "Запланировать",
+
+    "footer-title": "Архимед — ваш торговый представитель",
+    "nav": "Навигация",
+    "social": "социальные сети",
+    "rights": "© Архимед 2018. Все права защищены",
+    "shop": "Интернет-магазин",
+    "vacancies": "Вакансии",
+    "post": "Почта",
+    "adress": "Адрес",
+    "phone": "Телефон"
+
+
+
+
+    
 }
