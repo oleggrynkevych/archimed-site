@@ -9,6 +9,7 @@
 
     "title": "ARCHIMEDES IS YOUR SALES REPRESENTATIVE IN UKRAINE",
 
+    "services_title": "WE PROVIDE 10 SERVICES THAT COVER 450+ TASKS",
     "services_subtitle": "our services",
     "learn_more": "learn more",
 
@@ -28,6 +29,9 @@
     "phone_form": "Phone",
     "send_form": "send",
     "plan": "Plan",
+    "validation_message_name": "Fill in the field",
+    "validation_message_email": "Fill in the field correctly",
+    "validation_message_phone": "Incorrectly dialed number",
 
     "footer-title": "Archimedes is your sales representative",
     "nav": "Navigation",
@@ -37,7 +41,8 @@
     "vacancies": "Vacancies",
     "post": "E-mail",
     "adress": "Adress",
-    "phone": "Phone"
+    "phone": "Phone",
+    "privacy_policy": "Privacy policy"
 
 
 

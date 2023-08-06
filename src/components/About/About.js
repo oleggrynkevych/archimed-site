@@ -23,7 +23,8 @@ query GetAboutPage ($locale: I18NLocaleCode) {
             Text2,
             Text3,
             Text4,
-            ButtonText
+            ButtonText,
+            ButtonLink
         }
       }
     }
@@ -116,7 +117,7 @@ function About() {
                         <span className="about-page-main-first-text">{data.aboutPage.data.attributes.Text2}</span>
                         <div className="about-page-main-second-text">
                             <span>{data.aboutPage.data.attributes.Text3}</span>
-                            <div>{data.aboutPage.data.attributes.ButtonText}</div>
+                            <a href={data.aboutPage.data.attributes.ButtonLink} target='_blank' rel='noopener'><div>{data.aboutPage.data.attributes.ButtonText}</div></a>
                         </div>
                         <div className="about-page-main-special">
                             <div className="about-page-special-first-text">

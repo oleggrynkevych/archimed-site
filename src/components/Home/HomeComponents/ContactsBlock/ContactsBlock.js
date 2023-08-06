@@ -8,14 +8,16 @@ import { useQuery, gql } from '@apollo/client';
 import SiteInfoItem from './SiteInfoItem.js';
 import VideoItem from './VideoItem';
 import { useTranslation } from 'react-i18next';
+import {useForm} from 'react-hook-form';
+import classnames from 'classnames';
 
 
 const INFO = gql`
-    query GetHomePage ($locale: I18NLocaleCode){
-        homePage (locale: $locale) {
+    query GetFooter ($locale: I18NLocaleCode){
+        footer (locale: $locale) {
             data {
                 attributes {
-                    EMail,
+                    Email,
                     TelephoneNumber,
                     Adress,
                     AdressLink
@@ -37,9 +39,31 @@ function ContactsBlock ({commonStyle}) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [phoneError, setPhoneError] = useState(false);
+
+    const {handleSubmit, register, formState: {errors}} = useForm();
+
+    const phonePattern = /^[0-9]{12}$/;
+
+    const validatePhone = (value) => {
+        if (!value || !phonePattern.test(value)) {
+            setPhoneError(true);
+        } else {
+            setPhoneError(false);
+        }
+    };
+
+    const handlePhoneChange = (value) => {
+        setPhone(value);
+        validatePhone(value);
+    };
+
+    const onSubmit = values => console.log(values);
 
     if(loading) return <p></p>
     if(error) return <p></p>
+
+    console.log(data);
 
     return(
         <section className='contacts-block' style={commonStyle}>
@@ -65,18 +89,18 @@ function ContactsBlock ({commonStyle}) {
                     </div>
 
                     <div className='footer-site-info'>
-                        <SiteInfoItem href={`mailto:${data.homePage.data.attributes.EMail}`} target={"_blank"} firstText={'пошта'} secondText={data.homePage.data.attributes.EMail}/>
-                        <SiteInfoItem href={`tel:${data.homePage.data.attributes.TelephoneNumber}`} target={"_blank"} firstText={'телефон'} secondText={data.homePage.data.attributes.TelephoneNumber}/>
+                        <SiteInfoItem href={`mailto:${data.footer.data.attributes.Email}`} target={"_blank"} firstText={'пошта'} secondText={data.footer.data.attributes.Email}/>
+                        <SiteInfoItem href={`tel:${data.footer.data.attributes.TelephoneNumber}`} target={"_blank"} firstText={'телефон'} secondText={data.footer.data.attributes.TelephoneNumber}/>
                         <SiteInfoItem 
-                            href={data.homePage.data.attributes.AdressLink}                            
+                            href={data.footer.data.attributes.AdressLink}                            
                             target={"_blank"}
                             rel="noreferrer"
                             firstText={'адреса'} 
-                            secondText={data.homePage.data.attributes.Adress}/>
+                            secondText={data.footer.data.attributes.Adress}/>
                         <div className='footer-map'>
                             <img src={mapIcon} alt="Map Icon"></img>
                             <a 
-                                href={data.homePage.data.attributes.AdressLink}                                
+                                href={data.footer.data.attributes.AdressLink}                                
                                 target="_blank"
                                 rel="noreferrer"
                             >{t('google_map_text')}</a>
@@ -95,28 +119,57 @@ function ContactsBlock ({commonStyle}) {
                     </svg>
                 </div>
 
+                <div className='contacts-border'></div>
+
                 <div className='contacts-second-block'>
                     <span className='contacts-second-block-title'>{t('fill_fields')}</span>
-                    <form>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <span>{t('name_form')}</span>
-                        <input 
+                        
+                        <input className={classnames({ 'has-error': errors.name })}
+                            {...register("name", 
+                                {required: t('validation_message_default'), 
+                                 pattern:{
+                                    value: /^[a-zA-Zа-яА-ЯЁё ,.'-]{3,}$/,
+                                    message: t('validation_message_default'),
+                                }
+                            })}
+                            type="text"
                             placeholder='Георгій'                              
-                            onChange={(e) => setName(e.target.value)}/>
+                            onBlur={(e) => {
+                                setName(e.target.value);
+                            }}
+                        />
+                        <p className={classnames({ 'has-error': errors.name })}>{t('validation_message_name')}</p>
+
                         <span>E-mail</span>
-                        <input 
+                        <input className={classnames({ 'has-error': errors.email})}
+                            {...register("email", 
+                            {required: t('validation_message_email'), 
+                            pattern:{
+                                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                message: t('validation_message_email'),
+                            }
+                            })}
                             placeholder='example@mail.com'
-                            onChange={(e) => setEmail(e.target.value)}/>
+                            onBlur={(e) => {
+                                setEmail(e.target.value);
+                            }}
+                        />
+                        <p className={classnames({ 'has-error': errors.email})}>{t('validation_message_email')}</p>
+
                         <span>{t('phone_form')}</span>
                         <PhoneInput
                             country="ua"
-                            masks={{ua: '(..) ...-..-..'}}
+                            masks={{ ua: '(..) ...-..-..' }}
                             disableCountryCode={false}
                             alwaysDefaultMask={false}
-                            
-                            inputClass='phone-input'
+                            inputClass={classnames('phone-input', { 'has-error': phoneError })}
                             countryCodeEditable={false}
-                            onChange={(value) => setPhone(value)}
+                            value={phone} 
+                            onChange={handlePhoneChange}
                         />
+                        <p className={classnames({ 'has-error': phoneError })}>{t('validation_message_phone')}</p>
                         <button className='form-button'><span>{t('send_form')}</span></button>
                     </form>
                 </div>

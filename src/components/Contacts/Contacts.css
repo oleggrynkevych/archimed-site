@@ -5,13 +5,21 @@
     display: none;
 }
 
+.contacts-page .contacts-block-container{
+    min-height: calc(100vh - 64px);;
+    align-items: center;
+}
+
 .contacts-page .contacts-first-block span:nth-child(2){
     margin-top: 40px;
 }
 
-.contacts-page .contacts-first-block{
-    border-right: 1px solid rgba(222, 224, 226, 1) !important;
-    ;
+.contacts-page .contacts-border{
+    background-color: rgba(222, 224, 226, 1);
+}
+
+.contacts-page form {
+    margin-top: 39px;
 }
 
 .contacts-page input {
@@ -45,6 +53,10 @@
 .contacts-page .form-button {
     background-color: transparent;
     margin-bottom: 56px;
+}
+
+.contacts-page .contacts-second-block{
+    margin-top: 97px;
 }
 
 .contacts-page .footer-site-info {
@@ -85,6 +97,10 @@
 
 @media (max-width: 800px) {
     .contacts-page .contacts-block-for-mobile {
+        display: none;
+    }
+
+    .contacts-border{
         display: none;
     }
 

@@ -8,6 +8,7 @@
 .services-block-container{
     width: 100%;
     height: auto;
+    min-height: 100vh;
     box-sizing: border-box;
     max-width: 1200px;
     margin: auto 120px;

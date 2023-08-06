@@ -16,11 +16,16 @@
     font-family: 'Inter';
 }
 
+.contacts-border {
+  height: 100%;
+  width: 1px;
+  background-color: rgba(245, 245, 245, 0.1);
+}
+
 .contacts-first-block {
     display: flex;
     flex-direction: column;
-    width: 60%;
-    border-right: 1px solid rgba(245, 245, 245, 0.1);
+    width: 59%;
     position: relative;
 }
 
@@ -163,9 +168,30 @@
     height: 57px;
     background: #1C3849;
     border: none;
-    margin-bottom: 24px;
+    margin-bottom: 4px;
     color: #F5F5F5;
     padding-left: 16px;
+    border: 1px solid transparent;
+  }
+
+  input.has-error {
+    border: 1px solid red;
+  }
+
+  form p {
+    color: #F17E7E;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    margin: 0 0 24px 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  form p.has-error {
+    opacity: 1;
   }
 
   input::placeholder{
@@ -186,17 +212,27 @@
     width: 441px !important;
     height: 57px !important;
     background: #1C3849 !important;
-    border: none !important;
+    border: 1px solid transparent !important;
     margin-bottom: 24px !important;
     color: #F5F5F5 !important;
     padding-left: 54px !important;
     border-radius: 0px !important;
   }
 
+  .phone-input.has-error{
+    border: 1px solid red;
+  }
+
+  .react-tel-input{
+    margin-bottom: 4px;
+  }
+
   .flag-dropdown{
     background: #1C3849 !important;
     border: none !important;
     margin-left: 12px !important;
+    top: 9px;
+    height: 90%;
   }
 
   .open,
@@ -220,7 +256,7 @@
     border-radius: 100px;
     border: 1px solid #DEE0E2;
     color: #1C3849 ;
-    margin-top: 75px;
+    margin-top: 50px;
     position: relative;
     cursor: pointer;
     overflow: hidden;
@@ -233,7 +269,7 @@
     font-size: 16px !important;
     margin-bottom: 0 !important;
     position: relative !important;
-    z-index: 3;
+    z-index: 1;
   }
 
   .form-button::after{
