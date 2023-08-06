@@ -4,7 +4,7 @@ function SliderTeamMember (props) {
     return(
         <div className='slider-team-member'>
             <div className='slider-team-member-photo'>
-                <img src={`http://localhost:1337${props.src}`} alt='Team Member'/>
+                <img src={props.src} alt='Team Member'/>
             </div>
             <div className='slider-team-member-content'>
                 <div className='member-content-container'>

@@ -8,7 +8,7 @@ import Contacts from '../components/Contacts/Contacts';
 import PrivacyPolicy from '../components/Privacy Policy/PrivacyPolicy';
 import Footer from '../components/Footer/Footer';
 import ServicePage from '../components/Services/ServicePage';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate, Redirect } from 'react-router-dom';
 import classnames from 'classnames';
 import ScrollToTopOnPageChange from './ScrollToTopOnPageChange.js';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +20,12 @@ function AppContent() {
     const navigate = useNavigate();
     const location = useLocation();
     const isContactsPath = location.pathname === '/contacts';
+
+    if (!location.pathname.includes("/en") && 
+        !location.pathname.includes("/ru") && 
+        !location.pathname.includes("/ua")) {
+      window.location.href = "/ua"; 
+    } 
   
     const marginClass = 'margin-class';
     const marginSpecialClass = 'margin-special-class';
@@ -36,12 +42,13 @@ function AppContent() {
           <ScrollToTopOnPageChange/>
             <div className={containerClassName}>
               <Routes>
-              <Route path='/:lang/' element={<Home />} />
-              <Route path='/:lang/services' element={<Services />} />
-              <Route path='/:lang/contacts' element={<Contacts />} />
-              <Route path='/:lang/about' element={<About />} />
-              <Route path='/:lang/services/:id' element={<ServicePage />} />
-              <Route path='/:lang/privacypolicy' element={<PrivacyPolicy />} />
+
+                <Route path='/:lang/' element={<Home />} />
+                <Route path='/:lang/services' element={<Services />} />
+                <Route path='/:lang/contacts' element={<Contacts />} />
+                <Route path='/:lang/about' element={<About />} />
+                <Route path='/:lang/services/:id' element={<ServicePage />} />
+                <Route path='/:lang/privacypolicy' element={<PrivacyPolicy />} />
               </Routes>
             </div>
           <Footer isSpecial={isContactsPath}/>

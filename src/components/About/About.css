@@ -99,6 +99,10 @@
     position: relative;
 }
 
+.about-page-main a{
+    color: #F5F5F5;
+}
+
 .small-container-main {
     display: flex;
     justify-content: space-between;

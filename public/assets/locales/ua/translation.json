@@ -9,8 +9,9 @@
 
     "title": "АРХІМЕД — ВАШ ТОРГОВИЙ ПРЕДСТАВНИК В УКРАЇНІ",
 
+    "services_title": "НАДАЄМО 10 ПОСЛУГ, ЩО ЗАКРИВАЮТЬ 450+ ЗАДАЧ",
     "services_subtitle": "наші послуги",
-    "learn_more": "узнать больше",
+    "learn_more": "дізнатись більше",
 
     "partners_text": "нам довіряють",
     "inter_companies": "31 МІЖНАРОДНА КОМПАНІЯ",
@@ -28,6 +29,9 @@
     "phone_form": "Телефон",
     "send_form": "надіслати",
     "plan": "Запланувати",
+    "validation_message_name": "Заповніть поле",
+    "validation_message_email": "Заповніть поле коректно",
+    "validation_message_phone": "Невірно набраний номер",
 
     "footer-title": "Архімед — ваш торговий представник",
     "nav": "Навігація",
@@ -37,7 +41,8 @@
     "vacancies": "Вакансії",
     "post": "Пошта",
     "adress": "Адреса",
-    "phone": "Телефон"
+    "phone": "Телефон",
+    "privacy_policy": "Політика конфідеційності"
 
 
 

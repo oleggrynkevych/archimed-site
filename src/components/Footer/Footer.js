@@ -10,16 +10,15 @@ import { useTranslation } from 'react-i18next';
 
 
 const INFO = gql`
-    query GetHomePage ($locale: I18NLocaleCode) {
-        homePage (locale: $locale) {
+    query GetFooter ($locale: I18NLocaleCode) {
+        footer (locale: $locale) {
             data {
                 attributes {
-                    EMail,
+                    Email,
                     TelephoneNumber,
                     Adress,
                     AdressLink, 
                     SocialMedia,
-                    PrivacyPolicy
                 }
             }
         }
@@ -55,18 +54,18 @@ function Footer ({ isSpecial }) {
                 </div>
                 <div className='footer-main'>
                     <div className='footer-site-info'>
-                        <SiteInfoItem href={`mailto:${data.homePage.data.attributes.EMail}`} target={"_blank"} rel={"noopener"} firstText={t('post')} secondText={data.homePage.data.attributes.EMail}/>
-                        <SiteInfoItem href={`tel:${data.homePage.data.attributes.TelephoneNumber}`} target={"_blank"} rel={"noopener"} firstText={t('phone')} secondText={data.homePage.data.attributes.TelephoneNumber}/>
+                        <SiteInfoItem href={`mailto:${data.footer.data.attributes.Email}`} target={"_blank"} rel={"noopener"} firstText={t('post')} secondText={data.footer.data.attributes.Email}/>
+                        <SiteInfoItem href={`tel:${data.footer.data.attributes.TelephoneNumber}`} target={"_blank"} rel={"noopener"} firstText={t('phone')} secondText={data.footer.data.attributes.TelephoneNumber}/>
                         <SiteInfoItem 
-                            href={data.homePage.data.attributes.AdressLink} 
+                            href={data.footer.data.attributes.AdressLink} 
                             target={"_blank"}
                             rel={"noopener"}
                             firstText={t('adress')} 
-                            secondText={data.homePage.data.attributes.Adress}/>
+                            secondText={data.footer.data.attributes.Adress}/>
                         <div className='footer-map'>
                             <img src={mapIcon} alt="Map Icon"></img>
                             <a 
-                                href={data.homePage.data.attributes.AdressLink}
+                                href={data.footer.data.attributes.AdressLink}
                                 target="_blank"
                                 rel="noreferrer"
                             >{t('google_map_text')}</a>
@@ -94,14 +93,14 @@ function Footer ({ isSpecial }) {
                         </div>
                         <div className='footer-socmedia'>
                             <span className='footer-subtitle'>{t('social')}</span>
-                            <div dangerouslySetInnerHTML={{ __html: decodeURI(data.homePage.data.attributes.SocialMedia) }} />
+                            <div dangerouslySetInnerHTML={{ __html: decodeURI(data.footer.data.attributes.SocialMedia) }} />
                         </div>
                     </div>
                 </div>
 
                 <div className='footer-bottom'>
                     <span>{t('rights')}</span>
-                    <Link to='/privacypolicy'>{data.homePage.data.attributes.PrivacyPolicy} </Link>
+                    <Link to={`/${i18n.language}/privacypolicy`}>{t('privacy_policy')}</Link>
                 </div>
                 <div></div>
             </div>

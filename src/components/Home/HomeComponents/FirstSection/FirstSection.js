@@ -36,7 +36,7 @@ const FirstSection = function ({ scrollToNextComponent }) {
 
     if(loading) return <p></p>
     if(error) return <p></p>
-    console.log(data);
+    
     return(
         <section className='first-section'>
             <div className='first-3d' style={{width:'100%', height:'100%', top:'64px', left:'0', overflow: 'visible'}}>

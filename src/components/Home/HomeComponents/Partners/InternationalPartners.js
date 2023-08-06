@@ -29,7 +29,7 @@ function InternationalPartners () {
   if(error) return <p></p>
 
   const photoData = data.homePage.data.attributes.LogosInternationalPartners.data;
-  const photoURLs = photoData.map(photo => `http://localhost:1337${photo.attributes.url}`);
+  const photoURLs = photoData.map(photo => photo.attributes.url);
 
   while (photoURLs.length < 12) {
     photoURLs.push(...photoURLs);

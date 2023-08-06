@@ -42,6 +42,7 @@
     left: 0;
     padding-top: 30px;
     padding-left: 4.5%;
+    z-index: 10;
 }
 
 .modal-content-header img {
