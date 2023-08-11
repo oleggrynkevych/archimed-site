@@ -1,0 +1,251 @@
+.search-page{
+    width: 100%;
+    height: auto;
+    min-height: calc(100vh - 64px);
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    color: #042336;
+}
+
+.search-page.empty {
+    align-items: center;
+    margin-top: -64px;
+    min-height: 100vh;
+}
+
+.search-page-container {
+    width: 90%;
+    height: 100%;
+    max-width: 1200px;
+    margin: 60px 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.search-page-input{
+    width: 90%;
+    max-width: 556px;
+    height: 66px;
+    padding: 0 16px;
+    background-color: #E9EBEC;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-page-input div {
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.search-page-input input{
+    width: 85%;
+    background-color: transparent;
+    font-family: NAMU;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    margin: 0;
+}
+
+.search-page-input > div > input{
+    color: #042336;
+}
+
+.search-page-input > div > input:focus {
+    font-family: NAMU;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    color: #042336;
+}
+
+.search-result-text{
+    width: 90%;
+    max-width: 588px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.search-result-text h2 {
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    margin: 24px 0 0 0;
+    word-break: break-all;
+}
+
+.search-result-text span {
+    margin-left: -6px;
+    font-family: NAMU;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 115%;
+}
+
+.search-results{
+    width: 90%;
+    max-width: 588px;
+    margin-top: 64px;
+}
+
+.search-item{
+    height: 172px;
+    display: flex;
+    flex-direction: column;
+    color: #042336;
+    border-top: 1px solid rgba(4, 35, 54, 0.1);;
+    cursor: pointer;
+}
+
+.search-item:hover{
+    color: #3693C8;
+}
+
+.search-item span {
+    margin-top: 24px;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; 
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+.search-item h3 {
+    margin: 0;
+    font-family: NAMU;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 115%; 
+}
+
+.search-item p {
+    width: 90%;
+    height: 40%;
+    margin: 12px 0 0 0;
+    overflow-wrap: break-word;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.search-no-results{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.search-no-results button {
+    width: 180px;
+    height: 52px;
+    border-radius: 1000px;
+    border: 1px solid #042336;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.4s easy;
+    position: relative;
+}
+
+.search-no-results span {
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    color: #042336;
+    position: relative;
+    z-index: 2;
+}
+
+.search-no-results button:hover span{
+    color:#F5F5F5;
+}
+
+.search-no-results button::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #042336;
+    border-radius: 1000px;
+    z-index: 1;
+    transition: transform 0.5s;
+    transform: translateX(100%);
+}
+
+.search-no-results button:hover::before{
+    transform: translateX(0);
+}
+
+@media (max-width: 920px) {
+    .search-page-input div{
+        width: 100%;
+    }
+    
+    .search-page-input input{
+        width: 95%;
+    }
+
+    .search-page.empty {
+        align-items: start;
+        margin-top: -64px;
+        min-height: 100vh;
+        padding-top: 40px;
+    }
+
+    .search-no-results a {
+        width: calc(50% - 4px);
+    }
+
+    .search-no-results button {
+        width: 100%;
+    }
+
+    .search-page-container{
+        margin: 52px 0;
+    }
+
+    .search-result-text {
+        width: 100%;
+    }
+
+    .search-results {
+        width: 100%;
+    }
+
+    .search-item p {
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 500px) {
+    .search-item{
+        height: 202px;
+    }
+}
+
+@media (max-width: 390px) {
+    .search-item{
+        height: 232px;
+    }
+}
+

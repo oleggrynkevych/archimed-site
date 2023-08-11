@@ -7,7 +7,7 @@ const LOGOSEMB = gql`
     homePage {
       data {
         attributes{
-            LogosEmbassies{
+            LogosEmbassies (pagination: { start: 0, limit: 12 }){
             data{
               attributes{
                 url
@@ -21,7 +21,6 @@ const LOGOSEMB = gql`
 `
 
 function EmbassiesPartners () {
-  let firstSlideTime = '16s';
 
   const {loading, error, data} = useQuery(LOGOSEMB);
 
@@ -38,7 +37,7 @@ function EmbassiesPartners () {
   const newPhotos = photoURLs.slice(0, 12);
 
 
-  return (<div className='logos-slide' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
+  return (<div className='logos-slide'>
     {newPhotos.map((url, index) => (
         <Logo key={index} src={url} />
       ))}

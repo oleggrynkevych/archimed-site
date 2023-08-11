@@ -1,7 +1,7 @@
 import './App.css';
 import {  BrowserRouter } from 'react-router-dom';
-import React, { Suspense, useEffect } from 'react';
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import React, { Suspense, useEffect, useState } from 'react';
+import {ApolloClient, InMemoryCache, ApolloProvider, HttpLink, gql, useMutation} from '@apollo/client';
 import AppContent from './AppContent/AppContent';
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -10,7 +10,10 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from "i18next";
 import i18next from 'i18next';
 
-
+const client = new ApolloClient({
+  uri: 'https://strapi-app-urd2.onrender.com/graphql',
+  cache: new InMemoryCache()
+})
 
 i18n
   .use(initReactI18next) 
@@ -33,13 +36,7 @@ const loadingMarkup = (
   <div></div>
 )
 
-
 function App() {
-  const client = new ApolloClient({
-    uri: 'https://strapi-app-urd2.onrender.com/graphql',
-    cache: new InMemoryCache()
-  })
-
   return (
     <BrowserRouter>
       <ApolloProvider client={client}>

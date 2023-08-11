@@ -164,7 +164,6 @@ function ServicePage() {
 
     useEffect(() => {
         const currentPath = location.pathname;
-        console.log(currentPath)
        
         if (nextServiceId) {
             const pathSegments = currentPath.split('/');
@@ -183,7 +182,6 @@ function ServicePage() {
     
     if(loading || additionalMaterialsLoading ) return <p></p>
     if(error || additionalMaterialsError ) return <p></p>
-    console.log(data);
 
     const orderSercive = data.service.data.attributes.Order;
     const hasMatchingMaterials = additionalMaterialsData && additionalMaterialsData.additionalMaterials.data.some(material => orderSercive === material.attributes.WhichService);
@@ -251,7 +249,7 @@ function ServicePage() {
                     {additionalMaterialsData.additionalMaterials.data.map((material) => 
                         orderSercive == material.attributes.WhichService ? (
                             <MaterialItem
-                                onClick={() => handleMaterialItemClick(material)}                                key={material.id}
+                                onClick={() => handleMaterialItemClick(material)} key={material.id}
                                 title={material.attributes.Title}
                                 text={material.attributes.Description}
                             />

@@ -33,6 +33,10 @@
     width: 110px;
 }
 
+.search-icon {
+    cursor: pointer;
+}
+
 .nav ul{
     display: flex;
     flex-direction: row;
@@ -214,6 +218,154 @@
     display:none;
 }
 
+.search-input{
+    height: calc(100vh - 64px);
+    width: 100vw;
+    background-color: rgba(28, 56, 73, 0.2);
+    position: fixed;
+    z-index: 900;
+    top: 65px;
+    left: 0;
+    transition: 0.7s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.search-input.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.search-input-container{
+    height: 64px;
+    width: 100%;
+    padding-top: 4px;
+    background-color: #F5F5F5;
+    transform: translateY(-100%);
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-input-container.active {
+    transform: translateY(0%);
+}
+
+.input-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-container input{
+    width: 80%;
+    background-color: transparent;
+    padding-left: 0;
+    font-family: NAMU;
+    font-size: 30px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #042336;
+}
+
+.search-input-container > .input-container > input{
+    color: #042336;
+}
+
+.search-input-container > .input-container > input:focus {
+    font-family: NAMU;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #042336;
+}
+
+.input-container input::placeholder {
+    font-family: NAMU;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #042336;
+    opacity: 0.1;
+    padding-left: 5px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none
+  }
+  
+
+  .search-button {
+    height: 38px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 1000px;
+    border: 1px solid #000;
+    font-size: 14px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.4s easy;
+    position: relative;
+}
+
+.search-button span {
+    color:#042336;
+    z-index: 2;
+}
+
+.search-button:hover span{
+    color:#F5F5F5;
+}
+
+.search-button::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #042336;
+    border-radius: 1000px;
+    z-index: 1;
+    transition: transform 0.5s;
+    transform: translateX(100%);
+}
+
+.search-button:hover::before{
+    transform: translateX(0);
+}
+
+.search-close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color:#042336;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.search-close-icon {
+    display: none;
+}
+
+.header-icons{
+    display: none;
+}
+
 @media (max-width: 920px) {
     .container{
         height: 56px;
@@ -239,10 +391,12 @@
 
     .menu-icon{
         display: block;
+        margin-left: 16px;
     }
 
     .close-icon{
         display: none;
+        margin-left: 16px;
     }
 
     .menu-icon.active{
@@ -259,6 +413,11 @@
 
     .close-icon.inactive{
         display: none;
+    }
+
+    .header-icons {
+        display: flex;
+        flex-direction: row;
     }
 
     .nav.active{
@@ -320,4 +479,38 @@
         height: auto;
         background-color: #F5F5F5;
     }
+
+    .search-button{
+        display: none;
+    }
+
+    .search-close-button {
+        display: none;
+    }
+
+    .input-container{
+        width: 95%;
+        height: 100%;
+    }
+
+    .input-container input{
+        margin: 0;
+        height: 90%;
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+    }
+
+    .input-container input::placeholder{
+        font-size: 24px;
+    }
+
+    .search-input-container > .input-container > input:focus {
+        font-size: 24px;
+    }
+
+    .search-close-icon {
+        display: block;
+    }
+
 }

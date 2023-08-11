@@ -100,6 +100,10 @@
         display: none;
     }
 
+    .contacts-page .contacts-second-block {
+        margin-top: 32px;
+    }
+
     .contacts-border{
         display: none;
     }
@@ -134,13 +138,14 @@
     }
 
     .contacts-page .contacts-block-container {
-        height: 950px;
+        height: 1100px;
         justify-content: flex-start;
     }
 
     .contacts-page .footer-site-info {
         position: absolute;
-        top: 595px;
+        top: 750px;
+        width: 100%;
     }
 
     .contacts-page .contacts-first-block span:nth-child(1) {

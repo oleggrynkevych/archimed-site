@@ -220,7 +220,7 @@
   }
 
   .phone-input.has-error{
-    border: 1px solid red;
+    border: 1px solid red !important;
   }
 
   .react-tel-input{
@@ -233,6 +233,10 @@
     margin-left: 12px !important;
     top: 9px;
     height: 90%;
+  }
+
+  .react-tel-input .flag-dropdown {
+    top: 2px !important;
   }
 
   .open,
@@ -324,6 +328,10 @@
 
   .contacts-block .footer-site-info {
     display: none;
+  }
+
+  .contacts-block .footer-site-info a{
+    width: 100%;;
   }
 
   @media (max-width: 1200px){
@@ -426,7 +434,7 @@
         justify-content: center;
         align-items: center;
         position: absolute;
-        top: 715px;
+        top: 795px;
     }
 
     .contacts-block-for-mobile span:nth-child(1){

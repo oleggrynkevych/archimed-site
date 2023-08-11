@@ -219,6 +219,7 @@ a {
 @media (max-width: 900px) {
     .services-block-container {
         margin: auto 16px;
+        justify-content: start;
     }
 
     .service-item-info {

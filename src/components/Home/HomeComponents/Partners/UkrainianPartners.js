@@ -7,7 +7,7 @@ const LOGOSUKR = gql`
     homePage {
       data {
         attributes{
-            LogosUkrainianPartners{
+            LogosUkrainianPartners (pagination: { start: 0, limit: 12 }){
             data{
               attributes{
                 url
@@ -21,7 +21,6 @@ const LOGOSUKR = gql`
 `
 
 function UkrainianPartners () {
-  let firstSlideTime = '16s';
 
   const {loading, error, data} = useQuery(LOGOSUKR);
 
@@ -38,7 +37,7 @@ function UkrainianPartners () {
   const newPhotos = photoURLs.slice(0, 12);
 
 
-  return (<div className='logos-slide' style={{ animation: `${firstSlideTime} slide-reverse infinite linear` }}>
+  return (<div className='logos-slide' >
     {newPhotos.map((url, index) => (
         <Logo key={index} src={url} />
       ))}

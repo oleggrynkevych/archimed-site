@@ -12,22 +12,26 @@ import classNames from 'classnames';
 import {dataNav} from './header-data.js';
 import DropdownItem from './DropdownItem.js';
 import CustomLink from './CustomLink.js';
+import SearchInput from './SearchInput';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 import cookies from 'js-cookie';
 import { languages } from '../../languages';
 
-
-
-
 function Header ({ i18n, navigate }) {
-   
+
+    const [open, setOpen] = useState(false);
+    const [openMenu, setOpenMenu] = useState(false);
+    const [searchInputActive, setSearchInputActive] = useState(false);
+    
     const { t } = useTranslation();
     const scrollDirection = useScrollDirection();
 
     const secondNavItem = useRef();
+    const inputRef = useRef();
     const location = useLocation();
-    const isActiveServicePage = location.pathname.startsWith('/services/');
+    const isActiveServicePage = location.pathname.startsWith(`/${i18n.language}/services/`);
+    const isActiveServices = location.pathname.startsWith(`/${i18n.language}/services`);
 
     const currentLanguageCode = cookies.get('i18next') || 'ua';
     const currentLanguage = languages.find(l => l.code === currentLanguageCode);
@@ -42,10 +46,13 @@ function Header ({ i18n, navigate }) {
       const currentPath = location.pathname;
       const newPath = `/${code}${currentPath.substring(3)}`;
       navigate(newPath);
+      setOpenMenu(!openMenu);
     };
 
     useEffect(() => {
       if (isActiveServicePage) {
+        secondNavItem.current.classList.add('active');
+      } else if (isActiveServices){
         secondNavItem.current.classList.add('active');
       } else {
         secondNavItem.current.classList.remove('active');
@@ -57,10 +64,6 @@ function Header ({ i18n, navigate }) {
         }
       };
     }, [isActiveServicePage]);
-    
-
-    const [open, setOpen] = useState(false);
-    const [openMenu, setOpenMenu] = useState(false);
 
     const handleLinkClick = () => {
       setOpenMenu(!openMenu);
@@ -70,7 +73,31 @@ function Header ({ i18n, navigate }) {
       setOpen(!open);
     };
 
+    const handleSearchClick = () => {
+      setSearchInputActive(!searchInputActive);
+      inputRef.current.value = '';
+    };
+
+    const handleSearchClickClose = () => {
+      if(searchInputActive) {
+        setSearchInputActive(false);
+        inputRef.current.value = '';
+      }
+    };
+
     let dropdownRef = useRef();
+
+    useEffect(() => {
+      if (searchInputActive) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'unset';
+      }
+  
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+  }, [searchInputActive]);
 
     useEffect(() => {
         let handler = (e) => {
@@ -112,7 +139,7 @@ function Header ({ i18n, navigate }) {
       });
 
     return (
-      <header className={`header ${ scrollDirection === "down" ? "hide" : "show"}`}>
+      <header className={`header ${ scrollDirection === "down" ? "hide" : "show"}`} onClick={handleSearchClickClose}>
         <div className="header-container">
           <Link to={`/${i18n.language}/`}>
             <div className="logo-wrapper">
@@ -133,15 +160,15 @@ function Header ({ i18n, navigate }) {
         ))}
         </ul>
           <div className="language-switch">
-            <span>UA</span>
+            <span onClick={() => handleLanguageChange('ua')}>UA</span>
             <div className="line"></div>
-            <span>EN</span>
+            <span onClick={() => handleLanguageChange('en')}>EN</span>
             <div className="line"></div>
-            <span>RU</span>
+            <span onClick={() => handleLanguageChange('ru')}>RU</span>
           </div>
         </nav>
         <div className="right-menu">
-          <img src={searchIcon} alt="Search Icon" />
+          <img className='search-icon' src={searchIcon} alt="Search Icon" onClick={handleSearchClick}/>
           <div className="dropdown-container" ref={dropdownRef}>
             <div
               className={dropdownTriggerClass}
@@ -167,19 +194,24 @@ function Header ({ i18n, navigate }) {
             </div>
           </div>
         </div>
-        <img
-          className={menuIconClass}
-          src={menuIcon}
-          alt="Menu Icon"
-          onClick={handleLinkClick}
-        ></img>
-        <img
-          className={closeIconClass}
-          src={closeIcon}
-          alt="Close Icon"
-          onClick={handleLinkClick}
-        ></img>
+        <div className='header-icons'>
+            <img className='search-icon' src={searchIcon} alt="Search Icon" onClick={handleSearchClick}/>
+            <img
+              className={menuIconClass}
+              src={menuIcon}
+              alt="Menu Icon"
+              onClick={handleLinkClick}
+            ></img>
+            <img
+              className={closeIconClass}
+              src={closeIcon}
+              alt="Close Icon"
+              onClick={handleLinkClick}
+            ></img>
+        </div>
       </div>
+
+      <SearchInput ref={inputRef} active={searchInputActive} setActive={setSearchInputActive}/>
     </header>
     )
 }

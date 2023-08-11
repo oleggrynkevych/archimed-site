@@ -80,6 +80,10 @@
     border-radius: 10000px;
 }
 
+.logo-company img {
+    max-width: 80%;
+}
+
 @keyframes slide {
     from {
         transform: translateX(0);
@@ -141,4 +145,9 @@
         top: 756px;
         left: 4%;
     }
+
+    .logo-company img {
+        max-width: 90%;
+    }
+    
 }

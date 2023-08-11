@@ -7,6 +7,8 @@ import EmbassiesPartners from './EmbassiesPartners';
 import { useTranslation } from 'react-i18next';
 
 function Partners () {
+    let firstSlideTime = '20s';
+
     const { t } = useTranslation();
     const sectionRef = useRef(null);
     const [scrollTransform, setScrollTransform] = useState({ scale: 0.9, translateY: '150px' });
@@ -47,20 +49,39 @@ function Partners () {
                     <h5>{t('inter_companies')}</h5>
                     <h5>{t('ua_companies')}</h5>
                     <h5>{t('embassies')}</h5>
-                    <div className='logos'>
-                        <InternationalPartners/>
-                        <InternationalPartners/>
+                    <div style={{display: 'flex'}}>
+                        <div className='logos' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
+                            <InternationalPartners/>
+                            <InternationalPartners/>
+                        </div>
+                        <div className='logos' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
+                            <InternationalPartners/>
+                            <InternationalPartners/>
+                        </div>
                     </div>
 
-                    <div className='logos reverse'>
-                        <UkrainianPartners/>
-                        <UkrainianPartners/>
+                    <div style={{display: 'flex'}}>
+                        <div className='logos reverse' style={{ animation: `${firstSlideTime} slide-reverse infinite linear` }}>
+                            <UkrainianPartners/>
+                            <UkrainianPartners/>
+                        </div>
+                        <div className='logos reverse' style={{ animation: `${firstSlideTime} slide-reverse infinite linear` }}>
+                            <UkrainianPartners/>
+                            <UkrainianPartners/>
+                        </div>
                     </div>
 
-                    <div className='logos'>
-                        <EmbassiesPartners/>
-                        <EmbassiesPartners/>
+                    <div style={{display: 'flex'}}>
+                        <div className='logos' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
+                            <EmbassiesPartners/>
+                            <EmbassiesPartners/>
+                        </div>
+                        <div className='logos' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
+                            <EmbassiesPartners/>
+                            <EmbassiesPartners/>
+                        </div>
                     </div>
+
                 </div>
             </section>
         )

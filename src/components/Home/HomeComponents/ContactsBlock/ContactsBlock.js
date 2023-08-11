@@ -1,10 +1,10 @@
 import './ContactsBlock.css';
 import videoLogo from '../../../../images/video-logo.svg';
 import mapIcon from '../../../../images/map-icon-color.svg';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql, useMutation } from '@apollo/client';
 import SiteInfoItem from './SiteInfoItem.js';
 import VideoItem from './VideoItem';
 import { useTranslation } from 'react-i18next';
@@ -27,19 +27,43 @@ const INFO = gql`
     }
 `
 
+export const CREATE_REQUEST = gql`
+mutation CreateRequest($input: RequestInput!) {
+    createRequest(input: $input) {
+      data {
+        id
+        attributes {
+          Name
+          Email
+          Telephone
+        }
+      }
+    }
+  }
+`;
+
+const LOGIN_MUTATION = gql`
+  mutation Login($input: UsersPermissionsLoginInput!) {
+    login(input: $input) {
+      jwt
+    }
+  }
+`;
+
 
 function ContactsBlock ({commonStyle}) {
+    const [authToken, setAuthToken] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [phoneError, setPhoneError] = useState(false);
+
     const { t, i18n } = useTranslation();
     const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
 
     const {loading, error, data} = useQuery(INFO, {
         variables: { locale: locale }
     });
-
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [phoneError, setPhoneError] = useState(false);
 
     const {handleSubmit, register, formState: {errors}} = useForm();
 
@@ -58,12 +82,60 @@ function ContactsBlock ({commonStyle}) {
         validatePhone(value);
     };
 
-    const onSubmit = values => console.log(values);
+    const [login] = useMutation(LOGIN_MUTATION);
+    const [createRequest] = useMutation(CREATE_REQUEST);
+
+    useEffect(() => {
+        const loginUser = async () => {
+          try {
+            const { data } = await login({
+              variables: {
+                input: {
+                  identifier: 'ArchimedAdmin',
+                  password: 'ArchimedSite2023',
+                },
+              },
+            });
+      
+            const token = data.login.jwt;
+            setAuthToken(token);
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        };
+      
+        loginUser();
+    }, []);
+      
+
+    const onSubmit = async (formData) => {
+        try {
+            const { data } = await createRequest({
+                variables: {
+                  input: {
+                    data: {
+                      Name: formData.name,
+                      EMail: formData.email,
+                      Telephone: phone
+                    },
+                  },
+                },
+                context: {
+                  headers: {
+                    authorization: authToken ? `Bearer ${authToken}` : '',
+                  },
+                },
+              });
+        
+            
+          }catch (error) {
+            console.log(formData.email);
+            console.error('Error:', error);
+        }
+    };
 
     if(loading) return <p></p>
     if(error) return <p></p>
-
-    console.log(data);
 
     return(
         <section className='contacts-block' style={commonStyle}>
@@ -170,7 +242,7 @@ function ContactsBlock ({commonStyle}) {
                             onChange={handlePhoneChange}
                         />
                         <p className={classnames({ 'has-error': phoneError })}>{t('validation_message_phone')}</p>
-                        <button className='form-button'><span>{t('send_form')}</span></button>
+                        <button className='form-button' type="submit" disabled={phoneError}><span>{t('send_form')}</span></button>
                     </form>
                 </div>
             </div>

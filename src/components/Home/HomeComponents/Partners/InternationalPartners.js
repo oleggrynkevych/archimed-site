@@ -7,7 +7,7 @@ const LOGOSINTER = gql`
     homePage {
       data {
         attributes{
-          LogosInternationalPartners{
+          LogosInternationalPartners (pagination: { start: 0, limit: 12 }){
             data{
               attributes{
                 url
@@ -21,7 +21,6 @@ const LOGOSINTER = gql`
 `
 
 function InternationalPartners () {
-  let firstSlideTime = '16s';
 
   const {loading, error, data} = useQuery(LOGOSINTER);
 
@@ -31,14 +30,16 @@ function InternationalPartners () {
   const photoData = data.homePage.data.attributes.LogosInternationalPartners.data;
   const photoURLs = photoData.map(photo => photo.attributes.url);
 
+
   while (photoURLs.length < 12) {
     photoURLs.push(...photoURLs);
   }
   
+  photoURLs.sort();
+
   const newPhotos = photoURLs.slice(0, 12);
 
-
-  return (<div className='logos-slide' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
+  return (<div className='logos-slide' >
     {newPhotos.map((url, index) => (
         <Logo key={index} src={url} />
       ))}

@@ -117,7 +117,11 @@ function About() {
                         <span className="about-page-main-first-text">{data.aboutPage.data.attributes.Text2}</span>
                         <div className="about-page-main-second-text">
                             <span>{data.aboutPage.data.attributes.Text3}</span>
-                            <a href={data.aboutPage.data.attributes.ButtonLink} target='_blank' rel='noopener'><div>{data.aboutPage.data.attributes.ButtonText}</div></a>
+                            <a href={data.aboutPage.data.attributes.ButtonLink} target='_blank' rel='noopener'>
+                                <div className='codecs-button'>
+                                    <h5>{data.aboutPage.data.attributes.ButtonText}</h5>
+                                </div>
+                            </a>
                         </div>
                         <div className="about-page-main-special">
                             <div className="about-page-special-first-text">
