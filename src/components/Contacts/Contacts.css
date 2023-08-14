@@ -22,6 +22,14 @@
     margin-top: 39px;
 }
 
+.contacts-page input:focus {
+    border: 1px solid rgba(4, 35, 54, 0.4);
+}
+
+.contacts-page .phone-input:focus {
+    border: 1px solid rgba(4, 35, 54, 0.4) !important;
+}
+
 .contacts-page input {
     background: #E9EBEC;
     color: #042336;
@@ -34,7 +42,7 @@
 .contacts-page .phone-input {
     background: #E9EBEC !important;
     color: #042336 !important;
-  }
+}
 
 .contacts-page .flag-dropdown{
     background: #E9EBEC !important;

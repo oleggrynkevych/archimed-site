@@ -200,6 +200,7 @@
 
   input:focus{
     outline: none;
+    border: 1px solid rgba(245, 245, 245, 0.2);
   }
 
   form span {
@@ -217,6 +218,10 @@
     color: #F5F5F5 !important;
     padding-left: 54px !important;
     border-radius: 0px !important;
+  }
+
+  .phone-input:focus {
+    border: 1px solid rgba(245, 245, 245, 0.2) !important;
   }
 
   .phone-input.has-error{

@@ -11,7 +11,6 @@ import { useTranslation } from 'react-i18next';
 import {useForm} from 'react-hook-form';
 import classnames from 'classnames';
 
-
 const INFO = gql`
     query GetFooter ($locale: I18NLocaleCode){
         footer (locale: $locale) {
@@ -28,14 +27,15 @@ const INFO = gql`
 `
 
 export const CREATE_REQUEST = gql`
-mutation CreateRequest($input: RequestInput!) {
-    createRequest(input: $input) {
+  mutation CreateRequest($data: RequestInput!) {
+    createRequest(data: $data) {
       data {
         id
         attributes {
           Name
-          Email
+          EMail
           Telephone
+          publishedAt
         }
       }
     }
@@ -53,6 +53,7 @@ const LOGIN_MUTATION = gql`
 
 function ContactsBlock ({commonStyle}) {
     const [authToken, setAuthToken] = useState('');
+    const [countryCode, setCountryCode] = useState('ua');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -77,9 +78,10 @@ function ContactsBlock ({commonStyle}) {
         }
     };
 
-    const handlePhoneChange = (value) => {
+    const handlePhoneChange = (value, country) => {
         setPhone(value);
         validatePhone(value);
+        setCountryCode(country.dialCode);
     };
 
     const [login] = useMutation(LOGIN_MUTATION);
@@ -108,16 +110,15 @@ function ContactsBlock ({commonStyle}) {
     }, []);
       
 
-    const onSubmit = async (formData) => {
+    const onSubmit = async (formData, e) => {
         try {
             const { data } = await createRequest({
                 variables: {
-                  input: {
-                    data: {
+                  data: {
                       Name: formData.name,
                       EMail: formData.email,
-                      Telephone: phone
-                    },
+                      Telephone: phone,
+                      publishedAt: new Date().toISOString(),
                   },
                 },
                 context: {
@@ -126,12 +127,13 @@ function ContactsBlock ({commonStyle}) {
                   },
                 },
               });
-        
-            
           }catch (error) {
-            console.log(formData.email);
-            console.error('Error:', error);
+            console.error('Error:', JSON.stringify(error));
         }
+
+        e.target.reset();
+        setPhone(countryCode);
+        setPhoneError(false);
     };
 
     if(loading) return <p></p>
@@ -232,7 +234,7 @@ function ContactsBlock ({commonStyle}) {
 
                         <span>{t('phone_form')}</span>
                         <PhoneInput
-                            country="ua"
+                            country={countryCode}
                             masks={{ ua: '(..) ...-..-..' }}
                             disableCountryCode={false}
                             alwaysDefaultMask={false}
@@ -242,7 +244,7 @@ function ContactsBlock ({commonStyle}) {
                             onChange={handlePhoneChange}
                         />
                         <p className={classnames({ 'has-error': phoneError })}>{t('validation_message_phone')}</p>
-                        <button className='form-button' type="submit" disabled={phoneError}><span>{t('send_form')}</span></button>
+                        <button className='form-button' type="submit" disabled={phoneError || phone == ''}><span>{t('send_form')}</span></button>
                     </form>
                 </div>
             </div>
