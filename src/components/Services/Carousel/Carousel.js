@@ -16,7 +16,8 @@ const SERVICES = gql`
                 attributes {
                     Title,
                     TextForCarouselItem,
-                    Order
+                    Order,
+                    slug
                 }
             }
         }
@@ -72,7 +73,7 @@ function Carousel (props) {
       variables: { locale: locale }
     });
     
-    const idFromUrl = props.id;
+    const slugFromUrl = props.slug;
 
     if(loading) return <p></p>
     if(error) return <p></p>
@@ -87,12 +88,12 @@ function Carousel (props) {
               <h5>{props.textTitle}</h5>
               <Slider {...settings}>
               {sortedData.map(service =>
-                service.id !== idFromUrl ? (
+                service.attributes.slug !== slugFromUrl ? (
                   <CarouselItem 
                     key={service.id} 
                     title={service.attributes.Title} 
                     subtitle={service.attributes.TextForCarouselItem} 
-                    id={service.id}
+                    slug={service.attributes.Slug}
                   />
                 ) : null
               )}

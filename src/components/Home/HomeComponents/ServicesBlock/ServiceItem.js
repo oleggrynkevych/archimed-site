@@ -17,7 +17,7 @@ function ServiceItem({...props}){
     };
     return (
         <Link 
-            to={`/${i18n.language}/services/${props.id}`}
+            to={`/${i18n.language}/services/${props.slug}`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >

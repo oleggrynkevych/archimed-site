@@ -27,11 +27,13 @@
     "fill_fields": "заполните поля",
     "name_form": "Имя",
     "phone_form": "Телефон",
+    "name_placeholder": "Георгий",
     "send_form": "отправить",
     "plan": "Запланировать",
     "validation_message_name": "Заполните поле",
     "validation_message_email": "Заполните поле корректно",
     "validation_message_phone": "Неверно набранный номер",
+    "schedule": "Запланировать",
 
     "footer-title": "Архимед — ваш торговый представитель",
     "nav": "Навигация",
@@ -42,8 +44,28 @@
     "post": "Почта",
     "adress": "Адрес",
     "phone": "Телефон",
-    "privacy_policy": "Политика конфиденциальности"
+    "privacy_policy": "Политика конфиденциальности",
 
+    "search-question": "ЧТО ВАС ИНТЕРЕСУЕТ?",
+    "search-button": "Искать",
+    "search-close": "Закрыть",
 
+    "purpose": "цель",
+    "purpose_text": "открываем двери в Украину международным производителям товаров для здравоохранения",
+    "team": "команда",
+    "our_motivation": "Нами двигает интерес ко всему, что мы делаем",
+
+    "service_back_link": "все услуги",
+    "zmist": "Содержание",
+    "form_text": "Заполните форму и мы свяжемся с вами",
+    "add_materials": "Дополнительные материалы",
+    "up_button": "наверх",
+    "other_services": "другие услуги",
+
+    "empty_search_p1": "К сожалению, по запросу",
+    "empty_search_p2": ", ничего не найдено.",
+    "to_main": "На главную",
+    "search_results": "Результаты по поиску",
+    "single_service": "услуга"
     
 }

@@ -1,15 +1,17 @@
 import './ContactsBlock.css';
 import videoLogo from '../../../../images/video-logo.svg';
 import mapIcon from '../../../../images/map-icon-color.svg';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
+import {phones} from './phones.js';
 import { useQuery, gql, useMutation } from '@apollo/client';
 import SiteInfoItem from './SiteInfoItem.js';
 import VideoItem from './VideoItem';
 import { useTranslation } from 'react-i18next';
 import {useForm} from 'react-hook-form';
 import classnames from 'classnames';
+import emailjs from '@emailjs/browser';
 
 const INFO = gql`
     query GetFooter ($locale: I18NLocaleCode){
@@ -61,31 +63,50 @@ function ContactsBlock ({commonStyle}) {
 
     const { t, i18n } = useTranslation();
     const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
+    const form = useRef();
 
     const {loading, error, data} = useQuery(INFO, {
         variables: { locale: locale }
     });
 
+    const [login] = useMutation(LOGIN_MUTATION);
+    const [createRequest] = useMutation(CREATE_REQUEST);
+
     const {handleSubmit, register, formState: {errors}} = useForm();
-
-    const phonePattern = /^[0-9]{12}$/;
-
-    const validatePhone = (value) => {
-        if (!value || !phonePattern.test(value)) {
-            setPhoneError(true);
+    
+    const validatePhone = (value, country) => {
+        if (!value || !countryCode) {
+          setPhoneError(true);
+          return;
+        }
+        
+        const phonePattern = phones[country];
+      
+        if (!phonePattern || !phonePattern.test(value)) {
+          setPhoneError(true);
         } else {
-            setPhoneError(false);
+          setPhoneError(false);
         }
     };
 
     const handlePhoneChange = (value, country) => {
         setPhone(value);
-        validatePhone(value);
+        const phoneNumber = value.replace(/[^\d]/g, '');
+        validatePhone(phoneNumber, country.countryCode
+            );
         setCountryCode(country.dialCode);
     };
 
-    const [login] = useMutation(LOGIN_MUTATION);
-    const [createRequest] = useMutation(CREATE_REQUEST);
+    const sendEmail = (e) => {
+      e.preventDefault();
+  
+      emailjs.sendForm('service_4z9bkgm', 'template_ijtb4pp', form.current, 'Bre4mNFxUF0ygljp-')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+    };
 
     useEffect(() => {
         const loginUser = async () => {
@@ -130,7 +151,7 @@ function ContactsBlock ({commonStyle}) {
           }catch (error) {
             console.error('Error:', JSON.stringify(error));
         }
-
+        sendEmail(e);
         e.target.reset();
         setPhone(countryCode);
         setPhoneError(false);
@@ -149,7 +170,7 @@ function ContactsBlock ({commonStyle}) {
                     <span>{t('contact_video_subtitle')}</span>
 
                     <div className='video-item-block'>
-                        <VideoItem src={videoLogo} text={'Запланувати'}/>
+                        <VideoItem src={videoLogo} text={t('schedule')}/>
                         
                     </div>
 
@@ -157,19 +178,19 @@ function ContactsBlock ({commonStyle}) {
                         <span>{t('contact_video_subtitle')}</span>
                         <span>{t('available_at')}</span>
                         <div className='video-item-block-mobile'>
-                            <VideoItem src={videoLogo} text={'Запланувати'}/>
+                            <VideoItem src={videoLogo} text={t('schedule')}/>
                             
                         </div>
                     </div>
 
                     <div className='footer-site-info'>
-                        <SiteInfoItem href={`mailto:${data.footer.data.attributes.Email}`} target={"_blank"} firstText={'пошта'} secondText={data.footer.data.attributes.Email}/>
-                        <SiteInfoItem href={`tel:${data.footer.data.attributes.TelephoneNumber}`} target={"_blank"} firstText={'телефон'} secondText={data.footer.data.attributes.TelephoneNumber}/>
+                        <SiteInfoItem href={`mailto:${data.footer.data.attributes.Email}`} target={"_blank"} firstText={t('post')} secondText={data.footer.data.attributes.Email}/>
+                        <SiteInfoItem href={`tel:${data.footer.data.attributes.TelephoneNumber}`} target={"_blank"} firstText={t('phone')} secondText={data.footer.data.attributes.TelephoneNumber}/>
                         <SiteInfoItem 
                             href={data.footer.data.attributes.AdressLink}                            
                             target={"_blank"}
                             rel="noreferrer"
-                            firstText={'адреса'} 
+                            firstText={t('adress')} 
                             secondText={data.footer.data.attributes.Adress}/>
                         <div className='footer-map'>
                             <img src={mapIcon} alt="Map Icon"></img>
@@ -197,7 +218,7 @@ function ContactsBlock ({commonStyle}) {
 
                 <div className='contacts-second-block'>
                     <span className='contacts-second-block-title'>{t('fill_fields')}</span>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form ref={form} onSubmit={handleSubmit(onSubmit)}>
                         <span>{t('name_form')}</span>
                         
                         <input className={classnames({ 'has-error': errors.name })}
@@ -209,7 +230,7 @@ function ContactsBlock ({commonStyle}) {
                                 }
                             })}
                             type="text"
-                            placeholder='Георгій'                              
+                            placeholder={t('name_placeholder')}                          
                             onBlur={(e) => {
                                 setName(e.target.value);
                             }}
@@ -234,6 +255,9 @@ function ContactsBlock ({commonStyle}) {
 
                         <span>{t('phone_form')}</span>
                         <PhoneInput
+                            inputProps={{
+                              name: 'phone'
+                            }}
                             country={countryCode}
                             masks={{ ua: '(..) ...-..-..' }}
                             disableCountryCode={false}

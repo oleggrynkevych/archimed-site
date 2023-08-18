@@ -28,10 +28,12 @@
     "name_form": "Ім'я",
     "phone_form": "Телефон",
     "send_form": "надіслати",
+    "name_placeholder": "Георгій",
     "plan": "Запланувати",
     "validation_message_name": "Заповніть поле",
     "validation_message_email": "Заповніть поле коректно",
     "validation_message_phone": "Невірно набраний номер",
+    "schedule": "Запланувати",
 
     "footer-title": "Архімед — ваш торговий представник",
     "nav": "Навігація",
@@ -42,10 +44,28 @@
     "post": "Пошта",
     "adress": "Адреса",
     "phone": "Телефон",
-    "privacy_policy": "Політика конфідеційності"
+    "privacy_policy": "Політика конфідеційності",
 
+    "search-question": "ЩО ВАС ЦІКАВИТЬ?",
+    "search-button": "Шукати",
+    "search-close": "Закрити",
 
+    "purpose": "мета",
+    "purpose_text": "відкриваєм двері в Україну міжнародним виробникам товарів для охорони здоров'я",
+    "team": "команда",
+    "our_motivation": "Нами рухає інтерес до всього, що ми робимо",
 
+    "service_back_link": "всі послуги",
+    "zmist": "Зміст",
+    "form_text": "Заповніть форму і ми зв’яжемось з вами",
+    "add_materials": "Додаткові матеріали",
+    "up_button": "наверх",
+    "other_services": "інші послуги",
 
+    "empty_search_p1": "Нажаль, за запитом",
+    "empty_search_p2": ", нічого не знайдено.",
+    "to_main": "На головну",
+    "search_results": "Результати за пошуком",
+    "single_service": "послуга"
 
 }

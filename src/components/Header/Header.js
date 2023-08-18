@@ -88,7 +88,7 @@ function Header ({ i18n, navigate }) {
     let dropdownRef = useRef();
 
     useEffect(() => {
-      if (searchInputActive) {
+      if (searchInputActive || openMenu) {
         document.body.style.overflow = 'hidden';
       } else {
         document.body.style.overflow = 'unset';
@@ -97,7 +97,7 @@ function Header ({ i18n, navigate }) {
       return () => {
         document.body.style.overflow = 'unset';
       };
-  }, [searchInputActive]);
+  }, [searchInputActive, openMenu]);
 
     useEffect(() => {
         let handler = (e) => {
@@ -147,25 +147,25 @@ function Header ({ i18n, navigate }) {
             </div>
           </Link>
         <nav className={navClass}>
-        <ul>
-        {dataNav.map((item, index) => (
-          <CustomLink
-            key={index}
-            to={`/${i18n.language}${item.to}`}
-            ref={index === 1 ? secondNavItem : null}
-            onClick={handleLinkClick}
-          >
-            {t(item.text)}
-          </CustomLink>
-        ))}
-        </ul>
-          <div className="language-switch">
-            <span onClick={() => handleLanguageChange('ua')}>UA</span>
-            <div className="line"></div>
-            <span onClick={() => handleLanguageChange('en')}>EN</span>
-            <div className="line"></div>
-            <span onClick={() => handleLanguageChange('ru')}>RU</span>
-          </div>
+          <ul>
+            {dataNav.map((item, index) => (
+              <CustomLink
+                key={index}
+                to={`/${i18n.language}${item.to}`}
+                ref={index === 1 ? secondNavItem : null}
+                onClick={openMenu ? handleLinkClick : null}
+              >
+                {t(item.text)}
+              </CustomLink>
+            ))}
+          </ul>
+            <div className="language-switch">
+              <span onClick={() => handleLanguageChange('ua')}>UA</span>
+              <div className="line"></div>
+              <span onClick={() => handleLanguageChange('en')}>EN</span>
+              <div className="line"></div>
+              <span onClick={() => handleLanguageChange('ru')}>RU</span>
+            </div>
         </nav>
         <div className="right-menu">
           <img className='search-icon' src={searchIcon} alt="Search Icon" onClick={handleSearchClick}/>

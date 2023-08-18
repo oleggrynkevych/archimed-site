@@ -160,6 +160,14 @@
     color: #042336;
 }
 
+.service-page-form input:focus {
+    border: 1px solid rgba(4, 35, 54, 0.4);
+}
+
+.service-page-form .phone-input:focus {
+    border: 1px solid rgba(4, 35, 54, 0.4) !important;
+}
+
 .service-page-form input::placeholder{
     color: rgba(4, 35, 54, 0.2);
 }
@@ -412,7 +420,6 @@
     font-size: 14px;
     line-height: 155%;
 }
-
 
 
 

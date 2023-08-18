@@ -18,7 +18,8 @@ const SERVICES = gql`
                 id
                 attributes {
                     Title,
-                    Order
+                    Order,
+                    slug
                 }
             }
         }
@@ -63,7 +64,7 @@ const ServicesBlock = function ({ innerRef }) {
                             key={service.id} 
                             number={service.attributes.Order < 10 ? service.attributes.Order.toString().padStart(2, '0') : service.attributes.Order.toString()} 
                             name={service.attributes.Title} 
-                            id={service.id}
+                            slug={service.attributes.slug}
                         />
                     ))}
                 </div>

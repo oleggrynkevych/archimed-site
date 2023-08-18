@@ -27,11 +27,13 @@
     "fill_fields": "fill in the fields",
     "name_form": "Name",
     "phone_form": "Phone",
+    "name_placeholder": "George",
     "send_form": "send",
     "plan": "Plan",
     "validation_message_name": "Fill in the field",
     "validation_message_email": "Fill in the field correctly",
     "validation_message_phone": "Incorrectly dialed number",
+    "schedule": "Plan",
 
     "footer-title": "Archimedes is your sales representative",
     "nav": "Navigation",
@@ -42,12 +44,28 @@
     "post": "E-mail",
     "adress": "Adress",
     "phone": "Phone",
-    "privacy_policy": "Privacy policy"
+    "privacy_policy": "Privacy policy",
 
+    "search-question": "WHAT INTERESTS YOU?",
+    "search-button": "Search",
+    "search-close": "Close",
 
+    "purpose": "goal",
+    "purpose_text": "we open the door to Ukraine for international manufacturers of health care products",
+    "team": "team",
+    "our_motivation": "We are driven by interest in everything we do",
 
+    "service_back_link": "all services",
+    "zmist": "Content",
+    "form_text": "Fill out the form and we will contact you",
+    "add_materials": "Additional materials",
+    "up_button": "on top",
+    "other_services": "other services",
 
-
-
+    "empty_search_p1": "Unfortunately, upon request",
+    "empty_search_p2": ", nothing found.",
+    "to_main": "To Main",
+    "search_results": "Results according to search",
+    "single_service": "service"
 
 }

@@ -7,7 +7,7 @@ function SearchItem (props) {
     return(
         <Link to={`/${i18n.language}/services/${props.id}`}>
             <div className='search-item'>
-                <span>Послуга</span>
+                <span>{t('single_service')}</span>
                 <h3>{props.title}</h3>
                 <p>{props.description.substring(0, 160)}...</p>
             </div>

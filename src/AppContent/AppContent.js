@@ -48,7 +48,7 @@ function AppContent() {
                 <Route path='/:lang/services' element={<Services />} />
                 <Route path='/:lang/contacts' element={<Contacts />} />
                 <Route path='/:lang/about' element={<About />} />
-                <Route path='/:lang/services/:id' element={<ServicePage />} />
+                <Route path='/:lang/services/:slug' element={<ServicePage />} />
                 <Route path='/:lang/privacypolicy' element={<PrivacyPolicy />} />
                 <Route path='/:lang/search-page' element={<SearchPage />} />
               </Routes>

@@ -34,7 +34,7 @@ const SearchInput = forwardRef(({ active, setActive }, ref) => {
                         ref={ref}
                         id='search-input'
                         type='search'
-                        placeholder="ЩО ВАС ЦІКАВИТЬ?"
+                        placeholder={t('search-question')}
                         onKeyDown={(event) => {
                             if (event.key === 'Enter') {
                                 handleSearchClick();
@@ -44,7 +44,7 @@ const SearchInput = forwardRef(({ active, setActive }, ref) => {
 
                     {/* <Link to={`/${i18n.language}/search-page`}> */}
                         <button className='search-button' onClick={handleSearchClick}>
-                            <span>Шукати</span>
+                            <span>{t('search-button')}</span>
                         </button>
                     {/* </Link> */}
 
@@ -54,7 +54,7 @@ const SearchInput = forwardRef(({ active, setActive }, ref) => {
                             <path d="M3.96582 12.2666L12.9814 3.78132" stroke="#042336" strokeLinecap="square" strokeLinejoin="round"/>
                             <path d="M3.96582 12.2666L12.9814 3.78132" stroke="#042336" strokeLinecap="square" strokeLinejoin="round"/>
                         </svg>
-                        <span>Закрити</span>
+                        <span>{t('search-close')}</span>
                     </button>
 
                     <img

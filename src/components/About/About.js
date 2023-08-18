@@ -89,8 +89,8 @@ function About() {
                     <div className='small-container-header'>   
                         <div className="about-page-header-text">
                             <span>{data.aboutPage.data.attributes.Text1}</span>
-                            <span>мета</span>
-                            <span>відкриваєм двері в Україну міжнародним виробникам товарів для охорони здоров'я</span>
+                            <span>{t('purpose')}</span>
+                            <span>{t('purpose_text')}</span>
                         </div>
                         <div className="about-page-header-photo">
                             <div className="background-team-image"></div>
@@ -125,8 +125,8 @@ function About() {
                         </div>
                         <div className="about-page-main-special">
                             <div className="about-page-special-first-text">
-                                <span>команда</span>
-                                <span>Нами рухає інтерес до всього, що ми робимо</span>
+                                <span>{t('team')}</span>
+                                <span>{t('our_motivation')}</span>
                             </div>
                             <span className="about-page-special-second-text">{data.aboutPage.data.attributes.Text4}</span>
                         </div>
@@ -149,7 +149,7 @@ function About() {
                 </div>  
 
                 <div className='about-page-carousel'>
-                    <Carousel textTitle={'наші послуги'}/> 
+                    <Carousel textTitle={t('services_subtitle')}/> 
                 </div>           
         </div>
     )

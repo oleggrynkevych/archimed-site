@@ -14,9 +14,7 @@ const SERVICES = gql`
                 attributes {
                     Title,
                     Order,
-                    Description {
-                        ${Array.from({ length: 45 }, (_, i) => `Text${i + 1}`).join('\n')}
-                    }
+                    Description 
                 }
             }
         }
@@ -56,7 +54,8 @@ function SearchPage () {
 
             const filtered = data.services.data.filter(service => {
                 const title = service.attributes.Title.toLowerCase();
-                const description = Object.values(service.attributes.Description).join(' ').toLowerCase();
+                console.log(data);
+                const description = service.attributes.Description.toLowerCase();
 
                 const modifiedSearchTerms = searchTerms.map(modifySearchTerm);
 
@@ -85,18 +84,6 @@ function SearchPage () {
         empty: displayedValue.trim() !== '' && filteredServices.length === 0
     });
 
-    const extractFirstParagraph = (description) => {
-        const descriptionArray = Object.values(description);
-        for (let i = 0; i < descriptionArray.length; i++) {
-            const text = descriptionArray[i];
-            const match = text.match(/<p>(.*?)<\/p>/);
-            if (match && match[1]) {
-                return match[1];
-            }
-        }
-        return '';
-    };
-
     return(
         <div className={containerClasses}>
             <div className='search-page-container'>
@@ -117,18 +104,18 @@ function SearchPage () {
                         >
                         </input>
                     </div>
-                    <button className='search-button' onClick={handleSearchClick}><span>Шукати</span></button>
+                    <button className='search-button' onClick={handleSearchClick}><span>{t('search-button')}</span></button>
                 </div>
 
                 <div className='search-result-text'>
                     {displayedValue.trim() !== '' && filteredServices.length > 0 ? (
                         <>
-                            <h2>Результати за пошуком</h2>
+                            <h2>{t('search_results')}</h2>
                             <span>"{displayedValue}"</span>
                         </>
                     ) : (
                         <>
-                            <h2>Нажаль, за запитом “{displayedValue}”, нічого не знайдено.</h2>
+                            <h2>{t('empty_search_p1')} “{displayedValue}”{t('empty_search_p2')}</h2>
                         </>
                     )}
                 </div>
@@ -139,7 +126,7 @@ function SearchPage () {
                             <SearchItem 
                                 key={service.id}
                                 title={service.attributes.Title}
-                                description={extractFirstParagraph(service.attributes.Description)}
+                                description={service.attributes.Description}
                                 id={service.id}
                             />
                         ))
@@ -147,12 +134,12 @@ function SearchPage () {
                         <div className='search-no-results'>
                             <Link to={`/${i18n.language}/`}>
                                 <button>
-                                    <span>На головну</span>
+                                    <span>{t('to_main')}</span>
                                 </button>
                             </Link>
                             <Link to={`/${i18n.language}/contacts`}>
                                 <button>
-                                    <span>Контакти</span>
+                                    <span>{t('contacts_page')}</span>
                                 </button>
                             </Link>
                         </div>
