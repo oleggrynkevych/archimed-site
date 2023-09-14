@@ -62,9 +62,6 @@ function ServicePage() {
    
     let { slug } = useParams();
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
     const [modalActive, setModalActive] = useState(false);
     const [selectedMaterial, setSelectedMaterial] = useState(null);
     
@@ -117,21 +114,59 @@ function ServicePage() {
 
     useEffect(()=>{
         const allLinks = document.querySelectorAll('.service-description-block a');
+        const allParagraphs = document.querySelectorAll('.service-description-block p');
+        const allLists = document.querySelectorAll('.service-description-block ul, .service-description-block ol');
         const allTitles = document.querySelectorAll('.service-description-block h2');
         const pageTitles = document.querySelectorAll('.service-description-block h2');
+        const svgArrow = document.querySelector('.svg-arrow');
+        const zmist = document.querySelector('.zmist');
 
-        allLinks.forEach((link) => {link.addEventListener('click', function(){
-            this.setAttribute('target', '_blank');
-        })})
+
+        allLinks.forEach((link) => {
+            link.addEventListener('click', function() {
+                this.setAttribute('target', '_blank');
+            });
+        });
+
+        allParagraphs.forEach((paragraph) => {
+            const nextElement = paragraph.nextElementSibling;
+            if (nextElement && (nextElement.tagName === 'UL' || nextElement.tagName === 'OL')) {
+                paragraph.style.marginBottom = '24px';
+            }
+        })
+
+        allLists.forEach((list) => {
+            const nextElement = list.nextElementSibling;
+            if (nextElement && (nextElement.tagName === 'H2' || nextElement.tagName === 'H3')) {
+                list.style.marginBottom = '40px';
+            }
+        })
+
+        if (zmist !== null) {
+            if (allTitles.length == 0) {
+                zmist.style.paddingTop = '0';
+                zmist.style.visibility = 'hidden';
+            }
+        }
+
 
         allTitles.forEach((title, index) => { 
             const cloneTitle = title.cloneNode(true);
+            const cloneSvg = svgArrow.cloneNode(true);
             const number = (index + 1).toString().padStart(2, '0');
             const titleText = cloneTitle.innerText;
-            cloneTitle.innerText = `${number}. \u00A0${cloneTitle.innerText}`;
-            document.getElementById('list').append(cloneTitle);
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'title-with-svg';
 
-            cloneTitle.addEventListener('click', () => {
+            cloneTitle.innerText = `${number}. \u00A0${cloneTitle.innerText}`;
+
+            titleDiv.appendChild(cloneTitle);
+            titleDiv.appendChild(cloneSvg);
+
+            document.getElementById('list').append(titleDiv);
+
+
+            titleDiv.addEventListener('click', () => {
                 const pageTitle = Array.from(pageTitles).find((pageTitle) => pageTitle.innerText === titleText);
                 if (pageTitle) {
                     pageTitle.scrollIntoView({ behavior: 'smooth' });
@@ -197,7 +232,6 @@ function ServicePage() {
 
     let orderSercive =  null;
     let hasMatchingMaterials = null;
-    console.log(data);
 
     if(data && data.services.data.length>0){
         orderSercive = data.services.data[0].attributes.Order;
@@ -260,7 +294,7 @@ function ServicePage() {
                         </div>
                     </div>
 
-                    <div className='service-materials-button-wrapper'style={!hasMatchingMaterials ? {marginTop: '500px'} : null}>
+                    <div className='service-materials-button-wrapper'>
                         <div className='service-materials-button' onClick={scrollToTop}>
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6.5 11.8611V12.3611H7.5V11.8611H6.5ZM7.5 3.69446C7.5 3.41832 7.27614 3.19446 7 3.19446C6.72386 3.19446 6.5 3.41832 6.5 3.69446H7.5ZM7.5 11.8611V3.69446H6.5V11.8611H7.5Z" fill="currentColor"/>
@@ -276,6 +310,7 @@ function ServicePage() {
                 <Modal active={modalActive} setActive={setModalActive}>
                     {selectedMaterial && (
                         <>
+                            <h2>{selectedMaterial.attributes.Title}</h2>
                             <Markdown>{selectedMaterial.attributes.ModalDescription}</Markdown>
                         </>
                     )}
@@ -283,6 +318,15 @@ function ServicePage() {
 
             </section>
             <Carousel textTitle={t('other_services')} slug={slug}></Carousel>
+
+            <div className='svg-arrow'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <g opacity="0.5">
+                    <path d="M9.50146 3.99992L9.50146 3.49992L8.50146 3.49992L8.50146 3.99992L9.50146 3.99992ZM8.50146 14.6065C8.50146 14.8827 8.72532 15.1065 9.00146 15.1065C9.27761 15.1065 9.50146 14.8827 9.50146 14.6065L8.50146 14.6065ZM8.50146 3.99992V14.6065L9.50146 14.6065V3.99992L8.50146 3.99992Z" fill="currentColor"/>
+                    <path d="M14.3048 9.30322L9.00146 14.6065L3.69816 9.30322" stroke="currentColor" strokeLinecap="square"/>
+                    </g>
+                </svg>
+            </div>
     </div>
     )
 }

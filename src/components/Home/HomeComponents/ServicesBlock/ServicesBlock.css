@@ -63,6 +63,7 @@
     position: relative;
     overflow: hidden;
     transition: transform 0.4s ease;
+    transition: color 0.4s ease-in-out;
 }
 
 .service-item-info{

@@ -7,9 +7,9 @@
     "about_page": "About us",
     "contacts_page": "Contacts",
 
-    "title": "ARCHIMEDES IS YOUR SALES REPRESENTATIVE IN UKRAINE",
+    "title": "ARCHIMED IS YOUR SALES REPRESENTATIVE IN UKRAINE",
 
-    "services_title": "WE PROVIDE 10 SERVICES THAT COVER 450+ TASKS",
+    "services_title": "WE PROVIDE 10 SERVICES THAT COVER 100+ TASKS",
     "services_subtitle": "our services",
     "learn_more": "learn more",
 
@@ -33,9 +33,9 @@
     "validation_message_name": "Fill in the field",
     "validation_message_email": "Fill in the field correctly",
     "validation_message_phone": "Incorrectly dialed number",
-    "schedule": "Plan",
+    "schedule": "Schedule a meeting",
 
-    "footer-title": "Archimedes is your sales representative",
+    "footer-title": "Archimed is your sales representative",
     "nav": "Navigation",
     "social": "social networks",
     "rights": "© Archimed 2018. All rights reserved",
@@ -45,13 +45,14 @@
     "adress": "Adress",
     "phone": "Phone",
     "privacy_policy": "Privacy policy",
+    "developed_by": "Developed by Ivan Vergun",
 
     "search-question": "WHAT INTERESTS YOU?",
     "search-button": "Search",
     "search-close": "Close",
 
     "purpose": "goal",
-    "purpose_text": "we open the door to Ukraine for international manufacturers of health care products",
+    "purpose_text": "We are opening Ukraine to international manufacturers of healthcare products",
     "team": "team",
     "our_motivation": "We are driven by interest in everything we do",
 

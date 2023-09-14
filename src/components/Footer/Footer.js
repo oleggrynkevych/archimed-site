@@ -6,7 +6,7 @@ import './Footer.css';
 import useScrollToTop from '../../hooks/useScrollToTop';
 import SiteInfoItem from './SiteInfoItem.js';
 import { useTranslation } from 'react-i18next';
-
+import Markdown from 'marked-react';
 
 
 const INFO = gql`
@@ -93,14 +93,21 @@ function Footer ({ isSpecial }) {
                         </div>
                         <div className='footer-socmedia'>
                             <span className='footer-subtitle'>{t('social')}</span>
-                            <div dangerouslySetInnerHTML={{ __html: decodeURI(data.footer.data.attributes.SocialMedia) }} />
+                            <div>
+                                <Markdown>{data.footer.data.attributes.SocialMedia}</Markdown>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div className='footer-bottom'>
-                    <span>{t('rights')}</span>
+                    <span className={
+                        i18n.language == 'en' ? 'en-footer-span'
+                        : i18n.language == 'ru' ? 'ru-footer-span'
+                        : 'ua-footer-span'
+                    }>{t('rights')}</span>
                     <Link to={`/${i18n.language}/privacypolicy`}>{t('privacy_policy')}</Link>
+                    <a href='https://www.instagram.com/vania_gun/' target='_blank'>{t('developed_by')}</a>
                 </div>
                 <div></div>
             </div>

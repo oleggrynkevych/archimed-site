@@ -5,7 +5,7 @@ function SearchItem (props) {
     const { i18n , t } = useTranslation();
 
     return(
-        <Link to={`/${i18n.language}/services/${props.id}`}>
+        <Link to={`/${i18n.language}/services/${props.slug}`}>
             <div className='search-item'>
                 <span>{t('single_service')}</span>
                 <h3>{props.title}</h3>

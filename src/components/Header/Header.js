@@ -43,10 +43,18 @@ function Header ({ i18n, navigate }) {
 
     const handleLanguageChange = (code) => {
       i18n.changeLanguage(code);
+
       const currentPath = location.pathname;
       const newPath = `/${code}${currentPath.substring(3)}`;
       navigate(newPath);
-      setOpenMenu(!openMenu);
+
+      if (openMenu) {
+        setOpenMenu(!openMenu);
+      }
+
+      if (open) {
+        setOpen(!open);
+      }
     };
 
     useEffect(() => {

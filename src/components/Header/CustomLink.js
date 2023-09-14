@@ -10,9 +10,11 @@ const CustomLink = React.forwardRef(({ to, children, ...props }, ref) => {
     const liClass = classNames({ active: isActive });
   
     return (
-      <li ref={ref} className={liClass}>
-        <Link to={to} {...props}>{children}</Link>
-      </li>
+      <Link to={to} {...props}>
+        <li ref={ref} className={liClass}>
+          <span>{children}</span>
+        </li>
+      </Link>
     );
 });
 

@@ -15,6 +15,7 @@ const SERVICES = gql`
                     Title,
                     Order,
                     Description 
+                    slug
                 }
             }
         }
@@ -95,7 +96,7 @@ function SearchPage () {
                         <input 
                             value={inputValue}
                             onChange={handleInputChange}
-                            type='search'
+                            type='text'
                             onKeyDown={(event) => {
                                 if (event.key === 'Enter') {
                                     handleSearchClick();
@@ -127,7 +128,7 @@ function SearchPage () {
                                 key={service.id}
                                 title={service.attributes.Title}
                                 description={service.attributes.Description}
-                                id={service.id}
+                                slug={service.attributes.slug}
                             />
                         ))
                     ) : (

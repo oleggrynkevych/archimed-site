@@ -74,7 +74,7 @@
 }
 
 .search-result-text h2 {
-    font-family: Inter;
+    font-family: Mulish;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -105,6 +105,7 @@
     color: #042336;
     border-top: 1px solid rgba(4, 35, 54, 0.1);;
     cursor: pointer;
+    transition: color 0.3s ease-in-out;
 }
 
 .search-item:hover{
@@ -113,7 +114,7 @@
 
 .search-item span {
     margin-top: 24px;
-    font-family: Inter;
+    font-family: Mulish;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
@@ -136,7 +137,7 @@
     height: 40%;
     margin: 12px 0 0 0;
     overflow-wrap: break-word;
-    font-family: Inter;
+    font-family: Mulish;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -159,12 +160,13 @@
     border: 1px solid #042336;
     cursor: pointer;
     overflow: hidden;
-    transition: color 0.4s easy;
+    transition: all 0.4s ease;
     position: relative;
+    isolation: isolate;
 }
 
 .search-no-results span {
-    font-family: Inter;
+    font-family: Mulish;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

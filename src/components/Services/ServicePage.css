@@ -102,26 +102,49 @@
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
-    margin: 0 0 12px 0;
+    margin: 0 0 8px 0;
+}
+
+.svg-arrow {
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+}
+
+#list .svg-arrow {
+    visibility: visible;
 }
 
 #list{
     margin: 0 0 48px 0;
+    color: #1C3849;
+}
+
+.title-with-svg {
+    color: inherit;
+    height: 46px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(35, 35, 35, 0.1);
+    transition: all 0.3s ease-in-out;
 }
 
 #list h2 {
-    height: 46px;
     font-family: 'Mulish';
     font-style: normal;
     font-weight: 500;
     font-size: 13px;
     line-height: 170%;
-    border-bottom: 1px solid rgba(35, 35, 35, 0.1);
     margin: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
-    cursor: pointer;
+}
+
+.title-with-svg:hover {
+    color: #3693C8;
+    border-bottom: 1px solid rgba(54, 147, 200, 0.10);
 }
 
 .service-description-block ol,
@@ -142,6 +165,18 @@
     margin-bottom: 8px;
 
 }
+
+.service-description-block h4{
+    width: 100%;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 170%;
+    margin-bottom: 24px;
+    border-left: 4px solid #042336;
+    padding-left: 16px;
+    overflow-wrap: break-word;
+}
+
 
 .service-description-block a {
     color: #3693C8;
@@ -164,6 +199,15 @@
     border: 1px solid rgba(4, 35, 54, 0.4);
 }
 
+.service-page-form p {
+    margin-bottom: 28px;
+}
+
+.service-page-form input.has-error,
+.service-page-form input.has-error:focus {
+    border: 1px solid red;
+}
+
 .service-page-form .phone-input:focus {
     border: 1px solid rgba(4, 35, 54, 0.4) !important;
 }
@@ -178,6 +222,10 @@
     color: #042336 !important;
 }
 
+.service-page-form .phone-input.has-error{
+    border: 1px solid red !important;
+  }
+
 .service-page-form .flag-dropdown{
     background: rgb(235 235 235) !important;
     margin-left: 12px !important;
@@ -188,6 +236,14 @@
 .service-page-form .selected-flag:hover{
     background: rgb(235 235 235) !important;
 }
+
+.service-page-form .arrow.up {
+    border-bottom: none !important;
+}
+
+.service-page-form .country-list {
+    opacity: 1;
+  }
 
 .service-page-form .arrow {
     border-top: 4px solid #042336 !important;
@@ -210,7 +266,7 @@
     bottom: 0px;
     width: 100%;
     height: 100%;
-    border: 1px solid #042336;
+    border: 0px solid #042336;
     background-color: transparent;
     border-radius: 100px;
     z-index: 1;
@@ -266,6 +322,7 @@
     margin-bottom: 12px;
     padding: 20px 0 20px 0;
     cursor: pointer;
+    transition: all 0.3s ease-in-out
 }
 
 .material-item-container {
@@ -282,7 +339,7 @@
     font-weight: 700;
     font-size: 14px;
     line-height: 170%;
-    margin-bottom:20px;
+    margin-bottom:10px;
 }
 
 .material-item-text{
@@ -305,7 +362,7 @@
 }
 
 .material-item-link span {
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
@@ -342,7 +399,7 @@
 }
 
 .service-materials-block-info span{
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 400;
     font-size: 10px;
@@ -355,7 +412,7 @@
 
 .service-materials-block-info a{
     color: #042336;
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -380,6 +437,8 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    isolation: isolate;
 }
 
 .service-materials-button::before{
@@ -414,7 +473,7 @@
 .service-materials-button span {
     position: relative;
     z-index: 2;
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;

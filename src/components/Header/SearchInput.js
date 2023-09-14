@@ -33,7 +33,7 @@ const SearchInput = forwardRef(({ active, setActive }, ref) => {
                     <input
                         ref={ref}
                         id='search-input'
-                        type='search'
+                        type='text'
                         placeholder={t('search-question')}
                         onKeyDown={(event) => {
                             if (event.key === 'Enter') {

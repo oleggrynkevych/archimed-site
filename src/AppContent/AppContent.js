@@ -8,7 +8,9 @@ import Contacts from '../components/Contacts/Contacts';
 import PrivacyPolicy from '../components/Privacy Policy/PrivacyPolicy';
 import SearchPage from '../components/Search/SearchPage';
 import Footer from '../components/Footer/Footer';
+import ErrorPage from '../components/Error/ErrorPage';
 import ServicePage from '../components/Services/ServicePage';
+import EthicsCode from '../components/EthicsCode/EthicsCode';
 import { Route, Routes, useLocation, useNavigate, Redirect } from 'react-router-dom';
 import classnames from 'classnames';
 import ScrollToTopOnPageChange from './ScrollToTopOnPageChange.js';
@@ -30,6 +32,8 @@ function AppContent() {
   
     const marginClass = 'margin-class';
     const marginSpecialClass = 'margin-special-class';
+
+    const allowScroll = location.pathname !== window.location.pathname;
   
     const containerClassName = classnames({
       [marginClass]: !isContactsPath,
@@ -40,7 +44,7 @@ function AppContent() {
     
         <div>
           <Header i18n={i18n} navigate={navigate} location={location}/>
-          <ScrollToTopOnPageChange/>
+          <ScrollToTopOnPageChange allowScroll={allowScroll}/>
             <div className={containerClassName}>
               <Routes>
 
@@ -51,6 +55,8 @@ function AppContent() {
                 <Route path='/:lang/services/:slug' element={<ServicePage />} />
                 <Route path='/:lang/privacypolicy' element={<PrivacyPolicy />} />
                 <Route path='/:lang/search-page' element={<SearchPage />} />
+                <Route path='/:lang/ethics-code' element={<EthicsCode />} />
+                <Route path='/:lang/*' element={<ErrorPage />} />
               </Routes>
             </div>
           <Footer isSpecial={isContactsPath}/>

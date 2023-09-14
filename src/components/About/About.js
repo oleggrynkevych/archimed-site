@@ -2,6 +2,7 @@ import './About.css';
 import Slider from "react-slick";
 import Carousel from '../Services/Carousel/Carousel';
 import {teamMembersData} from './about-page-data.js';
+import { Link } from 'react-router-dom';
 import React, { Suspense} from 'react';
 import { Canvas } from '@react-three/fiber';
 import Scissors3D from './Scissors3D';
@@ -117,11 +118,11 @@ function About() {
                         <span className="about-page-main-first-text">{data.aboutPage.data.attributes.Text2}</span>
                         <div className="about-page-main-second-text">
                             <span>{data.aboutPage.data.attributes.Text3}</span>
-                            <a href={data.aboutPage.data.attributes.ButtonLink} target='_blank' rel='noopener'>
+                            <Link to={`/${i18n.language}/ethics-code`}>
                                 <div className='codecs-button'>
                                     <h5>{data.aboutPage.data.attributes.ButtonText}</h5>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                         <div className="about-page-main-special">
                             <div className="about-page-special-first-text">

@@ -26,6 +26,14 @@
     border: 1px solid rgba(4, 35, 54, 0.4);
 }
 
+.contacts-page input.has-error:focus {
+    border: 1px solid red;
+}
+
+.contacts-page .phone-input.has-error:focus{
+    border: 1px solid red !important;
+}
+
 .contacts-page .phone-input:focus {
     border: 1px solid rgba(4, 35, 54, 0.4) !important;
 }
@@ -56,6 +64,10 @@
 
 .contacts-page .arrow {
     border-top: 4px solid #042336 !important;
+}
+
+.contacts-page .arrow.up {
+    border-bottom: none !important;
 }
 
 .contacts-page .form-button {

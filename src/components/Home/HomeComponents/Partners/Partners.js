@@ -49,37 +49,25 @@ function Partners () {
                     <h5>{t('inter_companies')}</h5>
                     <h5>{t('ua_companies')}</h5>
                     <h5>{t('embassies')}</h5>
-                    <div style={{display: 'flex'}}>
-                        <div className='logos' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
-                            <InternationalPartners/>
-                            <InternationalPartners/>
-                        </div>
-                        <div className='logos' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
-                            <InternationalPartners/>
-                            <InternationalPartners/>
-                        </div>
+                    <div className='logos'>
+                        <InternationalPartners/>
+                        <InternationalPartners/>
+                        <InternationalPartners/>
+                        <InternationalPartners/>
                     </div>
 
-                    <div style={{display: 'flex'}}>
-                        <div className='logos reverse' style={{ animation: `${firstSlideTime} slide-reverse infinite linear` }}>
-                            <UkrainianPartners/>
-                            <UkrainianPartners/>
-                        </div>
-                        <div className='logos reverse' style={{ animation: `${firstSlideTime} slide-reverse infinite linear` }}>
-                            <UkrainianPartners/>
-                            <UkrainianPartners/>
-                        </div>
+                    <div className='logos reverse'>
+                        <UkrainianPartners/>
+                        <UkrainianPartners/>
+                        <UkrainianPartners/>
+                        <UkrainianPartners/>
                     </div>
 
-                    <div style={{display: 'flex'}}>
-                        <div className='logos' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
-                            <EmbassiesPartners/>
-                            <EmbassiesPartners/>
-                        </div>
-                        <div className='logos' style={{ animation: `${firstSlideTime} slide infinite linear` }}>
-                            <EmbassiesPartners/>
-                            <EmbassiesPartners/>
-                        </div>
+                    <div className='logos'>
+                        <EmbassiesPartners/>
+                        <EmbassiesPartners/>
+                        <EmbassiesPartners/>
+                        <EmbassiesPartners/>
                     </div>
 
                 </div>

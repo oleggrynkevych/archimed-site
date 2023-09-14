@@ -1,0 +1,27 @@
+.error-page{
+    margin-top: -64px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-page h2{
+    color: #1C3849;
+    font-family: 'Mulish';
+    font-size: 250px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+}
+
+@media (max-width: 920px) {
+    .error-page{
+        padding: 0 16px;
+    }
+
+    .error-page h2{
+        font-size: 120px;
+    }
+}

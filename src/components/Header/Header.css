@@ -45,7 +45,6 @@
 }
 
 .nav a{
-    color: inherit;
     text-decoration: none;
     font-family: 'Mulish';
     font-style: normal;
@@ -67,11 +66,16 @@
     border-radius: 1000px;
     border: 1px solid transparent;
     overflow: hidden;
-    transition: color 0.4s easy;
+    transition: color 0.4s ease-in-out;
     position: relative;
+    isolation: isolate;
 }
 
-.nav li:hover{
+.nav span {
+    z-index: 3;
+}
+
+.nav li:hover {
     color:#F5F5F5;
 }
 
@@ -93,6 +97,10 @@
     transform: translateX(0);
 }
 
+.nav li:active::before{
+    background-color: #D6D6D6;
+}
+
 .nav li.active{
     border-color: #042336;
 }
@@ -111,7 +119,7 @@
     gap: 7.5px;
     color: #042336;
     text-decoration: none;
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -298,6 +306,14 @@
 input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none
   }
+
+  input::-webkit-contacts-auto-fill-button {
+    visibility: hidden;
+    display: none !important;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+  }
   
 
   .search-button {
@@ -312,8 +328,9 @@ input[type="search"]::-webkit-search-cancel-button {
     font-size: 14px;
     cursor: pointer;
     overflow: hidden;
-    transition: color 0.4s easy;
+    transition: all 0.4s ease-in-out;
     position: relative;
+    isolation: isolate;
 }
 
 .search-button span {
@@ -352,7 +369,7 @@ input[type="search"]::-webkit-search-cancel-button {
     background-color: transparent;
     cursor: pointer;
     color:#042336;
-    font-family: Inter;
+    font-family: Mulish;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -494,6 +511,7 @@ input[type="search"]::-webkit-search-cancel-button {
     }
 
     .input-container input{
+        width: 90%;
         margin: 0;
         height: 90%;
         display: flex;

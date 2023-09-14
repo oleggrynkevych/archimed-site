@@ -87,16 +87,16 @@ function Carousel (props) {
             <div className='carousel-container'>
               <h5>{props.textTitle}</h5>
               <Slider {...settings}>
-              {sortedData.map(service =>
-                service.attributes.slug !== slugFromUrl ? (
-                  <CarouselItem 
-                    key={service.id} 
-                    title={service.attributes.Title} 
-                    subtitle={service.attributes.TextForCarouselItem} 
-                    slug={service.attributes.Slug}
-                  />
-                ) : null
-              )}
+                {sortedData.map(service =>
+                  service.attributes.slug !== slugFromUrl ? (
+                    <CarouselItem 
+                      key={service.id} 
+                      title={service.attributes.Title} 
+                      subtitle={service.attributes.TextForCarouselItem} 
+                      slug={service.attributes.slug}
+                    />
+                  ) : null
+                )}
               </Slider>
             </div>
         </div>

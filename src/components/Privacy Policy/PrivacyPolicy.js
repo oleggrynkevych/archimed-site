@@ -1,14 +1,14 @@
-import Iframe from 'react-iframe';
 import './PrivacyPolicy.css';
 import { useQuery, gql } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
+import Markdown from 'marked-react';
 
 const POLICY = gql`
 query GetPrivacyPolicy ($locale: I18NLocaleCode) {
     privacyPolicy (locale: $locale) {
       data {
         attributes {
-          Link
+          Text
         }
       }
     }
@@ -31,7 +31,11 @@ function PrivacyPolicy(){
 
     return(
         <div className='privacy-policy'>
-            <Iframe url={data.privacyPolicy.data.attributes.Link} />        
+          <div className='privacy-policy-container'>
+            <Markdown>
+              {data.privacyPolicy.data.attributes.Text}
+            </Markdown>
+          </div>  
         </div>
     )
 }

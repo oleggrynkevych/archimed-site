@@ -11,7 +11,7 @@ import i18n from "i18next";
 import i18next from 'i18next';
 
 const client = new ApolloClient({
-  uri: 'https://strapi-app-urd2.onrender.com/graphql',
+  uri: 'https://strapi-web-u9qr.onrender.com/graphql',
   cache: new InMemoryCache()
 })
 

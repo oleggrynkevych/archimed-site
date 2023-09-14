@@ -70,7 +70,7 @@
     height: 77px;
     border: 1px solid rgba(4, 35, 54, 0.1);
     border-radius: 10000px;
-    transition: transform 0.5s ease;
+    transition: all 0.5s ease;
     position: relative;
     cursor: pointer;
 }
@@ -171,6 +171,7 @@
         top: 20%;
         width: 188.35px;
         height: 134.05px;
+        opacity: 0.6;
     }
 
     .second-3d {

@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-family: 'Inter';
+    font-family: 'Mulish';
 }
 
 .contacts-border {
@@ -40,7 +40,7 @@
   }
 
   .contacts-first-block span:nth-child(2) {
-    width: 383px;
+    width: 404px;
     font-family: 'NAMU';
     font-style: normal;
     font-weight: 800;
@@ -115,6 +115,7 @@
 .video-item svg {
   position: relative;
   z-index: 5;
+  margin-top: 2px;
 }
 
   .video-item span {
@@ -172,15 +173,21 @@
     color: #F5F5F5;
     padding-left: 16px;
     border: 1px solid transparent;
+    border-radius: 0;
+    font-family: Mulish;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
   }
 
-  input.has-error {
+  input.has-error,
+  input.has-error:focus {
     border: 1px solid red;
   }
 
   form p {
     color: #F17E7E;
-    font-family: Inter;
+    font-family: Mulish;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -218,6 +225,7 @@
     color: #F5F5F5 !important;
     padding-left: 54px !important;
     border-radius: 0px !important;
+    font-size: 16px !important;
   }
 
   .phone-input:focus {
@@ -269,6 +277,8 @@
     position: relative;
     cursor: pointer;
     overflow: hidden;
+    transition: color 0.4s ease-in-out;
+    isolation: isolate;
   }
 
   .form-button span{
@@ -288,7 +298,7 @@
     bottom: 0px;
     width: 100%;
     height: 100%;
-    border: 1px solid #DEE0E2;
+    border: 0px solid #DEE0E2;
     background-color: transparent;
     border-radius: 100px;
     z-index: 1;
@@ -316,6 +326,14 @@
 
 .form-button:hover::before{
     transform: translateX(0%);
+}
+
+.country-name {
+  color: #042336;
+}
+
+.country-list {
+  opacity: 1;
 }
 
 .contacts-second-block-title {
@@ -404,7 +422,7 @@
     }
 
     input{
-        margin-bottom: 16px;
+        margin-bottom: 8px;
         width: auto;
         height: 52px;
     }
@@ -466,14 +484,16 @@
 
     .video-item-block-mobile {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: center;
         align-items: center;
         margin-top: 32px;
-        gap: 24px;
+        width: 100%;
     }
 
     .video-item-block-mobile  a{
       color: inherit;
+      width: 60%;
     }
 
     .video-item{
@@ -482,18 +502,7 @@
         justify-content: center;
         padding: 0;
         height: 45px;
-    }
-
-    .video-item:nth-child(1) {
-        width: 154px;
-    }
-
-    .video-item:nth-child(2) {
-        width: 105px;
-    }
-
-    .video-item:nth-child(3) {
-        width: 177px;
+        width: 100%;
     }
 }
   

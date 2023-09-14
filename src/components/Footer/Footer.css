@@ -113,7 +113,7 @@ footer{
 }
 
 .footer-head span {
-    width: 827px;
+    width: 905px;
     font-family: 'NAMU';
     font-style: normal;
     font-weight: 800;
@@ -135,7 +135,7 @@ footer{
     color: #F5F5F5;
     cursor: pointer;
     position: relative;
-    transition: transform 0.4s ease;  
+    transition: all 0.4s ease-in-out;  
 }
 
 .footer-head svg {
@@ -189,7 +189,7 @@ footer{
 }
 
 .footer-site-info span {
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 400;
     font-size: 10px;
@@ -209,6 +209,7 @@ footer{
     text-decoration: none;
     color: #F5F5F5;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;  
 }
 
 .footer-site-info a:hover{
@@ -235,7 +236,7 @@ footer{
 }
 
 .footer-map a{
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -261,11 +262,12 @@ footer{
 .footer-nav a {
     text-decoration: none;
     color: #F5F5F5;
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 150%;
+    transition: all 0.3s ease-in-out;  
 }
 
 .footer-nav a:hover {
@@ -274,7 +276,7 @@ footer{
 
 .footer-subtitle {
     display: block;
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 400;
     font-size: 10px;
@@ -305,21 +307,28 @@ footer{
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    isolation: isolate;
 }
 
 .footer-socmedia a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
     color: #F5F5F5;
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 150%;
     position: relative;
     z-index: 2;
+    transition: all 0.3s ease-in-out;  
 }
 
-.footer-socmedia a:hover{
+.footer-socmedia li:hover a{
     color:#1C3849;
 }
 
@@ -345,7 +354,7 @@ footer{
 .footer-bottom {
     display: flex;
     justify-content: flex-start;
-    font-family: 'Inter';
+    font-family: 'Mulish';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -358,15 +367,49 @@ footer{
 .footer-bottom a {
     color: inherit;
     text-decoration: none;
+    margin-right: 32px;
 }
 
-.footer-bottom span {
+.ua-footer-span {
     margin-right: 605px;
 }
 
+.en-footer-span {
+    margin-right: 563px;
+}
 
+.ru-footer-span {
+    margin-right: 573px;
+}
+
+@media (max-width: 1020px) {
+    .footer-container {
+        width: 95%;
+    }
+
+    .footer-head span {
+        width: 810px;
+    }
+
+    .ru-footer-span{
+        margin-right: 250px;
+    }
+
+    .ua-footer-span{
+        margin-right: 300px;
+    }
+
+    .ru-footer-span{
+        margin-right: 250px;
+    }
+
+    .en-footer-span{
+        margin-right: 350px;
+    }
+}
 
 @media (max-width: 920px) {
+
     .footer-head span {
         width: 527px;
         font-size: 35px;
@@ -381,8 +424,11 @@ footer{
         justify-content: space-between;
     }
 
-    .footer-bottom span{
-        margin-right: 200px;
+    .footer-bottom {
+        display: flex;
+        flex-direction: column;
+        margin-top: 64px;
+        gap: 8px;
     }
 }
 
@@ -404,8 +450,8 @@ footer{
     }
 
     .footer-container{
-        width: 100%;
-        height: 914px;
+        width: 90%;
+        height: 964px;
         box-sizing: border-box;
         margin: auto 16px;
         padding-top: 59px;
@@ -442,12 +488,6 @@ footer{
         margin-top: 64px;
         display: flex;
         justify-content: space-between;
-    }
-
-    .footer-bottom {
-        display: flex;
-        flex-direction: column;
-        margin-top: 64px;
     }
 
 }

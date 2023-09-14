@@ -8,7 +8,7 @@ function MaterialItem(props) {
         <div className='material-item' onClick={onClick}>
             <div className='material-item-container'>
                 <span className='material-item-title'>{title}</span>
-                <span className='material-item-text'>{text}</span>
+                <span className='material-item-text'>{text.substring(0, 80)} ...</span>
                 <div className='material-item-link'>
                     <span>{t('learn_more')}</span>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

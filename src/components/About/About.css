@@ -12,6 +12,7 @@
 
 .about-page-header {
     width: 100%;
+    height: calc(100vh - 198px);
     color: #042336;
     padding-top: 57px;
     padding-bottom: 77px;
@@ -37,11 +38,12 @@
 }
 
 .about-page-header-text span:nth-child(1) {
-    width: 255px;
+    width: 310px;
+    height: 300px;
     font-weight: 500;
     font-size: 16px;
     line-height: 150%;
-    margin-bottom: 306px;
+    margin-bottom: 140px;
 }
 
 .about-page-header-text span:nth-child(2) {
@@ -82,7 +84,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('../../images/team-photo.jpeg') ;
+    background-image: url('../../images/team-photo.png') ;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -167,11 +169,12 @@
     position: relative;
     cursor: pointer;
     overflow: hidden;
-    transition: color 0.4s easy;
+    transition: all 0.4s ease;
+    isolation: isolate;
 }
 
 .codecs-button h5 {
-    font-family: Inter;
+    font-family: Mulish;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -202,12 +205,11 @@
 }
 
 .about-page-main-special {
-    height: 133px;
+    height: 130px;
     width: 100%;
     padding: 51px 0px 77px 0px;
     position: absolute;
     bottom: -261px;
-    z-index: 5;
     background-color: #F5F5F5;
     display: flex;
     color: #042336;
@@ -219,6 +221,8 @@
     flex-direction: column;
     margin-left: 120px;
     margin-right: 42px;
+    position: relative;
+    z-index: 12;
 }
 
 .about-page-special-first-text span:nth-child(1) {
@@ -246,6 +250,8 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 170%;
+    position: relative;
+    z-index: 12;
 }
 
 .slider-team-member {
@@ -332,6 +338,8 @@
     text-transform: uppercase;
     opacity: 0.5;
     margin-top: 12px;
+    max-width: 350px;
+;
 }
 
 .about-page-slider {
@@ -358,6 +366,7 @@
     color: #042336 !important;
     transition: all 0.4s ease;  
     scale: 1;
+    transform-origin: top !important;
     /* position: absolute !important; */
 }
 
@@ -368,7 +377,6 @@
 
 .about-page-slider .slick-arrow:hover {
     scale: 1.3;
-    transform-origin: top !important;
 }
 
 .about-page-slider .slick-arrow::after {
@@ -467,6 +475,10 @@
     background: #1C3849;
 }
 
+.about-page-carousel .carousel-item:hover {
+    background: #3E5E71;
+}
+
 .about-page-carousel .carousel-item-link{
     color:#F5F5F5;
 }
@@ -546,6 +558,7 @@
 
     .slider-team-member-person span:nth-child(2){
         font-size: 9px;
+        max-width: 280px;
     }
 
 }
@@ -564,6 +577,10 @@
 
     .about-page-main-second-text span {
         width: 324px;
+    }
+
+    .about-page-header-text span:nth-child(1) {
+        width: 500px;
     }
 
     .about-page-special-first-text span:nth-child(2) {
@@ -595,8 +612,9 @@
     }
 
     .member-content-container{
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: flex-start;
+        height: 80%;
     }
 
     .about-page-slider .slick-next {
@@ -614,11 +632,12 @@
 }
 
 @media (max-width: 700px) {
+
     .about-page-header {
         margin: auto 16px;
         padding-bottom: 0px;
         padding-top: 10vh;
-        height: 85vh;
+        height: auto;
     }
 
     .small-container-header {
@@ -688,6 +707,7 @@
         background-color: #042336;
         color: #F5F5F5;
         flex-direction: column;
+        border-bottom: none;
     }
 
     .about-page-special-first-text{
@@ -708,7 +728,7 @@
     }
 
     .third-3d{
-        z-index: 11;
+        z-index: 9;
     }
 
     .white-two {
@@ -734,11 +754,15 @@
 
     .slider-team-member-content{
         width: 100%;
+        height: 380px;
         margin-left: 0;
+        padding-bottom: 105px;
     }
 
     .member-content-container {
         width: 100%;
+        height: 380px;
+        justify-content: space-between;
     }
 
     .slider-team-member-photo img {
@@ -747,7 +771,7 @@
 
     .slider-team-member {
         flex-direction: column;
-        padding-bottom: 65px;
+        margin-bottom: 0;
     }
 
     .slider-team-member-comment {
@@ -797,8 +821,20 @@
 
 @media (max-width: 500px) {
 
+    .about-page-header-text span:nth-child(1) {
+        margin-bottom: 231px;
+    }
+
+    .about-page-header {
+        height: auto;
+        min-height: 85vh;
+        padding-top: 5vh;
+        overflow: hidden;
+    }
+
     .about-page-header-photo {
         height: 50%;
+        position: static;
      }
 
     .background-team-image {

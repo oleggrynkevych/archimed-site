@@ -9,7 +9,7 @@ import { useQuery, gql, useMutation } from '@apollo/client';
 import SiteInfoItem from './SiteInfoItem.js';
 import VideoItem from './VideoItem';
 import { useTranslation } from 'react-i18next';
-import {useForm} from 'react-hook-form';
+import {useForm, Controller} from 'react-hook-form';
 import classnames from 'classnames';
 import emailjs from '@emailjs/browser';
 
@@ -72,7 +72,7 @@ function ContactsBlock ({commonStyle}) {
     const [login] = useMutation(LOGIN_MUTATION);
     const [createRequest] = useMutation(CREATE_REQUEST);
 
-    const {handleSubmit, register, formState: {errors}} = useForm();
+    const {handleSubmit, register, control, formState: {errors}} = useForm();
     
     const validatePhone = (value, country) => {
         if (!value || !countryCode) {
@@ -132,29 +132,35 @@ function ContactsBlock ({commonStyle}) {
       
 
     const onSubmit = async (formData, e) => {
-        try {
-            const { data } = await createRequest({
-                variables: {
-                  data: {
-                      Name: formData.name,
-                      EMail: formData.email,
-                      Telephone: phone,
-                      publishedAt: new Date().toISOString(),
-                  },
+
+      if(phoneError) {
+        return;
+      }
+      
+      sendEmail(e);
+      e.target.reset();
+      setPhone(countryCode);
+      
+
+      try {
+          const { data } = await createRequest({
+              variables: {
+                data: {
+                    Name: formData.name,
+                    EMail: formData.email,
+                    Telephone: phone,
+                    publishedAt: new Date().toISOString(),
                 },
-                context: {
-                  headers: {
-                    authorization: authToken ? `Bearer ${authToken}` : '',
-                  },
+              },
+              context: {
+                headers: {
+                  authorization: authToken ? `Bearer ${authToken}` : '',
                 },
-              });
-          }catch (error) {
-            console.error('Error:', JSON.stringify(error));
-        }
-        sendEmail(e);
-        e.target.reset();
-        setPhone(countryCode);
-        setPhoneError(false);
+              },
+            });
+        }catch (error) {
+          console.error('Error:', JSON.stringify(error));
+      }
     };
 
     if(loading) return <p></p>
@@ -167,7 +173,7 @@ function ContactsBlock ({commonStyle}) {
                     <span>{t('contact_form')}</span>
                     <span>{t('contact_with_us')}</span>
                     <span>{t('contact_subtitle')}</span>
-                    <span>{t('contact_video_subtitle')}</span>
+                    <span style={i18n.language == 'en' ? {marginTop: '242px'} : {marginTop: '182px'}}>{t('contact_video_subtitle')}</span>
 
                     <div className='video-item-block'>
                         <VideoItem src={videoLogo} text={t('schedule')}/>
@@ -225,7 +231,7 @@ function ContactsBlock ({commonStyle}) {
                             {...register("name", 
                                 {required: t('validation_message_default'), 
                                  pattern:{
-                                    value: /^[a-zA-Zа-яА-ЯЁё ,.'-]{3,}$/,
+                                    value: /^[a-zA-Zа-яА-ЯЁёієїґ ,.'-]{3,}$/,
                                     message: t('validation_message_default'),
                                 }
                             })}
@@ -254,21 +260,37 @@ function ContactsBlock ({commonStyle}) {
                         <p className={classnames({ 'has-error': errors.email})}>{t('validation_message_email')}</p>
 
                         <span>{t('phone_form')}</span>
-                        <PhoneInput
-                            inputProps={{
-                              name: 'phone'
-                            }}
-                            country={countryCode}
-                            masks={{ ua: '(..) ...-..-..' }}
-                            disableCountryCode={false}
-                            alwaysDefaultMask={false}
-                            inputClass={classnames('phone-input', { 'has-error': phoneError })}
-                            countryCodeEditable={false}
-                            value={phone} 
-                            onChange={handlePhoneChange}
-                        />
-                        <p className={classnames({ 'has-error': phoneError })}>{t('validation_message_phone')}</p>
-                        <button className='form-button' type="submit" disabled={phoneError || phone == ''}><span>{t('send_form')}</span></button>
+                        <Controller
+                          control={control}
+                          name="phone"
+                          rules={{
+                            required: t('validation_message_phone'),
+                          }}
+                          render={({ field: { ref, ...field } }) => (
+                            <PhoneInput
+                              {...field}
+                              inputExtraProps={{
+                                ref,
+                              }}
+                              inputProps={{
+                                name: 'phone'
+                              }}
+                              country={countryCode}
+                              masks={{ ua: '(..) ...-..-..' }}
+                              disableCountryCode={false}
+                              alwaysDefaultMask={false}
+                              inputClass={classnames('phone-input', { 'has-error': errors.phone || phoneError })}
+                              countryCodeEditable={false}
+                              value={phone} 
+                              onChange={(value, country) => {
+                                handlePhoneChange(value, country);
+                                field.onChange(value); 
+                              }}
+                            />
+                            )}
+                          />
+                        <p className={classnames({ 'has-error': errors.phone || phoneError })}>{t('validation_message_phone')}</p>
+                        <button className='form-button' type="submit"><span>{t('send_form')}</span></button>
                     </form>
                 </div>
             </div>

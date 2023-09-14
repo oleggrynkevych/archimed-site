@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {useForm} from 'react-hook-form';
+import {useForm, Controller} from 'react-hook-form';
 import {gql, useMutation } from '@apollo/client';
 import emailjs from '@emailjs/browser';
 import { useTranslation } from 'react-i18next';
@@ -45,7 +45,7 @@ function ServiceForm() {
     const [authToken, setAuthToken] = useState('');
 
     const { t, i18n } = useTranslation();
-    const {handleSubmit, register, formState: {errors}} = useForm();
+    const {handleSubmit, register, control, formState: {errors}} = useForm();
     
     const [login] = useMutation(LOGIN_MUTATION);
     const [createRequest] = useMutation(CREATE_REQUEST);
@@ -107,6 +107,16 @@ function ServiceForm() {
     }, []);
 
     const onSubmit = async (formData, e) => {
+
+        if(phoneError) {
+          return;
+        }
+        
+        sendEmail(e);
+        e.target.reset();
+        setPhone(countryCode);
+        
+
         try {
             const { data } = await createRequest({
                 variables: {
@@ -126,10 +136,6 @@ function ServiceForm() {
           }catch (error) {
             console.error('Error:', JSON.stringify(error));
         }
-        sendEmail(e);
-        e.target.reset();
-        setPhone(countryCode);
-        setPhoneError(false);
     };
 
     return(
@@ -169,21 +175,39 @@ function ServiceForm() {
             <p className={classnames({ 'has-error': errors.email})}>{t('validation_message_email')}</p>
 
             <span>{t('phone_form')}</span>
-            <PhoneInput
-                inputProps={{
-                name: 'phone'
-                }}
-                country={countryCode}
-                masks={{ ua: '(..) ...-..-..' }}
-                disableCountryCode={false}
-                alwaysDefaultMask={false}
-                inputClass={classnames('phone-input', { 'has-error': phoneError })}
-                countryCodeEditable={false}
-                value={phone} 
-                onChange={handlePhoneChange}
-            />
-            <p className={classnames({ 'has-error': phoneError })}>{t('validation_message_phone')}</p>
-            <button className='form-button' type="submit" disabled={phoneError || phone == ''}><span>{t('send_form')}</span></button>
+            <Controller
+              control={control}
+              name="phone"
+              rules={{
+                required: t('validation_message_phone'),
+              }}
+              render={({ field: { ref, ...field } }) => (
+                <PhoneInput
+                  {...field}
+                  inputExtraProps={{
+                    ref,
+                  }}
+                  inputProps={{
+                    name: 'phone'
+                  }}
+                  country={countryCode}
+                  masks={{ ua: '(..) ...-..-..' }}
+                  disableCountryCode={false}
+                  alwaysDefaultMask={false}
+                  inputClass={classnames('phone-input', { 'has-error': errors.phone || phoneError })}
+                  countryCodeEditable={false}
+                  value={phone} 
+                  onChange={(value, country) => {
+                    handlePhoneChange(value, country);
+                    field.onChange(value); 
+                  }}
+                />
+                )}
+              />
+
+
+            <p className={classnames({ 'has-error': errors.phone || phoneError})}>{t('validation_message_phone')}</p>
+            <button className='form-button' type="submit" ><span>{t('send_form')}</span></button>
         </form>
     )
 }
