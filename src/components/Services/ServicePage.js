@@ -1,4 +1,5 @@
 import './ServicePage.css';
+import mainLogo from '../../images/logo.svg';
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import backIcon from '../../images/backIcon.svg';
@@ -10,6 +11,7 @@ import MaterialItem from './MaterialItem.js';
 import { useTranslation } from 'react-i18next';
 import Markdown from 'marked-react';
 import ServiceForm from './ServiceForm/ServiceForm';
+import classnames from 'classnames';
 
 const SERVICE = gql`
     query GetServices ($slug: String!, $locale: I18NLocaleCode) {
@@ -56,7 +58,7 @@ const ADDITIONALMATERIAL = gql`
     }
 `
 
-function ServicePage() {
+function ServicePage(props) {
     const { t, i18n } = useTranslation();
     let locale = i18n.language === 'ua' ? 'uk' : i18n.language;
    
@@ -64,20 +66,21 @@ function ServicePage() {
 
     const [modalActive, setModalActive] = useState(false);
     const [selectedMaterial, setSelectedMaterial] = useState(null);
+    const [loadingDiv, setLoadingDiv] = useState(false);
     
     const location = useLocation();
     const navigate = useNavigate();
 
 
     const initialSlug = useRef(slug);
-    const initialLocale = useRef(locale);    
+    // const initialLocale = useRef(locale);    
 
     const fetchServiceData = (newSlug, newLocale) => {
         getServiceData({
             variables: {
                 slug: newSlug,
                 locale: newLocale
-            }
+            },
         });
     };
    
@@ -189,46 +192,67 @@ function ServicePage() {
                     }
                 )
             }
-            localStorage.setItem("slugs", JSON.stringify(slugs))
+            localStorage.setItem("slugs", JSON.stringify(slugs));
         }
     }, [data]);
 
     useEffect(() => {
         const currentPath = location.pathname;
         const pathSegments = currentPath.split('/');
-    
-        if (locale !== initialLocale.current) {
-            let newSlugsForUrl = JSON.parse(localStorage.getItem("slugs"));
-            let nextServiceSlug = null;
-    
-            for (let i = 0; i < newSlugsForUrl.length; i++) {
-                if (newSlugsForUrl && newSlugsForUrl.length > 0) {
-                    if (locale === newSlugsForUrl[i].locale) {
-                        nextServiceSlug = newSlugsForUrl[i].slug;
+
+        let newSlugsForUrl = JSON.parse(localStorage.getItem("slugs"));
+        console.log(newSlugsForUrl);
+
+        if (newSlugsForUrl !== null) {
+            // if (locale !== props.initialLocale.current) {
+                let nextServiceSlug = null;
+        
+                for (let i = 0; i < newSlugsForUrl.length; i++) {
+                    if (newSlugsForUrl && newSlugsForUrl.length > 0) {
+                        if (locale === newSlugsForUrl[i].locale) {
+                            nextServiceSlug = newSlugsForUrl[i].slug;
+                        }
                     }
                 }
-            }
-
-            if (nextServiceSlug !== null) {
-                pathSegments[pathSegments.length - 1] = nextServiceSlug;
-                const newPath = pathSegments.join('/');
-                navigate(newPath);
-                fetchServiceData(nextServiceSlug, locale);
-                localStorage.clear();
-            }
-        } else {
-            pathSegments[pathSegments.length - 1] = initialSlug.current;
-            const newPath = pathSegments.join('/');
-            navigate(newPath);
-            fetchServiceData(initialSlug.current, locale);
-            localStorage.clear();
+    
+                if (nextServiceSlug !== null) {
+                    pathSegments[pathSegments.length - 1] = nextServiceSlug;
+                    const newPath = pathSegments.join('/');
+                    navigate(newPath);
+                    fetchServiceData(nextServiceSlug, locale);
+                    localStorage.removeItem('slugs');
+                }
+            // } else {
+            //     pathSegments[pathSegments.length - 1] = initialSlug.current;
+            //     const newPath = pathSegments.join('/');
+            //     navigate(newPath);
+            //     fetchServiceData(initialSlug.current, locale);
+            //     localStorage.removeItem('slugs');;
+            // }
         }
+
     }, [locale]);
 
+    const loadingClass = classnames('loading-service', {
+        hide: loadingDiv
+      });
+
     const scrollToTop = useScrollToTop();
+
+    useEffect(function () {
+        const timeout = setTimeout(function () {
+          setLoadingDiv(true);
+        }, 500)
+        
+        return function ()  {
+            clearTimeout(timeout)
+        }
+    }, [data])
     
-    if(loading || additionalMaterialsLoading ) return <p></p>
-    if(error || additionalMaterialsError ) return <p>{JSON.stringify(error)}</p>
+    if(loading || additionalMaterialsLoading ) return <div className='loading-div-service'>
+            <img src={mainLogo} alt={'Main Logo'}/>
+        </div>
+    if(error || additionalMaterialsError ) return <p></p>
 
     let orderSercive =  null;
     let hasMatchingMaterials = null;
@@ -239,7 +263,12 @@ function ServicePage() {
     }
 
     return (
-        <div>
+        <div style={{position: 'relative', width: '100vw'}}>
+
+            <div className={loadingClass}>
+                <img src={mainLogo} alt={'Main Logo'}/>
+            </div>
+
             <section className='service-page'>
                 <div className='service-page-title'>
                     <Link to={`/${i18n.language}/services`}>

@@ -1,4 +1,5 @@
 import './About.css';
+import mainLogo from '../../images/logo.svg';
 import Slider from "react-slick";
 import Carousel from '../Services/Carousel/Carousel';
 import {teamMembersData} from './about-page-data.js';
@@ -15,65 +16,67 @@ import SliderTeamMember from './SliderTeamMember.js';
 import { useTranslation } from 'react-i18next';
 
 
-const ABOUTINFO = gql`
-query GetAboutPage ($locale: I18NLocaleCode) {
-    aboutPage (locale: $locale) {
-      data {
-        attributes {
-            Text1, 
-            Text2,
-            Text3,
-            Text4,
-            ButtonText,
-            ButtonLink
-        }
-      }
-    }
-  }
-`
+// const ABOUTINFO = gql`
+// query GetAboutPage ($locale: I18NLocaleCode) {
+//     aboutPage (locale: $locale) {
+//       data {
+//         attributes {
+//             Text1, 
+//             Text2,
+//             Text3,
+//             Text4,
+//             ButtonText,
+//             ButtonLink
+//         }
+//       }
+//     }
+//   }
+// `
 
-const TEAMMEMBER = gql`
-    query GetTeamMember ($locale: I18NLocaleCode) {
-        teamMembers (locale: $locale) {
-            data {
-                id
-                attributes {
-                Comment,
-                FirstName,
-                Position,
-                LastName,
-                Order,
-                Photo{
-                    data{
-                        attributes{
-                            url
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-`
+// const TEAMMEMBER = gql`
+//     query GetTeamMember ($locale: I18NLocaleCode) {
+//         teamMembers (locale: $locale) {
+//             data {
+//                 id
+//                 attributes {
+//                 Comment,
+//                 FirstName,
+//                 Position,
+//                 LastName,
+//                 Order,
+//                 Photo{
+//                     data{
+//                         attributes{
+//                             url
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+// `
 
-function About() {
+function About(props) {
     const { t, i18n } = useTranslation();
     const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
 
-    const {loading, error, data} = useQuery(ABOUTINFO, {
-        variables: { locale: locale }
-    });
+    // const {loading, error, data} = useQuery(ABOUTINFO, {
+    //     variables: { locale: locale }
+    // });
 
-    const {loading: teamMemberLoading, error: teamMemberError, data: teamMemberData} = useQuery(TEAMMEMBER, {
-        variables: { locale: locale }
-    });
+    // const {loading: teamMemberLoading, error: teamMemberError, data: teamMemberData} = useQuery(TEAMMEMBER, {
+    //     variables: { locale: locale }
+    // });
 
-    if(loading || teamMemberLoading) return <p></p>
-    if(error || teamMemberError) return <p></p>
+    // if(loading || teamMemberLoading) return <div style={{backgroundColor: '#F5F5F5', width: '100%', height: '100vh', position: 'relative'}}>
+    //         <img src={mainLogo} alt={'Main Logo'} style={{position: 'absolute', top: '50%', left: '50%', transform: 'translateX(-50%)'}}/>
+    //     </div>
+    // if(error || teamMemberError) return <p></p>
 
-    const sortedTeamMembers = [...teamMemberData.teamMembers.data].sort((a, b) => {
-        return a.attributes.Order - b.attributes.Order;
-    });
+    // const sortedTeamMembers = [...teamMemberData.teamMembers.data].sort((a, b) => {
+    //     return a.attributes.Order - b.attributes.Order;
+    // });
 
     const settings = {
         dots: false,
@@ -89,7 +92,7 @@ function About() {
                 <div className="about-page-header">  
                     <div className='small-container-header'>   
                         <div className="about-page-header-text">
-                            <span>{data.aboutPage.data.attributes.Text1}</span>
+                            <span>{props.text1}</span>
                             <span>{t('purpose')}</span>
                             <span>{t('purpose_text')}</span>
                         </div>
@@ -101,7 +104,7 @@ function About() {
 
                 <div className="about-page-main">
                     <div className='third-3d'>
-                        <Canvas dpr={1.5} camera={{fov: 45, position: [0,0,0]}}>
+                        <Canvas dpr={1.2} camera={{fov: 45, position: [0,0,0]}}>
                             <Suspense fallback={null}>
                         
                                 <Scissors3D/>
@@ -115,12 +118,12 @@ function About() {
                         </Canvas>
                     </div>
                     <div className='small-container-main'>
-                        <span className="about-page-main-first-text">{data.aboutPage.data.attributes.Text2}</span>
+                        <span className="about-page-main-first-text">{props.text2}</span>
                         <div className="about-page-main-second-text">
-                            <span>{data.aboutPage.data.attributes.Text3}</span>
+                            <span>{props.text3}</span>
                             <Link to={`/${i18n.language}/ethics-code`}>
                                 <div className='codecs-button'>
-                                    <h5>{data.aboutPage.data.attributes.ButtonText}</h5>
+                                    <h5>{props.buttonText}</h5>
                                 </div>
                             </Link>
                         </div>
@@ -129,14 +132,14 @@ function About() {
                                 <span>{t('team')}</span>
                                 <span>{t('our_motivation')}</span>
                             </div>
-                            <span className="about-page-special-second-text">{data.aboutPage.data.attributes.Text4}</span>
+                            <span className="about-page-special-second-text">{props.text4}</span>
                         </div>
                     </div>
                 </div>
                 
                 <div className='about-page-slider'>
                     <Slider {...settings}>
-                        {sortedTeamMembers.map((member) => (
+                        {props.sortedTeamMembers.map((member) => (
                             <SliderTeamMember
                                 key={member.id}
                                 src={member.attributes.Photo.data.attributes.url}

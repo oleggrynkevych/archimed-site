@@ -44,17 +44,18 @@ export const CREATE_REQUEST = gql`
   }
 `;
 
-const LOGIN_MUTATION = gql`
-  mutation Login($input: UsersPermissionsLoginInput!) {
-    login(input: $input) {
-      jwt
-    }
-  }
-`;
+// const LOGIN_MUTATION = gql`
+//   mutation Login($input: UsersPermissionsLoginInput!) {
+//     login(input: $input) {
+//       jwt
+//     }
+//   }
+// `;
 
 
 function ContactsBlock ({commonStyle}) {
-    const [authToken, setAuthToken] = useState('');
+    
+    // const [authToken, setAuthToken] = useState('');
     const [countryCode, setCountryCode] = useState('ua');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -69,7 +70,7 @@ function ContactsBlock ({commonStyle}) {
         variables: { locale: locale }
     });
 
-    const [login] = useMutation(LOGIN_MUTATION);
+    // const [login] = useMutation(LOGIN_MUTATION);
     const [createRequest] = useMutation(CREATE_REQUEST);
 
     const {handleSubmit, register, control, formState: {errors}} = useForm();
@@ -108,27 +109,27 @@ function ContactsBlock ({commonStyle}) {
         });
     };
 
-    useEffect(() => {
-        const loginUser = async () => {
-          try {
-            const { data } = await login({
-              variables: {
-                input: {
-                  identifier: 'ArchimedAdmin',
-                  password: 'ArchimedSite2023',
-                },
-              },
-            });
+    // useEffect(() => {
+    //     const loginUser = async () => {
+    //       try {
+    //         const { data } = await login({
+    //           variables: {
+    //             input: {
+    //               identifier: 'ArchimedAdmin',
+    //               password: 'ArchimedSite2023',
+    //             },
+    //           },
+    //         });
       
-            const token = data.login.jwt;
-            setAuthToken(token);
-          } catch (error) {
-            console.error('Error:', error);
-          }
-        };
+    //         const token = data.login.jwt;
+    //         setAuthToken(token);
+    //       } catch (error) {
+    //         console.error('Error:', error);
+    //       }
+    //     };
       
-        loginUser();
-    }, []);
+    //     loginUser();
+    // }, []);
       
 
     const onSubmit = async (formData, e) => {
@@ -154,7 +155,7 @@ function ContactsBlock ({commonStyle}) {
               },
               context: {
                 headers: {
-                  authorization: authToken ? `Bearer ${authToken}` : '',
+                  authorization: `Bearer ${process.env.REACT_APP_API_STRAPI_TOKEN}`,
                 },
               },
             });

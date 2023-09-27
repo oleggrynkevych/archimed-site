@@ -1,4 +1,5 @@
 import './Carousel.css';
+import mainLogo from '../../../images/logo.svg';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import React from 'react';
@@ -10,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 const SERVICES = gql`
     query GetServices ($locale: I18NLocaleCode) {
-        services (locale: $locale) {
+        services (locale: $locale, pagination: { start: 0, limit: 20 }) {
             data {
                 id
                 attributes {
@@ -75,8 +76,10 @@ function Carousel (props) {
     
     const slugFromUrl = props.slug;
 
-    if(loading) return <p></p>
-    if(error) return <p></p>
+    if(loading) return <div style={{backgroundColor: '#F5F5F5', width: '100%', height: '200vh', position: 'relative'}}>
+        <img src={mainLogo} alt={'Main Logo'} style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50vh)'}}/>
+      </div>
+    if(error) return <p>{JSON.stringify(error)}</p>
 
     const sortedData = [...data.services.data].sort((a, b) => {
       return a.attributes.Order - b.attributes.Order;

@@ -191,3 +191,31 @@
         height: 222.85px;   
     }
 }
+
+
+
+.word {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.word span {
+    display: inline-block;
+    animation-name: slideIn;
+    animation-duration: 1.3s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
+}
+
+.word span.without-delay {
+    animation-delay: 0s;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+  }

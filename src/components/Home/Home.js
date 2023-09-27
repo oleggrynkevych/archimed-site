@@ -4,7 +4,7 @@ import ServicesBlock from "./HomeComponents/ServicesBlock/ServicesBlock";
 import ContactsBlock from './HomeComponents/ContactsBlock/ContactsBlock';
 import Partners from './HomeComponents/Partners/Partners';
 
-function Home() {
+function Home(props) {
     const secondComponentRef = useRef(null);
 
     const scrollToNextComponent = () => {
@@ -18,7 +18,7 @@ function Home() {
 
     return (
         <div style={{marginTop: '-64px', backgroundColor:'#F5F5F5'}}>
-            <FirstSection scrollToNextComponent={scrollToNextComponent}/>
+            <FirstSection scrollToNextComponent={scrollToNextComponent} props={props}/>
             <ServicesBlock innerRef={secondComponentRef}/>
             <Partners/>
             <ContactsBlock commonStyle={commonStyle}/>

@@ -78,7 +78,7 @@ function SearchPage () {
         setDisplayedValue(inputValue);
     };
 
-    if(loading) return <p></p>
+    if (loading) return <p></p>
     if(error) return <p></p>
 
     const containerClasses = classnames('search-page', {

@@ -26,13 +26,13 @@ export const CREATE_REQUEST = gql`
   }
 `;
 
-const LOGIN_MUTATION = gql`
-  mutation Login($input: UsersPermissionsLoginInput!) {
-    login(input: $input) {
-      jwt
-    }
-  }
-`;
+// const LOGIN_MUTATION = gql`
+//   mutation Login($input: UsersPermissionsLoginInput!) {
+//     login(input: $input) {
+//       jwt
+//     }
+//   }
+// `;
 
 
 function ServiceForm() {
@@ -42,12 +42,12 @@ function ServiceForm() {
     const [countryCode, setCountryCode] = useState('ua');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [authToken, setAuthToken] = useState('');
+    // const [authToken, setAuthToken] = useState('');
 
     const { t, i18n } = useTranslation();
     const {handleSubmit, register, control, formState: {errors}} = useForm();
     
-    const [login] = useMutation(LOGIN_MUTATION);
+    // const [login] = useMutation(LOGIN_MUTATION);
     const [createRequest] = useMutation(CREATE_REQUEST);
 
     const validatePhone = (value, country) => {
@@ -84,27 +84,27 @@ function ServiceForm() {
           });
       };
 
-    useEffect(() => {
-        const loginUser = async () => {
-          try {
-            const { data } = await login({
-              variables: {
-                input: {
-                  identifier: 'ArchimedAdmin',
-                  password: 'ArchimedSite2023',
-                },
-              },
-            });
+    // useEffect(() => {
+    //     const loginUser = async () => {
+    //       try {
+    //         const { data } = await login({
+    //           variables: {
+    //             input: {
+    //               identifier: 'ArchimedAdmin',
+    //               password: 'ArchimedSite2023',
+    //             },
+    //           },
+    //         });
       
-            const token = data.login.jwt;
-            setAuthToken(token);
-          } catch (error) {
-            console.error('Error:', error);
-          }
-        };
+    //         const token = data.login.jwt;
+    //         setAuthToken(token);
+    //       } catch (error) {
+    //         console.error('Error:', error);
+    //       }
+    //     };
       
-        loginUser();
-    }, []);
+    //     loginUser();
+    // }, []);
 
     const onSubmit = async (formData, e) => {
 
@@ -129,7 +129,7 @@ function ServiceForm() {
                 },
                 context: {
                   headers: {
-                    authorization: authToken ? `Bearer ${authToken}` : '',
+                    authorization: `Bearer ${process.env.REACT_APP_API_STRAPI_TOKEN}`,
                   },
                 },
               });

@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 const SERVICES = gql`
     query GetServices ($locale: I18NLocaleCode) {
-        services (locale: $locale) {
+        services (locale: $locale, pagination: { start: 0, limit: 20 }) {
             data {
                 id
                 attributes {
@@ -26,7 +26,7 @@ const SERVICES = gql`
     }
 `
 
-const ServicesBlock = function ({ innerRef }) {
+const ServicesBlock = function ({ innerRef}) {
     const { t, i18n } = useTranslation();
     const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
 
@@ -34,7 +34,7 @@ const ServicesBlock = function ({ innerRef }) {
         variables: { locale: locale }
     });
 
-    if(loading) return <p></p>
+    if(loading) return <div style={{backgroundColor: '#F5F5F5', width: '100%', height: '100vh'}}></div>
     if(error) return <p></p>
 
     const sortedData = [...data.services.data].sort((a, b) => {

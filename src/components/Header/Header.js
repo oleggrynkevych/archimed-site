@@ -14,7 +14,6 @@ import DropdownItem from './DropdownItem.js';
 import CustomLink from './CustomLink.js';
 import SearchInput from './SearchInput';
 import { useTranslation } from 'react-i18next';
-import i18next from 'i18next';
 import cookies from 'js-cookie';
 import { languages } from '../../languages';
 

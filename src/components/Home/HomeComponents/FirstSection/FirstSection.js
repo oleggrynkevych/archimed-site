@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import './FirstSection.css';
 import ScissorsColors3D from './ScissorsColors3D';
 import PillsColors3D from './PillsColors3D';
 import SyringeColors3D from './SyringeColors3D';
-
+import classnames from 'classnames';
 import { EffectComposer, SMAA, FXAA } from "@react-three/postprocessing";
 import SobelEdge from '../../../Sobel/SobleEdge';
 import { useQuery, gql } from '@apollo/client';
@@ -12,35 +12,71 @@ import { useTranslation } from 'react-i18next';
 
 
 
-const SUBTITLE = gql`
-    query GetHomePage ($locale: I18NLocaleCode) {
-        homePage (locale: $locale) {
-            data {
-                attributes {
-                    SubTitleHomePage
-                }
-            }
-        }
-    }
-`
+// const SUBTITLE = gql`
+//     query GetHomePage ($locale: I18NLocaleCode) {
+//         homePage (locale: $locale) {
+//             data {
+//                 attributes {
+//                     SubTitleHomePage
+//                 }
+//             }
+//         }
+//     }
+// `
 
 
 
-const FirstSection = function ({ scrollToNextComponent }) {
+const FirstSection = function ({ scrollToNextComponent, props }) {
     const { t, i18n } = useTranslation();
-    const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
+    // const locale = i18n.language === 'ua' ? 'uk' : i18n.language;
 
-    const {loading, error, data} = useQuery(SUBTITLE, {
-        variables: { locale: locale }
-    });
+    // const {loading, error, subtitleData} = useQuery(SUBTITLE, {
+    //     variables: { locale: locale }
+    // });
 
-    if(loading) return <p></p>
-    if(error) return <p></p>
+    // if(loading) return <div style={{backgroundColor: '#F5F5F5', width: '100%', height: '200vh', position: 'relative'}}>
+    //     <img src={mainLogo} alt={'Main Logo'} style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50vh)'}}/>
+    // </div>
+    // if(error) return <p></p>
+    
+
+    useEffect(() => {
+        const subtitle = document.getElementById('subtitle').textContent;
+        const title = document.getElementById('title').textContent;
+
+        const words = subtitle.split(" ");
+        const words_2 = title.split(" ");
+
+
+        const animatedSubtitle = words.map((word, index) => {
+            return `<span class="word"><span>${word}</span></span>`;
+        }).join(" ");
+
+        const animatedTitle = words_2.map((word, index) => {
+            return `<span class="word"><span>${word}</span></span>`;
+        }).join(" ");
+
+        document.getElementById('title').innerHTML = animatedTitle;
+        document.getElementById('subtitle').innerHTML = animatedSubtitle;
+
+        const allWords = document.querySelectorAll('.word');
+
+        if(props.loading) {
+            allWords.forEach((word, index) => {
+                const spanElements = word.querySelectorAll('span');
+                spanElements.forEach((span) => {
+                    span.classList.add('without-delay');
+                });
+            });
+        }
+
+    }, [])
+    
     
     return(
         <section className='first-section'>
             <div className='first-3d' style={{width:'100%', height:'100%', top:'64px', left:'0', overflow: 'visible'}}>
-                    <Canvas dpr={1.5} camera={{fov: 45, position: [0,0,0]}}>
+                    <Canvas dpr={1.2} camera={{fov: 45, position: [0,0,0]}}>
                     <color attach="background" args={['#F5F5F5']} linear/>
                         <Suspense fallback={null}>
                             <ScissorsColors3D/>
@@ -65,8 +101,8 @@ const FirstSection = function ({ scrollToNextComponent }) {
                     </div>
                 </div>
                 <div className='first-section-container-text'>
-                    <h1>{t('title')}</h1>
-                    <h2>{data.homePage.data.attributes.SubTitleHomePage}</h2>
+                    <h1 id="title">{t('title')}</h1>
+                    <h2 id="subtitle">{props.subtitle}</h2>
                 </div>
             </div>
         </section>
